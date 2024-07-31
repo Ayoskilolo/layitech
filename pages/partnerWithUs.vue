@@ -1,13 +1,23 @@
+<script setup>
+const showForm = ref();
+</script>
+
 <template>
-  <section class="bg-bluewave bg-cover bg-no-repeat p-[5%] h-svh">
-    <div class="h-[95%] bg-white text-[#004AAD] flex justify-between main">
-      <div class="w-1/2 flex flex-col items-left justify-center px-5">
+  <section
+    class="bg-[#002b65] sm:bg-bluewave bg-cover bg-no-repeat p-[5%] h-svh"
+  >
+    <div
+      class="h-[95%] sm:bg-white sm:text-[#004AAD] main flex flex-col-reverse sm:flex-row justify-between sm:border-3 sm:border-[#002b65]"
+    >
+      <div
+        class="sm:w-1/2 flex flex-col items-center text-center sm:items-left sm:text-left justify-center px-5"
+      >
         <img src="/lightbulb.png" alt="lightbulb" width="50" height="50" />
         <div>
-          <p class="text-5xl font-bold mb-5">
+          <p class="text-2xl sm:text-5xl font-bold mb-5">
             Build your clean energy business on LayiTech for Solar-Installation
           </p>
-          <p class="text-xl font-normal">
+          <p class="text-base font-normal">
             We've built a platform to help solar business owners grow energy
             sales & get financing by offering your customers an initial deposit
             of only 25%. Build your clean energy business with LayiTech.
@@ -21,7 +31,9 @@
           />
         </div>
       </div>
-      <div class="bg-smarthome bg-contain bg-center bg-no-repeat w-1/2"></div>
+      <div
+        class="h-[80%] sm:h-full bg-smarthome bg-contain bg-center bg-no-repeat sm:w-1/2"
+      ></div>
     </div>
   </section>
 </template>

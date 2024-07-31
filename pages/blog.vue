@@ -11,7 +11,17 @@
       <div v-for="n in 10" :key="n" class="mb-5">
         <div class="card-container2">
           <div class="cards green"></div>
-          <div class="cards on-top"></div>
+          <div class="cards on-top">
+            <div></div>
+            <p>Title of Article</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              mollis eget ante eget accumsan. Praesent blandit, massa vel
+              elementum euismod, urna tellus molestie leo, vel mattis magna enim
+              quis purus.
+            </p>
+            <UButton type="submit">Submit</UButton>
+          </div>
         </div>
       </div>
     </div>
