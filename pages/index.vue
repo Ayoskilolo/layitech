@@ -7,86 +7,98 @@ const landingForm = ref({
 });
 
 const options = [
-  {
-    name: "United States",
-    value: "US",
-  },
-  {
-    name: "Canada",
-    value: "CA",
-    disabled: true,
-  },
-  {
-    name: "Mexico",
-    value: "MX",
-  },
+  "Not Sure - Exploring Options",
+  "At some point this year",
+  "Within the next month or so",
+  "Within the next 2 weeks",
+  "ASAP, within the next few days",
 ];
 </script>
 
 <template>
   <section
     id="hero"
-    class="h-screen p-5 bg-top bg-contain text-[40px] bg-no-repeat w-full flex flex-col items-center justify-center sm:flex-row sm:h-svh sm:bg-cover sm:bg-center"
+    class="p-5 bg-top bg-cover text-[40px] bg-no-repeat flex items-center justify-center sm:flex-row sm:h-screen sm:bg-cover sm:bg-center"
   >
-    <div class="hero-text pb-12 sm:w-[60%] sm:pr-5">
-      <div
-        class="flex flex-col text-center justify-center items-center py-5 sm:justify-left sm:items-start sm:text-left"
-      >
-        <img src="/lightbulb.png" alt="lightbulb" width="50" height="50" />
-        <p class="text-[40px] leading-10 sm:text-6xl py-3">
-          Get <span style="color: #81c781">Instant Access </span> to Financing
-          for Solar-Installation
-        </p>
-        <p class="text-[20px] sm:text-3xl">
-          Access repayments between 3-18 months with a 25% down payment.
-        </p>
+    <div class="flex sm:h-[55%] gap-8 flex-col sm:flex-row">
+      <div class="hero-text pb-12 sm:w-[60%] sm:pr-5 flex items-center">
+        <div
+          class="flex flex-col text-center justify-center items-center py-5 sm:justify-left sm:items-start sm:text-left"
+        >
+          <img src="/lightbulb.png" alt="lightbulb" width="50" height="50" />
+          <p class="text-[40px] leading-10 sm:text-6xl py-3 sm:text-left">
+            Get <span style="color: #81c781">Instant Access </span> to Financing
+            for Solar-Installation
+          </p>
+          <p class="text-[20px] sm:text-3xl sm:text-left">
+            Access repayments between 3-18 months with a 25% down payment.
+          </p>
+        </div>
       </div>
-    </div>
 
-    <div
-      class="card-container ml-6 pb-20 mb-20 w-[90%] sm:w-[50%] sm:mb-0 sm:pb-0"
-    >
-      <div class="cards green"></div>
-      <form class="cards on-top">
-        <p class="text-[#43ab43] text-3xl font-bold mb-4">Let’s Get Started</p>
-        <span class="text-[#002b65] text-xl font-light mb-4">
-          Please provide us with the following details to finance your
-          sustainable future
-        </span>
-        <UInput
-          v-model="landingForm.name"
-          placeholder="Enter your name"
-          size="lg"
-          class="mb-4 border-1 border-red-200"
-        />
-        <UInput
-          v-model="landingForm.email"
-          placeholder="Enter your email"
-          size="lg"
-          class="mb-4"
-        />
-        <UInput
-          v-model="landingForm.phoneNumber"
-          placeholder="Enter your phone number"
-          size="lg"
-          class="mb-4"
-        />
-        <USelect
-          v-model="landingForm.reason"
-          :options="options"
-          option-attribute="name"
-        />
-        <UButton type="submit" />
-      </form>
+      <div
+        class="h-[32rem] sm:h-auto card-container w-[100%] ml-3 sm:w-[50%] sm:mb-0 sm:pb-0"
+      >
+        <div class="cards green"></div>
+        <form class="cards m-5 bg-white z-[1] on-top p-4 pt-12 sm:p-9">
+          <div class="sm:w-[90%] flex flex-col text-center">
+            <p class="text-[#43ab43] text-3xl font-black mb-4 sm:text-left">
+              Let’s Get Started
+            </p>
+            <p
+              class="text-[#002b65] text-base sm:text-xl font-light mb-4 sm:text-left"
+            >
+              Please provide us with the following details to finance your
+              sustainable future
+            </p>
+            <v-text-field
+              v-model="landingForm.name"
+              density="compact"
+              placeholder="Enter your email"
+              color="#002b65"
+              base-color="black"
+              variant="outlined"
+            />
+            <v-text-field
+              density="compact"
+              v-model="landingForm.email"
+              placeholder="Enter your email"
+              color="#002b65"
+              base-color="black"
+              variant="outlined"
+            />
+            <v-text-field
+              density="compact"
+              v-model="landingForm.phoneNumber"
+              placeholder="Enter your phone number"
+              color="#002b65"
+              base-color="black"
+              variant="outlined"
+            />
+            <v-select
+              density="compact"
+              placeholder="Purpose of solar installation"
+              v-model="landingForm.reason"
+              :items="options"
+              color="#002b65"
+              base-color="black"
+              variant="outlined"
+            />
+            <div class="p-0 flex items-center justify-center">
+              <v-btn color="#002B65" text="Submit" max-width="30%" />
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </section>
 
   <section
     id="about"
-    class="flex flex-col-reverse h-[60vh] p-[5%] gap-10 justify-between sm:flex-row sm:h-[40vh]"
+    class="flex flex-col-reverse items-center h-[40rem] p-[5%] gap-10 justify-between sm:flex-row sm:h-[28rem]"
   >
     <div
-      class="green sm:w-2/5 p-5 flex flex-col"
+      class="h-full green sm:w-2/5 p-5 flex flex-col"
       style="border: 2px solid #002b65"
     >
       <p class="text-4xl font-semibold">About LayiPay</p>
@@ -97,16 +109,13 @@ const options = [
         in ante.
       </p>
     </div>
-    <div class="card-container2 sm:w-[50%] ml-5">
+    <div class="w-full card-container2 sm:w-[50%] ml-5 mt-5">
       <div class="cards green"></div>
-      <div class="cards on-top"></div>
+      <div class="cards flex flex-col m-5 bg-white z-[1] on-top"></div>
     </div>
   </section>
 
-  <section
-    id="panel"
-    class="flex flex-col items-center bg-panels h-[45vh] sm:h-[90vh]"
-  >
+  <section id="panel" class="flex flex-col items-center h-[28rem] sm:h-[55rem]">
     <div class="flex flex-col items-center justify-around py-8 text-center">
       <img
         src="/lightbulb.png"
@@ -126,6 +135,7 @@ const options = [
         :ui="{ rounded: 'rounded-full' }"
       />
     </div>
+    <div class="bg-panels"></div>
   </section>
 </template>
 
@@ -135,14 +145,25 @@ p {
 }
 
 #hero {
-  background-image: url("/checkingvitals.jpeg");
-  display: flex;
-  align-items: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("/checkingvitals.jpeg");
+}
+
+@media screen and (max-width: 640px) {
+  #hero {
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.3),
+        white
+      ),
+      url("/checkingvitals.jpeg");
+    background-size: contain;
+    background-position: bottom, top;
+  }
 }
 
 .card-container {
   position: relative;
-  height: 55%;
 }
 
 .card-container2 {
@@ -153,7 +174,6 @@ p {
 .cards {
   width: 100%;
   height: 100%;
-  padding-left: 20%;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -164,13 +184,9 @@ p {
   background: #43ab43;
   opacity: 1;
 }
+
 .on-top {
-  display: flex;
-  flex-direction: column;
-  padding: 5% 10% 5% 5%;
-  z-index: 1;
-  margin: 20px;
-  background-color: white;
+  font-family: "Inter", sans-serif;
 }
 
 #panel {

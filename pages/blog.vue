@@ -28,7 +28,7 @@
   </section>
 </template>
 
-<style>
+<style scoped>
 .card-container2 {
   position: relative;
   height: 100%;
@@ -37,7 +37,7 @@
 .cards {
   width: 100%;
   height: 100%;
-  padding-left: 20%;
+
   position: absolute;
   bottom: 0;
   right: 0;

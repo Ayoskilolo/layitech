@@ -2,10 +2,21 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@nuxtjs/google-fonts", "@nuxtjs/tailwindcss"],
+  modules: [
+    "@nuxt/ui",
+    "@nuxtjs/google-fonts",
+    "@nuxtjs/tailwindcss",
+    "vuetify-nuxt-module",
+  ],
+  vuetify: {
+    vuetifyOptions: {
+      components: ["VTextField", "VCombobox"],
+    },
+  },
   googleFonts: {
     families: {
       Outfit: true,
+      Inter: true,
     },
   },
   tailwindcss: {
@@ -25,6 +36,7 @@ export default defineNuxtConfig({
             miniwhitewave: "url('/miniwhitewave.png')",
             smarthome: "url('/smarthome.png')",
             greenwave2: "url('/greenwave2.png')",
+            technicians: "url('/technicians.jpeg')",
           },
           backgroundSize: { "90%": "90%" },
         },
