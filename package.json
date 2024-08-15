@@ -13,9 +13,17 @@
     "@nuxt/ui": "^2.17.0",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.12.1",
+    "animate.css": "^4.1.1",
+    "docx": "^8.5.0",
     "nuxt": "^3.12.4",
+    "nuxt-marquee": "^1.0.4",
+    "os": "^0.1.2",
+    "path": "^0.12.7",
+    "radash": "^12.1.0",
     "radix-vue": "^1.9.2",
     "vue": "latest",
-    "vuetify-nuxt-module": "^0.16.1"
+    "vue-marquee-slider": "^1.0.6",
+    "vuetify-nuxt-module": "^0.16.1",
+    "zeptomail": "^6.0.0"
   }
 }

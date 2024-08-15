@@ -4,8 +4,9 @@
   >
     <p class="text-white text-2xl sm:text-6xl font-bold">Our Services</p>
   </section>
+
   <section
-    class="py-10 px-10 flex flex-col-reverse justify-between bg-[#004aad] sm:bg-minibluewave bg-no-repeat bg-cover sm:flex-row sm:text-[#004aad]"
+    class="sm:h-[28rem] py-10 px-10 flex flex-col-reverse justify-between bg-[#004aad] sm:bg-minibluewave bg-no-repeat bg-cover sm:flex-row sm:text-[#004aad] sm:items-center"
   >
     <div
       class="flex flex-col p-2 sm:w-[60%] sm:bg-white sm:p-4 text-center sm:text-left"
@@ -23,7 +24,7 @@
   </section>
 
   <section
-    class="py-10 px-10 bg-white gap-4 flex flex-col justify-between sm:bg-miniwhitewave sm:flex-row sm:items-center bg-no-repeat bg-cover"
+    class="sm:h-[28rem] py-10 px-10 bg-white gap-4 flex flex-col justify-between sm:bg-miniwhitewave sm:flex-row sm:items-center bg-no-repeat bg-cover"
   >
     <div
       class="h-52 w-full sm:w-[40%] bg-handshake bg-no-repeat bg-contain bg-center sm:bg-left"
@@ -45,7 +46,7 @@
   </section>
 
   <section
-    class="py-10 px-10 flex flex-col-reverse sm:flex-row items-center justify-between sm:bg-minibluewave sm:text-[#004aad] bg-no-repeat bg-cover"
+    class="sm:h-[28rem] py-10 px-10 flex flex-col-reverse sm:flex-row items-center justify-between sm:bg-minibluewave sm:text-[#004aad] bg-no-repeat bg-cover"
     style="background-color: #004aad"
   >
     <div

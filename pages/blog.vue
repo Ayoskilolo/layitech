@@ -12,7 +12,6 @@
         <div class="card-container2">
           <div class="cards green"></div>
           <div class="cards on-top">
-            <div></div>
             <p>Title of Article</p>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -31,18 +30,19 @@
 <style scoped>
 .card-container2 {
   position: relative;
-  height: 100%;
+  height: 300px;
+  margin: 10px;
 }
 
 .cards {
   width: 100%;
   height: 100%;
-
   position: absolute;
   bottom: 0;
   right: 0;
   border-radius: 26px;
   border: 2px solid #002b65;
+  color: black;
 }
 .green {
   background: #43ab43;
@@ -53,7 +53,7 @@
   flex-direction: column;
   padding: 5% 10% 5% 5%;
   z-index: 1;
-  margin: 20px;
+  margin: 8px;
   background-color: white;
 }
 
@@ -62,5 +62,7 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 16px;
   padding: 5%;
+  height: 90%;
+  overflow-y: scroll;
 }
 </style>

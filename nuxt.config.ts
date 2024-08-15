@@ -7,7 +7,14 @@ export default defineNuxtConfig({
     "@nuxtjs/google-fonts",
     "@nuxtjs/tailwindcss",
     "vuetify-nuxt-module",
+    "nuxt-marquee",
   ],
+  runtimeConfig: {
+    public: {
+      commsionPercentage: process.env.COMMISION_PERCENTAGE,
+      interestRate: process.env.INTEREST_RATE,
+    },
+  },
   vuetify: {
     vuetifyOptions: {
       components: ["VTextField", "VCombobox"],
