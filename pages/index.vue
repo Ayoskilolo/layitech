@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import gsap from 'gsap';
+
 const landingForm = ref({
   name: "",
   email: "",
@@ -9,8 +11,15 @@ const commisionPercentage = useRuntimeConfig().public.commsionPercentage;
 const interestRate = useRuntimeConfig().public.interestRate;
 
 const projectCost = ref();
+
+const monthlyAmount = computed( () => [
+  calculatePaymentBreakDown(3),
+  calculatePaymentBreakDown(6),
+  calculatePaymentBreakDown(9),
+  calculatePaymentBreakDown(12)]);
+
+const value = ref()
 const initialDepositPercentage = ref();
-const repaymentPeriodInMonths = ref();
 const paymentDetails = {
   commision: 0,
   projectCostPlusCommision: 0,
@@ -21,7 +30,6 @@ const paymentDetails = {
   amountExpectedInMonths: 0,
 };
 
-const infoGiven = ref(false);
 
 const options = [
   "Not Sure - Exploring Options",
@@ -42,8 +50,10 @@ const images = [
   "/victron.png",
 ];
 
-function calculatePaymentBreakDown() {
-  infoGiven.value = !infoGiven.value;
+function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
+  if(!projectCost.value  || !initialDepositPercentage.value)  {
+    return 0;
+  }
   paymentDetails.commision = +projectCost.value * (+commisionPercentage / 100);
 
   paymentDetails.projectCostPlusCommision =
@@ -64,25 +74,21 @@ function calculatePaymentBreakDown() {
 
   paymentDetails.amountExpectedInMonths =
     paymentDetails.totalOutstandingBalancePayment /
-    repaymentPeriodInMonths.value;
+    (repaymentPeriodInMonths * 3);
 
-  console.log(paymentDetails.amountExpectedInMonths);
-}
-
-function calculateInterestRate() {
-  return true;
+  return Math.ceil(paymentDetails.amountExpectedInMonths).toLocaleString()
 }
 </script>
 
 <template>
   <section
     id="hero"
-    class="p-5 bg-top bg-cover text-[40px] bg-no-repeat flex items-center justify-center sm:flex-row sm:h-screen sm:bg-cover sm:bg-center"
+    class="p-5 bg-top bg-cover text-[40px] bg-no-repeat flex items-center justify-center md:flex-row md:h-screen md:bg-cover md:bg-center"
   >
-    <div class="flex sm:h-[55%] gap-8 flex-col sm:flex-row">
-      <div class="hero-text pb-12 sm:w-[60%] sm:pr-5 flex items-center">
+    <div class="flex md:h-[55%] gap-8 flex-col md:flex-row">
+      <div class="hero-text pb-12 md:w-[60%] md:pr-5 flex items-center">
         <div
-          class="flex flex-col text-center justify-center items-center py-5 px-5 sm:justify-left sm:items-start sm:text-left"
+          class="flex flex-col text-center justify-center items-center py-5 px-5 md:justify-left md:items-start md:text-left"
         >
           <img src="/lightbulb.png" alt="lightbulb" width="50" height="50" />
           <p
@@ -92,16 +98,16 @@ function calculateInterestRate() {
             for Solar-Installation
           </p>
           <p class="text-[20px] sm:text-3xl sm:text-left">
-            Access repayments between 3-18 months with a 25% down payment.
+            Access repayments between 3-12months with a 30% down payment
           </p>
         </div>
       </div>
 
       <div
-        class="h-[32rem] sm:h-auto card-container w-[100%] ml-3 sm:w-[50%] sm:mb-0 sm:pb-0"
+        class="h-[32rem] md:h-[32rem] card-container w-[100%] ml-3 md:w-[50%] md:mb-0 md:pb-0"
       >
         <div class="cards green"></div>
-        <form class="cards m-3 bg-white z-[1] on-top p-4 pt-12 sm:p-9">
+        <form class="cards m-3 bg-white z-[1] on-top p-4 pt-12 md:p-5">
           <div class="sm:w-[90%] flex flex-col text-center">
             <p class="text-[#43ab43] text-3xl font-black mb-4 sm:text-left">
               Let’s Get Started
@@ -156,31 +162,55 @@ function calculateInterestRate() {
 
   <section
     id="about"
-    class="flex flex-col-reverse items-center h-[40rem] p-[5%] gap-10 justify-between sm:flex-row sm:h-[28rem]"
+    class="flex flex-col items-center h-[35rem] p-[5%] justify-around sm:flex-row sm:h-[28rem]"
   >
     <div
-      class="h-full green sm:w-2/5 p-5 flex flex-col"
-      style="border: 2px solid #002b65"
+      class="sm:h-full text-black sm:w-2/5 flex flex-col justify-center text-justify"
     >
-      <p class="text-4xl font-semibold">About LayiPay</p>
-      <p class="">
-        Insert short statement/paragraph on LayiPay (now LayiTech). Lorem ipsum
-        dolor sit amet, consectetur adipiscing elit. Donec ac varius diam, eu
-        auctor nisi. Pellentesque enim mi, malesuada nec maximus sed, malesuada
-        in ante.
+      <p class="sm:text-4xl font-semibold mb-4 text-3xl text-[#43ab43]">
+        About LayiPay
+      </p>
+      <p class="text-xl md:text-2xl text-left">
+        LayiTech (subsidiary of LAYI Energy) is a cleantech company specializing
+        in providing installment payment solutions through strategic
+        partnerships with solar vendors.
       </p>
     </div>
-    <div class="w-full card-container2 sm:w-[50%] ml-5 mt-5">
-      <div class="cards green"></div>
-      <div class="cards flex flex-col m-5 bg-white z-[1] on-top"></div>
+
+    <div
+      class="sm:h-full w-full flex flex-col justify-around gap-10 text-black sm:w-[50%]"
+    >
+      <div>
+        <p class="sm:text-4xl font-semibold sm:mb-2 text-3xl text-[#43ab43]">
+          Our Vision
+        </p>
+        <p class="text-lg md:text-2xl text-left">
+          To be a world-class provider of renewable energy across Africa.
+        </p>
+      </div>
+
+      <div>
+        <p class="sm:text-4xl font-semibold sm:mb-2 text-3xl text-[#43ab43]">
+          Our Mission
+        </p>
+        <p class="text-lg md:text-2xl text-left">
+          To make clean energy accessible and affordable across Africa.
+        </p>
+      </div>
     </div>
+    <!-- <div class="w-full card-container2 sm:w-[50%] ml-5 mt-5">
+      <div class="cards green"></div>
+      <div class="cards flex flex-col items-center justify-center m-5 bg-white z-[1] on-top">
+        <img src="/logo.png" width="270" height="270"  />
+      </div>
+    </div> -->
   </section>
 
   <section class="text-center">
     <p class="pt-5 text-black text-4xl font-bold">Our Trusted Brands</p>
     <NuxtMarquee
       :speed="70"
-      class="h-[40rem] sm:h-[20rem]"
+      class="h-[20rem] sm:h-[25rem]"
       autofill
       play
       pauseOnClick
@@ -198,87 +228,76 @@ function calculateInterestRate() {
 
   <section id="calculator" class="flex flex-col p-[5%] text-black bg-slate-200">
     <div class="mb-10">
-      <p class="text-4xl font-bold mb-2">
+      <p class="text-3xl font-bold mb-2 sm:text-4xl text-[#43ab43] mb-5">
         Calculate Your Solar Savings with LayiTech
       </p>
-      <p class="text-2xl">
+      <p class="text-xl sm:text-2xl">
         Input your project cost and initial down payment to see your flexible
         payment plan options within 3-12 months. Discover how much you can save
         by switching to solar with LayiTech.
       </p>
     </div>
-    <v-form
-      class="flex flex-col items-center"
-      @submit.prevent="calculatePaymentBreakDown"
-    >
-      <div class="flex gap-5 w-full mb-5">
-        <v-text-field
-          v-model="projectCost"
-          placeholder="Project Amount:"
-          color="#002b65"
-          base-color="black"
-          variant="underlined"
-          type="tel"
-          style="width: 40%"
-          :rules="[(value) => !!value || 'There must be project amount.']"
-          required
-        />
-        <v-text-field
-          v-model="initialDepositPercentage"
-          append-inner-icon="mdi-percent-outline"
-          placeholder="Initial Deposit Amount(%)"
-          color="#002b65"
-          base-color="black"
-          variant="underlined"
-          type="tel"
-          style="width: 39%"
-          :rules="[
-            (value) =>
-              value > 29 ||
-              'Initial Deposit must be at least 30% of project amount.',
-          ]"
-          required
-        />
-        <v-text-field
-          v-model="repaymentPeriodInMonths"
-          placeholder="Tenure"
-          color="#002b65"
-          base-color="black"
-          hint="In months"
-          variant="underlined"
-          type="tel"
-          style="width: 10%"
-          :rules="[(value) => value > 0 || 'There must be a tenure.']"
-          required
-          persistent-hint
-        />
-      </div>
-      <v-btn variant="tonal" type="submit" color="#43ab43" size="x-large">
-        Submit
-      </v-btn>
-    </v-form>
 
-    <div v-if="infoGiven" class="flex">
-      <v-card
-        variant="outlined"
-        :title="`LayiTech's Commision (${commisionPercentage})%`"
+    <div class="flex flex-col">
+      <v-form
+        class="flex flex-col items-center w-full justify-center"
       >
-        <p>{{ paymentDetails.commision.toLocaleString("En-Us") }}</p>
-      </v-card>
-      <v-card
-        variant="outlined"
-        title="New Project Cost"
-        :subtitle="`${paymentDetails.projectCostPlusCommision}`"
-      >
-        <p>
-          Initial Deposit:
-          {{ paymentDetails.initialDeposit.toLocaleString("En-Us") }}
+        <div class="flex gap-5 w-full mb-5 flex-col p-1">
+          <v-text-field
+            v-model="projectCost"
+            placeholder="Project Amount(₦):"
+            color="#002b65"
+            base-color="black"
+            variant="underlined"
+            type="tel"
+            class="w-full"
+            :rules="[(value) => !!value || 'There must be project amount.']"
+            required
+          />
+          <v-text-field
+            v-model="initialDepositPercentage"
+            append-inner-icon="mdi-percent-outline"
+            placeholder="Initial Deposit Percentage(%)"
+            color="#002b65"
+            base-color="black"
+            variant="underlined"
+            type="tel"
+            class="w-full"
+            :rules="[
+              (value) =>
+                value > 29 ? value > 100 ? 'Initial Deposit must be at most a 100% of project amount.' : true :
+                'Initial Deposit must be at least 30% of project amount.'
+            ]"
+            required
+          />
+        </div>
+      </v-form>
+
+      <Transition>
+      <div class="grid grid-row-4 grid-cols-1 gap-4 sm:grid-cols-2 sm:grid-row-2 mt-5" v-if="projectCost && initialDepositPercentage">
+        <v-card v-for="n in 4" class="p-5 " variant="outlined" style="padding: 2em">
+        <p class="text-[1.4em]  mb-12">
+          <p>Plan {{ n }}:</p>
+          <span class="text-[2em] text-[#43ab43] plan" >
+            {{ `₦${ monthlyAmount[n-1] }` }}
+          </span>
         </p>
-        <p>
-          Outstanding Balance:
-          {{ paymentDetails.balancePayment.toLocaleString("En-Us") }}
-        </p>
+
+        <div class="text-right flex justify-between">
+          <div class="text-[1.2em] text-left"> 
+            <p>MONTHS OF REPAYMENT</p>
+            <p>{{ n * 3 }} Months</p>
+          </div>
+
+          <div class="text-[1.2em] text-[#43ab43]">
+            <p>INITIAL DEPOSIT</p>
+            <span>{{ `₦${paymentDetails.initialDeposit.toLocaleString("En-Us")}` }}</span>
+        </div>
+      </div>
+
       </v-card>
+      </div>
+      </Transition>
     </div>
   </section>
 
@@ -366,5 +385,15 @@ p {
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.8s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

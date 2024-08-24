@@ -9,10 +9,12 @@
     class="sm:h-[28rem] py-10 px-10 flex flex-col-reverse justify-between bg-[#004aad] sm:bg-minibluewave bg-no-repeat bg-cover sm:flex-row sm:text-[#004aad] sm:items-center"
   >
     <div
-      class="flex flex-col p-2 sm:w-[60%] sm:bg-white sm:p-4 text-center sm:text-left"
+      class="h-3/4 flex flex-col p-2 sm:w-[60%] sm:bg-white sm:p-4 text-center sm:text-left"
     >
       <p class="text-3xl font-semibold mb-2">Financing a Sustainable Future</p>
-      <p>
+      <p
+        class="text-lg sm:text-xl flex text-justify items-center leading-relaxed grow"
+      >
         Discover tailor-made renewable energy solutions with LayiTech, perfect
         for individuals & homes aiming to cut energy bills and increase power
         efficiency, and for businesses looking to also expand their business.
@@ -30,12 +32,14 @@
       class="h-52 w-full sm:w-[40%] bg-handshake bg-no-repeat bg-contain bg-center sm:bg-left"
     ></div>
     <div
-      class="flex flex-col sm:w-[60%] sm:text-white text-center sm:text-right p-3 text-[#002b65] sm:bg-[#002b65] sm:border-2 sm:border-[#002b65]"
+      class="h-3/4 flex flex-col sm:w-[60%] sm:text-white text-center sm:text-right p-3 text-[#002b65] sm:bg-[#002b65] sm:border-2 sm:border-[#002b65]"
     >
       <p class="text-3xl font-semibold mb-2">
         Sustainable Partnerships with Solar Vendors & Installers
       </p>
-      <p>
+      <p
+        class="text-lg sm:text-xl flex text-justify items-center leading-relaxed grow"
+      >
         LayiTech is partnering with leading solar vendors and installers to
         grant access to clean and affordable energy through solar installations.
         This collaboration aims to make solar energy more accessible, empowering
@@ -50,13 +54,15 @@
     style="background-color: #004aad"
   >
     <div
-      class="flex flex-col sm:w-[60%] sm:bg-white sm:p-4 text-center sm:text-left"
+      class="h-3/4 flex flex-col justify-around sm:w-[60%] sm:bg-white sm:p-4 text-center sm:text-left"
       style="border: 2px solid #004aad"
     >
-      <p class="text-3xl font-semibold mb-2">
+      <p class="text-3xl font-semibold mb-2 py-2 flex-none">
         Our Promise of a Sustainable Future
       </p>
-      <p>
+      <p
+        class="text-lg sm:text-xl flex text-justify items-center leading-relaxed grow"
+      >
         Upgrade from hazardous and costly fuel generators and lanterns to modern
         solar electricity, capable of powering lights, televisions, mobile
         phones, fans, computers, blenders, fridges, and other electronic
