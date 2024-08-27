@@ -19,13 +19,14 @@
           25%. Build your clean energy business with LayiTech.
         </p>
         <div>
-          <UButton
-            label="Partner With Us"
-            color="white"
-            variant="outline"
-            class="mt-5 transition duration-700 ease-in-out"
-            :ui="{ rounded: 'rounded-full', color: '#002b65' }"
-            to="/partnerWithUs/form"
+          <VBtn
+            flat
+            variant="outlined"
+            rounded="pill"
+            color="#002B65"
+            text="Partner With Us"
+            class="mt-5 text-none"
+            to="partnerWithUs/form"
           />
         </div>
       </div>

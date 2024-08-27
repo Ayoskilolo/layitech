@@ -1,8 +1,7 @@
 import { Document, Packer, Paragraph, TextRun, HeadingLevel } from "docx";
 import { title } from "radash";
+import { SendMailClient } from "zeptomail";
 import * as fs from "fs";
-import path from "path";
-import os from "os";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -24,14 +23,7 @@ export default defineEventHandler(async (event) => {
 
     const buffer = await Packer.toBuffer(doc);
 
-    const tempDir = os.tmpdir();
-    const filePath = path.join(tempDir, "temp_document.docx");
-    // fs.writeFile(filePath, buffer, function (err) {
-    //   if (err) throw err;
-    //   console.log("Saved!");
-    // });
-
-    // fs.writeFileSync("My Document.docx", buffer);
+    fs.writeFileSync("My Document.docx", buffer);
 
     return buffer;
   } catch (e) {

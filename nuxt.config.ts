@@ -9,7 +9,6 @@ export default defineNuxtConfig({
     "vuetify-nuxt-module",
     "nuxt-marquee",
   ],
-  ssr: true,
   runtimeConfig: {
     public: {
       commsionPercentage: process.env.COMMISION_PERCENTAGE,

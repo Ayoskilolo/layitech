@@ -1,12 +1,16 @@
-<script setup>
-// import { SendMailClient } from "zeptomail";
-const showForm = ref(false);
+<script setup lang="ts">
+import { Document, Packer, Paragraph, TextRun, HeadingLevel } from "docx";
+import { title } from "radash";
+import { SendMailClient } from "zeptomail";
+
+//Display Helper for changing page
 const formStage = ref(0);
 
+//Options for Select Button On Form
 const categoryofBusiness = ["Limited Liability Company", "Partnership", "Sole"];
-
 const meansOfIdentification = ["NIN", "Voter's Card", "Driver's License"];
 
+//Reactive Object that holds the form information.
 const partnerWithUsForm = ref({
   businessName: "",
   businessRegistrationNumber: "",
@@ -40,57 +44,105 @@ const partnerWithUsForm = ref({
 
 const generatedDocument = ref();
 
-async function generateDoc() {
-  try {
-    const response = await $fetch("api/generate-doc", {
-      method: "POST",
-      body: partnerWithUsForm.value,
-    });
+async function buildDocument() {
+  const doc = new Document({
+    sections: [
+      {
+        properties: {},
+        children: [
+          createHeading("Solar Provider On-boarding Information"),
+          ...writeJSONIntoParagraph(partnerWithUsForm.value),
+        ],
+      },
+    ],
+  });
 
-    if (response) {
-      generatedDocument.value = response;
-    }
+  const buffer = await Packer.toBuffer(doc);
 
-    const blob = new Blob([response]);
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.style.display = "none";
-    a.href = url;
-    a.download = "document.docx";
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
-  } catch (error) {
-    console.log(error);
-  }
+  return buffer;
 }
 
-async function saveDoc(props) {}
+function createHeading(text: string): Paragraph {
+  return new Paragraph({
+    text: text,
+    heading: "Heading1",
+    thematicBreak: true,
+  });
+}
+function writeJSONIntoParagraph(formData: Object): Paragraph[] {
+  const eachEntry = Object.entries(formData);
 
-// const url = "api.zeptomail.com/";
-// const token = "<SEND_MAIL_TOKEN>";
+  let children = [];
 
-// let client = new SendMailClient({ url, token });
+  for (const [key, value] of eachEntry) {
+    const newLine = new Paragraph({
+      children: [new TextRun(`${title(key)}: ${title(String(value))}`)],
+      heading: HeadingLevel.HEADING_1,
+    });
 
-// client
-//   .sendMail({
-//     from: {
-//       address: "<DOMAIN>",
-//       name: "noreply",
-//     },
-//     to: [
-//       {
-//         email_address: {
-//           address: "admin@layitech.africa",
-//           name: "LayiTech",
-//         },
-//       },
-//     ],
-//     subject: "Test Email",
-//     htmlbody: "<div><b> Test email sent successfully.</b></div>",
-//   })
-//   .then((resp) => console.log("success"))
-//   .catch((error) => console.log("error"));
+    children.push(newLine);
+  }
+
+  return children;
+}
+
+function testEmail() {
+  const url = "api.zeptomail.com/";
+  const token =
+    "Zoho-enczapikey wSsVR60i8xb3DKl9mjf4cr8xmF5XUgn0HE982Vqo7nGtT63F8cc8l0zNVwOmGKdKFGNqFDoW9bx8nRwHgTdc3t58wwwJXSiF9mqRe1U4J3x17qnvhDzIXGRYlBqBL4gPzghpnWdlG88g+g==";
+
+  let client = new SendMailClient({ url, token });
+  client
+    .sendMail({
+      from: {
+        address: "undefined",
+        name: "noreply",
+      },
+      to: [
+        {
+          email_address: {
+            address: "admin@layitech.africa",
+            name: "LayiTech",
+          },
+        },
+      ],
+      subject: "Test Email",
+      htmlbody: "<div><b> Test email sent successfully.</b></div>",
+    })
+    .then((resp) => console.log("success"))
+    .catch((error) => {
+      console.log("error");
+      console.log(error);
+    });
+}
+
+async function sendEmail() {
+  const url = "api.zeptomail.com";
+  const token =
+    "Zoho-enczapikey wSsVR60i8xb3DKl9mjf4cr8xmF5XUgn0HE982Vqo7nGtT63F8cc8l0zNVwOmGKdKFGNqFDoW9bx8nRwHgTdc3t58wwwJXSiF9mqRe1U4J3x17qnvhDzIXGRYlBqBL4gPzghpnWdlG88g+g==";
+
+  let client = new SendMailClient({ url, token });
+
+  client
+    .sendMail({
+      from: {
+        address: "<DOMAIN>",
+        name: "noreply",
+      },
+      to: [
+        {
+          email_address: {
+            address: "admin@layitech.africa",
+            name: "LayiTech",
+          },
+        },
+      ],
+      subject: "Test Email",
+      htmlbody: "<div><b> Test email sent successfully.</b></div>",
+    })
+    .then((resp) => console.log("success"))
+    .catch((error) => console.log("error"));
+}
 </script>
 
 <template>
@@ -449,7 +501,7 @@ Number"
                 text="Submit"
                 max-width="30%"
                 rounded="lg"
-                @click="generateDoc()"
+                @click="testEmail()"
               />
             </div>
           </div>

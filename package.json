@@ -27,5 +27,8 @@
     "vue-marquee-slider": "^1.0.6",
     "vuetify-nuxt-module": "^0.16.1",
     "zeptomail": "^6.0.0"
+  },
+  "devDependencies": {
+    "zeptomail": "^6.0.0"
   }
 }
