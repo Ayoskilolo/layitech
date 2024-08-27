@@ -10,6 +10,9 @@ const list = [
     icon: "mdi-handshake-outline",
   },
 ];
+
+const d = new Date();
+const year = d.getFullYear();
 </script>
 
 <template>
@@ -18,7 +21,7 @@ const list = [
   >
     <div class="flex items-center justify-between h-[100%] w-full">
       <NuxtLink to="/">
-        <img src="/logo.png" width="100" height="100" class="ml-5" />
+        <img src="/logo.png" width="150" height="150" class="ml-5" />
       </NuxtLink>
 
       <v-spacer></v-spacer>
@@ -74,12 +77,27 @@ const list = [
     <slot />
   </div>
 
-  <footer class="flex items-center justify-between px-5">
-    <img src="public/logo.png" width="150" height="150" />
+  <footer class="flex flex-col items-center h-[10em] p-5">
+    <div class="w-full h-1/2 flex items-center justify-between">
+      <div>
+        <img src="public/logo.png" width="100" height="100" />
+      </div>
+      <div class="content-end">
+        <v-btn icon="mdi-facebook" density="compact"></v-btn>
+        <v-btn icon="mdi-instagram" density="compact"></v-btn>
+        <v-btn icon="mdi-linkedin" density="compact"></v-btn>
+      </div>
+    </div>
+    <div
+      style="border-top: 1px solid white"
+      class="w-full flex justify-between items-center px-5 pt-2"
+    >
+      <div>
+        <p>LayiTech</p>
+        <p>Lekki- Ajah, Lagos.</p>
+      </div>
 
-    <div>
-      <p>LayiTech</p>
-      <p>Lekki- Ajah, Lagos.</p>
+      <p>© {{ year }} LayiPay, all rights reserved</p>
     </div>
   </footer>
 </template>

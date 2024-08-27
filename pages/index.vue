@@ -121,7 +121,7 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
             <v-text-field
               v-model="landingForm.name"
               density="compact"
-              placeholder="Enter your email"
+              placeholder="Enter your name."
               color="#002b65"
               base-color="black"
               variant="outlined"
@@ -129,7 +129,7 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
             <v-text-field
               density="compact"
               v-model="landingForm.email"
-              placeholder="Enter your email"
+              placeholder="Enter your email."
               color="#002b65"
               base-color="black"
               variant="outlined"
@@ -146,6 +146,7 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
               density="compact"
               placeholder="Purpose of solar installation"
               v-model="landingForm.reason"
+              value="Purpose of solar installation"
               :items="options"
               color="#002b65"
               base-color="black"
@@ -162,23 +163,43 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
 
   <section
     id="about"
-    class="flex flex-col items-center h-[35rem] p-[5%] justify-around sm:flex-row sm:h-[28rem]"
+    class="flex flex-col items-center h-[60rem] text-black p-[5%] gap-5 justify-around sm:flex-row sm:h-[35rem]"
   >
     <div
-      class="sm:h-full text-black sm:w-2/5 flex flex-col justify-center text-justify"
+      class="sm:h-full text-black sm:w-1/2 flex flex-col justify-center text-justify"
     >
       <p class="sm:text-4xl font-semibold mb-4 text-3xl text-[#43ab43]">
-        About LayiPay
+        About LayiTech
       </p>
       <p class="text-xl md:text-2xl text-left">
         LayiTech (subsidiary of LAYI Energy) is a cleantech company specializing
         in providing installment payment solutions through strategic
         partnerships with solar vendors.
       </p>
+
+      
+
+      <div class="mt-5 hidden sm:block">
+        <p class="sm:text-4xl font-semibold sm:mb-2 text-3xl text-[#43ab43]">
+          Our Vision
+        </p>
+        <p class="text-lg md:text-2xl text-left">
+          To be a world-class provider of renewable energy across Africa.
+        </p>
+      </div>
+
+      <div class="mt-5 hidden sm:block">
+        <p class="sm:text-4xl font-semibold sm:mb-2 text-3xl text-[#43ab43]">
+          Our Mission
+        </p>
+        <p class="text-lg md:text-2xl text-left">
+          To make clean energy accessible and affordable across Africa.
+        </p>
+      </div>
     </div>
 
     <div
-      class="sm:h-full w-full flex flex-col justify-around gap-10 text-black sm:w-[50%]"
+      class="hidden sm:h-full w-full flex flex-col justify-around gap-10 text-black sm:w-[50%]"
     >
       <div>
         <p class="sm:text-4xl font-semibold sm:mb-2 text-3xl text-[#43ab43]">
@@ -198,12 +219,30 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
         </p>
       </div>
     </div>
-    <!-- <div class="w-full card-container2 sm:w-[50%] ml-5 mt-5">
+
+    <div class="w-full card-container2  sm:w-[50%] ml-5 mt-5">
       <div class="cards green"></div>
-      <div class="cards flex flex-col items-center justify-center m-5 bg-white z-[1] on-top">
-        <img src="/logo.png" width="270" height="270"  />
+      <div class="cards flex flex-col items-center justify-center m-3 bg-white z-[1] on-top bg-[url('/team.jpeg')] bg-cover bg-center bg-no-repeat">
       </div>
-    </div> -->
+    </div>
+
+          <div class="mt-5 sm:hidden">
+        <p class="sm:text-4xl font-semibold sm:mb-2 text-3xl text-[#43ab43]">
+          Our Vision
+        </p>
+        <p class="text-lg md:text-2xl text-left">
+          To be a world-class provider of renewable energy across Africa.
+        </p>
+      </div>
+
+      <div class="mt-5 sm:hidden">
+        <p class="sm:text-4xl font-semibold sm:mb-2 text-3xl text-[#43ab43]">
+          Our Mission
+        </p>
+        <p class="text-lg md:text-2xl text-left">
+          To make clean energy accessible and affordable across Africa.
+        </p>
+      </div>
   </section>
 
   <section class="text-center">

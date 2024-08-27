@@ -26,7 +26,7 @@
             color="#002B65"
             text="Partner With Us"
             class="mt-5 text-none"
-            to="partnerWithUs/form"
+            to="/partnerWithUs/form"
           />
         </div>
       </div>
