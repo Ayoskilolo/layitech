@@ -83,8 +83,17 @@ const year = d.getFullYear();
         <img src="public/logo.png" width="100" height="100" />
       </div>
       <div class="content-end">
-        <v-btn icon="mdi-facebook" density="compact"></v-btn>
-        <v-btn icon="mdi-instagram" density="compact"></v-btn>
+        <v-btn
+          icon="mdi-facebook"
+          density="compact"
+          href="Facebook: https://www.facebook.com/profile.php?id=61564370400219&mibextid=LQQJ4d
+Instagram : https://www.instagram.com/layitech?igsh=MWxpb2g3M2pleG9zMg=="
+        ></v-btn>
+        <v-btn
+          icon="mdi-instagram"
+          density="compact"
+          href="https://www.instagram.com/layitech?igsh=MWxpb2g3M2pleG9zMg=="
+        ></v-btn>
         <v-btn icon="mdi-linkedin" density="compact"></v-btn>
       </div>
     </div>
