@@ -77,24 +77,33 @@ const year = d.getFullYear();
     <slot />
   </div>
 
-  <footer class="flex flex-col items-center h-[10em] p-5">
+  <footer class="flex flex-col items-center h-[8em] p-5">
     <div class="w-full h-1/2 flex items-center justify-between">
       <div>
         <img src="public/logo.png" width="100" height="100" />
       </div>
-      <div class="content-end">
+      <div class="flex content-end gap-2">
         <v-btn
           icon="mdi-facebook"
           density="compact"
+          style="background-color: #002b65; color: white"
+          flat
           href="Facebook: https://www.facebook.com/profile.php?id=61564370400219&mibextid=LQQJ4d
 Instagram : https://www.instagram.com/layitech?igsh=MWxpb2g3M2pleG9zMg=="
         ></v-btn>
         <v-btn
           icon="mdi-instagram"
           density="compact"
+          style="background-color: #002b65; color: white"
+          flat
           href="https://www.instagram.com/layitech?igsh=MWxpb2g3M2pleG9zMg=="
         ></v-btn>
-        <v-btn icon="mdi-linkedin" density="compact"></v-btn>
+        <v-btn
+          icon="mdi-linkedin"
+          density="compact"
+          flat
+          style="background-color: #002b65; color: white"
+        ></v-btn>
       </div>
     </div>
     <div
@@ -102,11 +111,10 @@ Instagram : https://www.instagram.com/layitech?igsh=MWxpb2g3M2pleG9zMg=="
       class="w-full flex justify-between items-center px-5 pt-2"
     >
       <div>
-        <p>LayiTech</p>
-        <p>Lekki- Ajah, Lagos.</p>
+        <p>Road 5, Ikota, Lekki-Lagos.</p>
       </div>
 
-      <p>© {{ year }} LayiPay, all rights reserved</p>
+      <p>© {{ year }} LayiTech, all rights reserved</p>
     </div>
   </footer>
 </template>
