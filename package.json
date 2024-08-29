@@ -23,6 +23,7 @@
     "radash": "^12.1.0",
     "radix-vue": "^1.9.2",
     "serve": "^14.2.3",
+    "v-mask": "^2.3.0",
     "vue": "latest",
     "vue-marquee-slider": "^1.0.6",
     "vuetify-nuxt-module": "^0.16.1",

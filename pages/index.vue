@@ -265,9 +265,9 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
     </NuxtMarquee>
   </section>
 
-  <section id="calculator" class="flex flex-col p-[5%] text-black bg-slate-200">
-    <div class="mb-10">
-      <p class="text-3xl font-bold mb-2 sm:text-4xl text-[#43ab43] mb-5">
+  <section id="calculator" class="flex flex-col sm:flex-row p-[5%] text-black bg-[#002b65] text-white gap-5">
+    <div class="mb-10 w-1/2">
+      <p class="text-3xl font-bold mb-2 sm:text-6xl text-[#43ab43] mb-5">
         Calculate Your Solar Savings with LayiTech
       </p>
       <p class="text-xl sm:text-2xl">
@@ -277,7 +277,7 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
       </p>
     </div>
 
-    <div class="flex flex-col">
+    <div class="flex flex-col w-1/2">
       <v-form
         class="flex flex-col items-center w-full justify-center"
       >
@@ -286,8 +286,8 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
             v-model="projectCost"
             placeholder="Project Amount(₦):"
             color="#002b65"
-            base-color="black"
-            variant="underlined"
+            base-color="white"
+            variant="outlined"
             type="tel"
             class="w-full"
             :rules="[(value) => !!value || 'There must be project amount.']"
@@ -298,8 +298,8 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
             append-inner-icon="mdi-percent-outline"
             placeholder="Initial Deposit Percentage(%)"
             color="#002b65"
-            base-color="black"
-            variant="underlined"
+            base-color="white"
+            variant="outlined"
             type="tel"
             class="w-full"
             :rules="[

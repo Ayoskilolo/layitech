@@ -45,6 +45,9 @@ importers:
       serve:
         specifier: ^14.2.3
         version: 14.2.3
+      v-mask:
+        specifier: ^2.3.0
+        version: 2.3.0
       vue:
         specifier: latest
         version: 3.4.33
@@ -3736,6 +3739,9 @@ packages:
 
   util@0.10.4:
     resolution: {integrity: sha512-0Pm9hTQ3se5ll1XihRic3FDIku70C+iHUdT/W926rSgHV5QgXsYbKZN8MSC3tJtSkhuROzvsQjAaFENRXr+19A==}
+
+  v-mask@2.3.0:
+    resolution: {integrity: sha512-ap7pTtCTvj25CqX4VYXqudCBd0+XvYyhiiLbzWQQR7AMQosJ2+DPu0a94P9stk0EGmGcmYxJaPkFkfjD8hquWQ==}
 
   vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
@@ -8110,6 +8116,8 @@ snapshots:
   util@0.10.4:
     dependencies:
       inherits: 2.0.3
+
+  v-mask@2.3.0: {}
 
   vary@1.1.2: {}
 

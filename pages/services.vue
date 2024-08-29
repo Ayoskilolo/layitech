@@ -1,6 +1,6 @@
 <template>
   <section
-    class="h-50 py-6 bg-fixing sm:h-94 sm:bg-top bg-no-repeat bg-cover flex items-center justify-center"
+    class="h-20 py-6 bg-fixing sm:h-94 sm:bg-top bg-no-repeat bg-cover flex items-center justify-center"
   >
     <p class="text-white text-2xl sm:text-6xl font-bold">Our Services</p>
   </section>
@@ -75,3 +75,5 @@
     ></div>
   </section>
 </template>
+
+<style scoped></style>
