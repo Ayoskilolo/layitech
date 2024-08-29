@@ -21,7 +21,7 @@ const year = d.getFullYear();
   >
     <div class="flex items-center justify-between h-[100%] w-full">
       <NuxtLink to="/">
-        <img src="/logo.png" width="150" height="150" class="ml-5" />
+        <img src="/logo.png" width="200" height="200" class="ml-5" />
       </NuxtLink>
 
       <v-spacer></v-spacer>
@@ -77,10 +77,10 @@ const year = d.getFullYear();
     <slot />
   </div>
 
-  <footer class="flex flex-col h-[35em] sm:h-[18em] truncate">
-    <div class="w-full grow flex flex-col items-center justify-between px-[5%]">
+  <footer class="flex flex-col h-[35em] sm:h-[20em]">
+    <div class="w-full grow flex flex-col justify-between px-[5%]">
       <div
-        class="w-full flex flex-col sm:flex-rowjustify-between pt-10 sm:px-3"
+        class="w-full flex flex-col sm:flex-row justify-between pt-10 sm:px-3"
       >
         <div class="flex mt-5 mb-10">
           <div class="pt-2">
@@ -89,7 +89,9 @@ const year = d.getFullYear();
           <p class="text-3xl font-bold">LayiTech</p>
         </div>
 
-        <div class="grid grid-rows-2 grid-cols-2 sm:flex gap-8 sm:gap-10">
+        <div
+          class="grid grid-rows-2 grid-cols-2 sm:flex gap-8 sm:gap-4 md:gap-6 lg:gap-8"
+        >
           <div>
             <p class="text-sm uppercase font-bold">Company</p>
             <p class="py-1">Our Partners</p>
@@ -112,7 +114,7 @@ const year = d.getFullYear();
           </div>
         </div>
       </div>
-      <div class="flex gap-2 w-full justify-center sm:justify-end">
+      <div class="w-full icons">
         <v-btn
           icon="mdi-facebook"
           density="compact"
@@ -137,7 +139,7 @@ Instagram : https://www.instagram.com/layitech?igsh=MWxpb2g3M2pleG9zMg=="
       </div>
     </div>
     <div
-      class="w-full flex flex-col sm:flex-row justify-between items-center p-5 px-[5%]"
+      class="w-full flex flex-col sm:flex-row justify-between items-center px-[5%] py-5"
     >
       <div>
         <p>Road 5, Ikota, Lekki-Lagos.</p>
@@ -156,5 +158,17 @@ body {
 footer {
   height: 10vh;
   background-color: #002b65;
+}
+
+.icons {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+}
+
+@media screen and (min-width: 640px) {
+  .icons {
+    justify-content: right;
+  }
 }
 </style>

@@ -16,9 +16,12 @@ const monthlyAmount = computed( () => [
   calculatePaymentBreakDown(3),
   calculatePaymentBreakDown(6),
   calculatePaymentBreakDown(9),
-  calculatePaymentBreakDown(12)]);
+  calculatePaymentBreakDown(12),
+  calculatePaymentBreakDown(15),
+  calculatePaymentBreakDown(18),
+]);
 
-const value = ref()
+const results = ref(false)
 const initialDepositPercentage = ref();
 const paymentDetails = {
   commision: 0,
@@ -54,10 +57,12 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
   if(!projectCost.value  || !initialDepositPercentage.value)  {
     return 0;
   }
-  paymentDetails.commision = +projectCost.value * (+commisionPercentage / 100);
+
+  const projectCostDone =  Number(projectCost.value.replace(/,/g, ''));
+  paymentDetails.commision = projectCostDone * (+commisionPercentage / 100);
 
   paymentDetails.projectCostPlusCommision =
-    +projectCost.value + paymentDetails.commision;
+    projectCostDone + paymentDetails.commision;
 
   paymentDetails.initialDeposit =
     paymentDetails.projectCostPlusCommision *
@@ -78,6 +83,19 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
 
   return Math.ceil(paymentDetails.amountExpectedInMonths).toLocaleString()
 }
+
+function showResults(){
+    if(!projectCost.value  || !initialDepositPercentage.value || initialDepositPercentage.value>100)  {
+    return 
+  }
+  results.value = !results.value
+  const plans = document.getElementById('plans');
+  console.log(plans)
+
+  if(plans)
+  plans.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+}
+
 </script>
 
 <template>
@@ -98,13 +116,13 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
             for Solar-Installation
           </p>
           <p class="text-[20px] sm:text-3xl sm:text-left">
-            Access repayments between 3-12months with a 30% down payment
+            Access repayments between 3-18 months with a 30% down payment.
           </p>
         </div>
       </div>
 
       <div
-        class="h-[32rem] md:h-[32rem] card-container w-[100%] ml-3 md:w-[50%] md:mb-0 md:pb-0"
+        class="h-[32rem] md:h-[30rem] card-container w-[100%] ml-3 md:w-[50%] md:mb-0 md:pb-0"
       >
         <div class="cards green"></div>
         <form class="cards m-3 bg-white z-[1] on-top p-4 pt-12 md:p-5">
@@ -265,21 +283,23 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
     </NuxtMarquee>
   </section>
 
-  <section id="calculator" class="flex flex-col sm:flex-row p-[5%] text-black bg-[#002b65] text-white gap-5">
-    <div class="mb-10 w-1/2">
+  <section id="calculator" class="flex flex-col  p-[5%] text-black bg-[#002b65] text-white gap-5">
+    <div class="flex gap-5 mb-10">
+      <div class="w-1/2">
       <p class="text-3xl font-bold mb-2 sm:text-6xl text-[#43ab43] mb-5">
         Calculate Your Solar Savings with LayiTech
       </p>
       <p class="text-xl sm:text-2xl">
         Input your project cost and initial down payment to see your flexible
-        payment plan options within 3-12 months. Discover how much you can save
+        payment plan options within 3-18 months. Discover how much you can save
         by switching to solar with LayiTech.
       </p>
-    </div>
+      </div>
 
-    <div class="flex flex-col w-1/2">
+
       <v-form
-        class="flex flex-col items-center w-full justify-center"
+        class="flex flex-col items-center w-1/2 justify-center"
+        @submit.prevent="showResults"
       >
         <div class="flex gap-5 w-full mb-5 flex-col p-1">
           <v-text-field
@@ -290,6 +310,8 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
             variant="outlined"
             type="tel"
             class="w-full"
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+            onblur="this.value = this.value.replace(/[^0-9.]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
             :rules="[(value) => !!value || 'There must be project amount.']"
             required
           />
@@ -301,6 +323,8 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
             base-color="white"
             variant="outlined"
             type="tel"
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+            onblur="this.value = this.value.replace(/[^0-9.]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
             class="w-full"
             :rules="[
               (value) =>
@@ -309,13 +333,18 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
             ]"
             required
           />
+        <v-btn variant="tonal" type="submit" color="#43ab43" size="x-large" >
+        Submit
+        </v-btn>
         </div>
       </v-form>
 
-      <Transition>
-      <div class="grid grid-row-4 grid-cols-1 gap-4 sm:grid-cols-2 sm:grid-row-2 mt-5" v-if="projectCost && initialDepositPercentage">
-        <v-card v-for="n in 4" class="p-5 " variant="outlined" style="padding: 2em">
-        <p class="text-[1.4em]  mb-12">
+    </div>
+
+          <Transition>
+      <div class="grid grid-row-4 grid-cols-1 gap-4 sm:grid-cols-2 sm:grid-row-2 mt-5" v-if="results">
+        <v-card v-for="n in 6" class="p-5 " variant="outlined" style="padding: 1.5em" >
+        <p class="text-[1.4em] mb-12">
           <p>Plan {{ n }}:</p>
           <span class="text-[2em] text-[#43ab43] plan" >
             {{ `₦${ monthlyAmount[n-1] }` }}
@@ -324,12 +353,12 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
 
         <div class="text-right flex justify-between">
           <div class="text-[1.2em] text-left"> 
-            <p>MONTHS OF REPAYMENT</p>
-            <p>{{ n * 3 }} Months</p>
+            <p class="text-sm">MONTHS OF REPAYMENT</p>
+            <p><span class="text-lg">{{ n * 3 }} </span> Months</p>
           </div>
 
           <div class="text-[1.2em] text-[#43ab43]">
-            <p>INITIAL DEPOSIT</p>
+            <p class=text-sm>INITIAL DEPOSIT</p>
             <span>{{ `₦${paymentDetails.initialDeposit.toLocaleString("En-Us")}` }}</span>
         </div>
       </div>
@@ -337,7 +366,6 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
       </v-card>
       </div>
       </Transition>
-    </div>
   </section>
 
   <section id="panel" class="flex flex-col items-center h-[28rem] sm:h-[60rem]">
