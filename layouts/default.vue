@@ -77,12 +77,42 @@ const year = d.getFullYear();
     <slot />
   </div>
 
-  <footer class="flex flex-col items-center h-[8em] p-5">
-    <div class="w-full h-1/2 flex items-center justify-between">
-      <div>
-        <img src="public/logo.png" width="100" height="100" />
+  <footer class="flex flex-col h-[35em] sm:h-[18em] truncate">
+    <div class="w-full grow flex flex-col items-center justify-between px-[5%]">
+      <div
+        class="w-full flex flex-col sm:flex-rowjustify-between pt-10 sm:px-3"
+      >
+        <div class="flex mt-5 mb-10">
+          <div class="pt-2">
+            <img src="public/favicon.ico" width="30" height="30" />
+          </div>
+          <p class="text-3xl font-bold">LayiTech</p>
+        </div>
+
+        <div class="grid grid-rows-2 grid-cols-2 sm:flex gap-8 sm:gap-10">
+          <div>
+            <p class="text-sm uppercase font-bold">Company</p>
+            <p class="py-1">Our Partners</p>
+            <p class="py-1">Blog</p>
+          </div>
+          <div>
+            <p class="text-sm uppercase font-bold">Resources</p>
+            <p class="py-1">Energy Calculator</p>
+            <p class="py-1">Link to Drive</p>
+          </div>
+          <div>
+            <p class="text-sm uppercase font-bold">Legal</p>
+            <p class="py-1">Service Level Agreement</p>
+            <p class="py-1">Installation Policy</p>
+          </div>
+          <div>
+            <p class="text-sm uppercase font-bold">Contact Us</p>
+            <p class="py-1">contact@layitech.africa</p>
+            <p class="py-1">+234 902 318 7179</p>
+          </div>
+        </div>
       </div>
-      <div class="flex content-end gap-2">
+      <div class="flex gap-2 w-full justify-center sm:justify-end">
         <v-btn
           icon="mdi-facebook"
           density="compact"
@@ -107,8 +137,7 @@ Instagram : https://www.instagram.com/layitech?igsh=MWxpb2g3M2pleG9zMg=="
       </div>
     </div>
     <div
-      style="border-top: 1px solid white"
-      class="w-full flex justify-between items-center px-5 pt-2"
+      class="w-full flex flex-col sm:flex-row justify-between items-center p-5 px-[5%]"
     >
       <div>
         <p>Road 5, Ikota, Lekki-Lagos.</p>
