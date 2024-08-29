@@ -163,10 +163,10 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
 
   <section
     id="about"
-    class="flex flex-col items-center h-[60rem] text-black p-[5%] gap-5 justify-around sm:flex-row sm:h-[35rem] bg-[#002b65]"
+    class="flex flex-col items-center h-[60rem] p-[5%] gap-5 justify-around sm:flex-row sm:h-[35rem] bg-[#002b65] text-white"
   >
     <div
-      class="sm:h-full text-black sm:w-1/2 flex flex-col justify-center text-justify"
+      class="sm:h-full text-white sm:w-1/2 flex flex-col justify-center text-justify"
     >
       <p class="sm:text-4xl font-semibold mb-4 text-3xl ">
         About LayiTech
