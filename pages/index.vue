@@ -163,12 +163,12 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
 
   <section
     id="about"
-    class="flex flex-col items-center h-[60rem] text-black p-[5%] gap-5 justify-around sm:flex-row sm:h-[35rem]"
+    class="flex flex-col items-center h-[60rem] text-black p-[5%] gap-5 justify-around sm:flex-row sm:h-[35rem] bg-[#002b65]"
   >
     <div
       class="sm:h-full text-black sm:w-1/2 flex flex-col justify-center text-justify"
     >
-      <p class="sm:text-4xl font-semibold mb-4 text-3xl text-[#43ab43]">
+      <p class="sm:text-4xl font-semibold mb-4 text-3xl ">
         About LayiTech
       </p>
       <p class="text-xl md:text-2xl text-left">
@@ -180,7 +180,7 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
       
 
       <div class="mt-5 hidden sm:block">
-        <p class="sm:text-4xl font-semibold sm:mb-2 text-3xl text-[#43ab43]">
+        <p class="sm:text-4xl font-semibold sm:mb-2 text-3xl ">
           Our Vision
         </p>
         <p class="text-lg md:text-2xl text-left">
@@ -189,7 +189,7 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
       </div>
 
       <div class="mt-5 hidden sm:block">
-        <p class="sm:text-4xl font-semibold sm:mb-2 text-3xl text-[#43ab43]">
+        <p class="sm:text-4xl font-semibold sm:mb-2 text-3xl ">
           Our Mission
         </p>
         <p class="text-lg md:text-2xl text-left">
@@ -227,7 +227,7 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
     </div>
 
           <div class="mt-5 sm:hidden">
-        <p class="sm:text-4xl font-semibold sm:mb-2 text-3xl text-[#43ab43]">
+        <p class="sm:text-4xl font-semibold sm:mb-2 text-3xl ">
           Our Vision
         </p>
         <p class="text-lg md:text-2xl text-left">
@@ -236,7 +236,7 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
       </div>
 
       <div class="mt-5 sm:hidden">
-        <p class="sm:text-4xl font-semibold sm:mb-2 text-3xl text-[#43ab43]">
+        <p class="sm:text-4xl font-semibold sm:mb-2 text-3xl ">
           Our Mission
         </p>
         <p class="text-lg md:text-2xl text-left">
