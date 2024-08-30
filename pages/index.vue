@@ -33,6 +33,9 @@ const paymentDetails = {
   amountExpectedInMonths: 0,
 };
 
+const articles = ref()
+const loading = ref(true);
+
 
 const options = [
   "Not Sure - Exploring Options",
@@ -90,11 +93,22 @@ function showResults(){
   }
   results.value = !results.value
   const plans = document.getElementById('plans');
-  console.log(plans)
 
   if(plans)
   plans.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
 }
+// onMounted(async () => {
+
+// const {data} = await useFetch(
+//   "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@layi.energy"
+// );  
+// console.log(data)
+//   loading.value = false
+
+// articles.value = data;
+
+// })
+
 
 </script>
 
@@ -284,9 +298,9 @@ function showResults(){
   </section>
 
   <section id="calculator" class="flex flex-col  p-[5%] text-black bg-[#002b65] text-white gap-5">
-    <div class="flex gap-5 mb-10">
-      <div class="w-1/2">
-      <p class="text-3xl font-bold mb-2 sm:text-6xl text-[#43ab43] mb-5">
+    <div class="flex flex-col sm:flex-row gap-5 mb-10">
+      <div class="w-full sm:w-1/2">
+      <p class="text-3xl font-bold mb-2 sm:text-6xl text-white mb-5">
         Calculate Your Solar Savings with LayiTech
       </p>
       <p class="text-xl sm:text-2xl">
@@ -298,7 +312,7 @@ function showResults(){
 
 
       <v-form
-        class="flex flex-col items-center w-1/2 justify-center"
+        class="flex flex-col items-center w-full sm:w-1/2 justify-center"
         @submit.prevent="showResults"
       >
         <div class="flex gap-5 w-full mb-5 flex-col p-1">
@@ -333,7 +347,7 @@ function showResults(){
             ]"
             required
           />
-        <v-btn variant="tonal" type="submit" color="#43ab43" size="x-large" >
+        <v-btn variant="tonal" type="submit" color="white" size="x-large" >
         Submit
         </v-btn>
         </div>
@@ -367,6 +381,8 @@ function showResults(){
       </div>
       </Transition>
   </section>
+
+    <MediumArticleComponent  />
 
   <section id="panel" class="flex flex-col items-center h-[28rem] sm:h-[60rem]">
     <div class="flex flex-col items-center justify-around py-8 text-center">

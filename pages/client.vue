@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Document, Packer, Paragraph, TextRun, HeadingLevel } from "docx";
 import { title } from "radash";
+import { SendMailClient } from "zeptomail";
 
 //Display Helper for changing page
 const formStage = ref(0);
@@ -40,6 +41,8 @@ const partnerWithUsForm = ref({
   directorSignature: "",
   dateToday: "",
 });
+
+const generatedDocument = ref();
 
 async function buildDocument() {
   const doc = new Document({
@@ -81,6 +84,64 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
   }
 
   return children;
+}
+
+function testEmail() {
+  const url = "api.zeptomail.com/";
+  const token =
+    "Zoho-enczapikey wSsVR60i8xb3DKl9mjf4cr8xmF5XUgn0HE982Vqo7nGtT63F8cc8l0zNVwOmGKdKFGNqFDoW9bx8nRwHgTdc3t58wwwJXSiF9mqRe1U4J3x17qnvhDzIXGRYlBqBL4gPzghpnWdlG88g+g==";
+
+  let client = new SendMailClient({ url, token });
+  client
+    .sendMail({
+      from: {
+        address: "undefined",
+        name: "noreply",
+      },
+      to: [
+        {
+          email_address: {
+            address: "admin@layitech.africa",
+            name: "LayiTech",
+          },
+        },
+      ],
+      subject: "Test Email",
+      htmlbody: "<div><b> Test email sent successfully.</b></div>",
+    })
+    .then((resp) => console.log("success"))
+    .catch((error) => {
+      console.log("error");
+      console.log(error);
+    });
+}
+
+async function sendEmail() {
+  const url = "api.zeptomail.com";
+  const token =
+    "Zoho-enczapikey wSsVR60i8xb3DKl9mjf4cr8xmF5XUgn0HE982Vqo7nGtT63F8cc8l0zNVwOmGKdKFGNqFDoW9bx8nRwHgTdc3t58wwwJXSiF9mqRe1U4J3x17qnvhDzIXGRYlBqBL4gPzghpnWdlG88g+g==";
+
+  let client = new SendMailClient({ url, token });
+
+  client
+    .sendMail({
+      from: {
+        address: "<DOMAIN>",
+        name: "noreply",
+      },
+      to: [
+        {
+          email_address: {
+            address: "admin@layitech.africa",
+            name: "LayiTech",
+          },
+        },
+      ],
+      subject: "Test Email",
+      htmlbody: "<div><b> Test email sent successfully.</b></div>",
+    })
+    .then((resp) => console.log("success"))
+    .catch((error) => console.log("error"));
 }
 </script>
 

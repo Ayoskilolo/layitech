@@ -1,6 +1,6 @@
 <template>
   <section
-    class="h-20 py-6 bg-fixing sm:h-94 sm:bg-top bg-no-repeat bg-cover flex items-center justify-center"
+    class="h-[30em] py-6 bg-[#002b65] bg-no-repeat bg-cover flex items-center justify-center"
   >
     <p class="text-white text-2xl sm:text-6xl font-bold">Our Services</p>
   </section>
@@ -9,7 +9,7 @@
     class="sm:h-[28rem] py-10 px-10 flex flex-col-reverse justify-between bg-[#004aad] sm:bg-minibluewave bg-no-repeat bg-cover sm:flex-row sm:text-[#004aad] sm:items-center"
   >
     <div
-      class="h-3/4 flex flex-col p-2 sm:w-[60%] sm:bg-white sm:p-4 text-center sm:text-left"
+      class="h-3/4 flex flex-col p-2 lg:w-[50%] sm:bg-white sm:p-4 text-center sm:text-left"
     >
       <p class="text-3xl font-semibold mb-2">Financing a Sustainable Future</p>
       <p
@@ -21,7 +21,7 @@
       </p>
     </div>
     <div
-      class="h-52 w-full sm:w-[40%] bg-piggy bg-contain bg-no-repeat bg-center sm:bg-right"
+      class="h-52 w-full lg:w-[50%] bg-piggy bg-contain bg-no-repeat bg-center scale-150 mb-10 sm:mb-0"
     ></div>
   </section>
 
@@ -29,7 +29,7 @@
     class="sm:h-[28rem] py-10 px-10 bg-white gap-4 flex flex-col justify-between sm:bg-miniwhitewave sm:flex-row sm:items-center bg-no-repeat bg-cover"
   >
     <div
-      class="h-52 w-full sm:w-[40%] bg-handshake bg-no-repeat bg-contain bg-center sm:bg-left"
+      class="h-52 w-full sm:w-[40%] bg-handshake bg-no-repeat bg-contain bg-center scale-125 mb-10 sm:mb-0"
     ></div>
     <div
       class="h-3/4 flex flex-col sm:w-[60%] sm:text-white text-center sm:text-right p-3 text-[#002b65] sm:bg-[#002b65] sm:border-2 sm:border-[#002b65]"
@@ -54,7 +54,7 @@
     style="background-color: #004aad"
   >
     <div
-      class="h-3/4 flex flex-col justify-around sm:w-[60%] sm:bg-white sm:p-4 text-center sm:text-left"
+      class="h-3/4 flex flex-col justify-around sm:w-[50%] sm:bg-white sm:p-4 text-center sm:text-left"
       style="border: 2px solid #004aad"
     >
       <p class="text-3xl font-semibold mb-2 py-2 flex-none">
@@ -71,7 +71,7 @@
       </p>
     </div>
     <div
-      class="h-52 w-full sm:w-[40%] bg-energy bg-contain bg-no-repeat bg-center sm:bg-right"
+      class="h-52 w-full sm:w-[50%] bg-energy bg-contain bg-no-repeat bg-center scale-150"
     ></div>
   </section>
 </template>

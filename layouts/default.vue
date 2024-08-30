@@ -84,7 +84,9 @@ const year = d.getFullYear();
       >
         <div class="flex mt-5 mb-10">
           <div class="pt-2">
-            <img src="public/favicon.ico" width="30" height="30" />
+            <NuxtLink to="/">
+              <img src="public/favicon.ico" width="30" height="30" />
+            </NuxtLink>
           </div>
           <p class="text-3xl font-bold">LayiTech</p>
         </div>
@@ -94,23 +96,44 @@ const year = d.getFullYear();
         >
           <div>
             <p class="text-sm uppercase font-bold">Company</p>
-            <p class="py-1">Our Partners</p>
+            <p class="py-1">
+              <NuxtLink to="/partnerWithUs"> Partners</NuxtLink>
+            </p>
             <p class="py-1">Blog</p>
           </div>
           <div>
             <p class="text-sm uppercase font-bold">Resources</p>
             <p class="py-1">Energy Calculator</p>
-            <p class="py-1">Link to Drive</p>
+            <p class="py-1">
+              <a
+                href="https://drive.google.com/file/d/14ElYuRp7OQdkXVW7sJnu3-f7DZyCloO1/view?usp=sharing"
+                >Deal Process Flow</a
+              >
+            </p>
+            <p class="py-1">
+              <NuxtLink to="/client">Customer KYC</NuxtLink>
+            </p>
           </div>
           <div>
             <p class="text-sm uppercase font-bold">Legal</p>
             <p class="py-1">Service Level Agreement</p>
-            <p class="py-1">Installation Policy</p>
+            <p class="py-1">
+              <a
+                href="https://drive.google.com/file/d/17qPxzpC61bywmfghsGBPLx3KRZUZmRfF/view?usp=sharing"
+                >Technical Policy</a
+              >
+            </p>
           </div>
           <div>
             <p class="text-sm uppercase font-bold">Contact Us</p>
-            <p class="py-1">contact@layitech.africa</p>
-            <p class="py-1">+234 902 318 7179</p>
+            <p class="py-1">
+              <a href="mailto:contact@layitech.africa">
+                contact@layitech.africa
+              </a>
+            </p>
+            <p class="py-1">
+              <a href="tel:+234 902 318 7179">+234 902 318 7179</a>
+            </p>
           </div>
         </div>
       </div>
@@ -120,8 +143,7 @@ const year = d.getFullYear();
           density="compact"
           style="background-color: #002b65; color: white"
           flat
-          href="Facebook: https://www.facebook.com/profile.php?id=61564370400219&mibextid=LQQJ4d
-Instagram : https://www.instagram.com/layitech?igsh=MWxpb2g3M2pleG9zMg=="
+          href="https://www.facebook.com/profile.php?id=61564370400219&mibextid=LQQJ4d"
         ></v-btn>
         <v-btn
           icon="mdi-instagram"
@@ -134,6 +156,7 @@ Instagram : https://www.instagram.com/layitech?igsh=MWxpb2g3M2pleG9zMg=="
           icon="mdi-linkedin"
           density="compact"
           flat
+          href="https://www.linkedin.com/company/layitech-africa/"
           style="background-color: #002b65; color: white"
         ></v-btn>
       </div>
