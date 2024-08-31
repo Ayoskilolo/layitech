@@ -440,7 +440,6 @@ Number"
                 text="Submit"
                 max-width="30%"
                 rounded="lg"
-                @click="testEmail()"
               />
             </div>
           </div>
@@ -471,6 +470,12 @@ Number"
   border-radius: 26px;
   border: 2px solid #002b65;
   overflow: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}
+
+.cards::-webkit-scrollbar {
+  display: none;
 }
 .test {
   overflow-y: visible;
