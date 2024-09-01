@@ -287,240 +287,242 @@ async function sendEmail() {
               />
             </div>
           </div>
-          <div v-if="formStage">
-            <p>2. Director’s Details</p>
-            <v-text-field
-              v-model="partnerWithUsForm.directorSurname"
-              density="compact"
-              placeholder="Insert surname here"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              label="Surname"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorFirstName"
-              placeholder="Insert first name here"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-              label="First Name"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorOtherName"
-              placeholder="Insert other name here"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-              label="Other Name"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorDateOfBirth"
-              placeholder="DD/MM/YYYY"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              label="Date of Birth"
-              type="date"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorGender"
-              placeholder="Select gender from the dropdown"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              label="Gender"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-            />
-            <v-select
-              density="compact"
-              v-model="partnerWithUsForm.directorMeansOfIdentification"
-              placeholder="Select a means of identification"
-              color="#002b65"
-              base-color="black"
-              :items="meansOfIdentification"
-              variant="outlined"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-              label="Means of Identification"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorIdentificationNumber"
-              placeholder="Insert ID number here"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              label="ID Number"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorBVN"
-              placeholder="Insert BVN here"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              label="BVN"
-              type="tel"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorJobRole"
-              placeholder="Insert job role here"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-              label="Job Role"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorResidentialAddress"
-              placeholder="Insert residential address here"
-              color="#002b65"
-              base-color="black"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-              variant="outlined"
-              label="Residential Address"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorState"
-              placeholder="Insert state here"
-              color="#002b65"
-              base-color="black"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-              variant="outlined"
-              label="State"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorCountry"
-              placeholder="Insert country here"
-              color="#002b65"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-              base-color="black"
-              variant="outlined"
-              label="Country"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorPhoneNumber1"
-              placeholder="Insert phone number here"
-              color="#002b65"
-              base-color="black"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-              variant="outlined"
-              label="Phone Number (1)"
-              type="tel"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorPhoneNumber2"
-              placeholder="Insert phone number here"
-              color="#002b65"
-              base-color="black"
-              class="mb-4"
-              rounded
-              variant="outlined"
-              label="Phone Number (2)"
-              type="tel"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorEmail"
-              placeholder="Insert email address here"
-              color="#002b65"
-              base-color="black"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-              variant="outlined"
-              ype="email"
-              label="Email Address"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorSignature"
-              placeholder="Select an upload method from the dropdown"
-              color="#002b65"
-              base-color="black"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-              variant="outlined"
-              label="Upload Signature"
-              type="file"
-            />
-
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.dateToday"
-              placeholder="Insert today’s date here"
-              color="#002b65"
-              base-color="black"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-              variant="outlined"
-              label="Today's Date"
-              type="date"
-            />
-
-            <div class="p-0 flex items-center justify-center gap-8">
-              <v-btn
-                color="#002B65"
-                text="Previous"
-                max-width="40%"
-                prepend-icon="mdi-chevron-left"
+          <Transition>
+            <div v-if="formStage">
+              <p>2. Director’s Details</p>
+              <v-text-field
+                v-model="partnerWithUsForm.directorSurname"
+                density="compact"
+                placeholder="Insert surname here"
+                color="#002b65"
+                base-color="black"
+                variant="outlined"
+                label="Surname"
+                class="mb-4"
                 rounded
-                @click="formStage -= 1"
+                :rules="[(value) => !!value || 'This field is required.']"
               />
-              <v-btn
-                color="#43AB43"
-                text="Submit"
-                max-width="30%"
+              <v-text-field
+                density="compact"
+                v-model="partnerWithUsForm.directorFirstName"
+                placeholder="Insert first name here"
+                color="#002b65"
+                base-color="black"
+                variant="outlined"
+                class="mb-4"
                 rounded
-                :loading="loading"
-                @click="sendEmail()"
+                :rules="[(value) => !!value || 'This field is required.']"
+                label="First Name"
               />
+              <v-text-field
+                density="compact"
+                v-model="partnerWithUsForm.directorOtherName"
+                placeholder="Insert other name here"
+                color="#002b65"
+                base-color="black"
+                variant="outlined"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+                label="Other Name"
+              />
+              <v-text-field
+                density="compact"
+                v-model="partnerWithUsForm.directorDateOfBirth"
+                placeholder="DD/MM/YYYY"
+                color="#002b65"
+                base-color="black"
+                variant="outlined"
+                label="Date of Birth"
+                type="date"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+              />
+              <v-text-field
+                density="compact"
+                v-model="partnerWithUsForm.directorGender"
+                placeholder="Select gender from the dropdown"
+                color="#002b65"
+                base-color="black"
+                variant="outlined"
+                label="Gender"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+              />
+              <v-select
+                density="compact"
+                v-model="partnerWithUsForm.directorMeansOfIdentification"
+                placeholder="Select a means of identification"
+                color="#002b65"
+                base-color="black"
+                :items="meansOfIdentification"
+                variant="outlined"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+                label="Means of Identification"
+              />
+              <v-text-field
+                density="compact"
+                v-model="partnerWithUsForm.directorIdentificationNumber"
+                placeholder="Insert ID number here"
+                color="#002b65"
+                base-color="black"
+                variant="outlined"
+                label="ID Number"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+              />
+              <v-text-field
+                density="compact"
+                v-model="partnerWithUsForm.directorBVN"
+                placeholder="Insert BVN here"
+                color="#002b65"
+                base-color="black"
+                variant="outlined"
+                label="BVN"
+                type="tel"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+              />
+              <v-text-field
+                density="compact"
+                v-model="partnerWithUsForm.directorJobRole"
+                placeholder="Insert job role here"
+                color="#002b65"
+                base-color="black"
+                variant="outlined"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+                label="Job Role"
+              />
+              <v-text-field
+                density="compact"
+                v-model="partnerWithUsForm.directorResidentialAddress"
+                placeholder="Insert residential address here"
+                color="#002b65"
+                base-color="black"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+                variant="outlined"
+                label="Residential Address"
+              />
+              <v-text-field
+                density="compact"
+                v-model="partnerWithUsForm.directorState"
+                placeholder="Insert state here"
+                color="#002b65"
+                base-color="black"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+                variant="outlined"
+                label="State"
+              />
+              <v-text-field
+                density="compact"
+                v-model="partnerWithUsForm.directorCountry"
+                placeholder="Insert country here"
+                color="#002b65"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+                base-color="black"
+                variant="outlined"
+                label="Country"
+              />
+              <v-text-field
+                density="compact"
+                v-model="partnerWithUsForm.directorPhoneNumber1"
+                placeholder="Insert phone number here"
+                color="#002b65"
+                base-color="black"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+                variant="outlined"
+                label="Phone Number (1)"
+                type="tel"
+              />
+              <v-text-field
+                density="compact"
+                v-model="partnerWithUsForm.directorPhoneNumber2"
+                placeholder="Insert phone number here"
+                color="#002b65"
+                base-color="black"
+                class="mb-4"
+                rounded
+                variant="outlined"
+                label="Phone Number (2)"
+                type="tel"
+              />
+              <v-text-field
+                density="compact"
+                v-model="partnerWithUsForm.directorEmail"
+                placeholder="Insert email address here"
+                color="#002b65"
+                base-color="black"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+                variant="outlined"
+                ype="email"
+                label="Email Address"
+              />
+              <v-text-field
+                density="compact"
+                v-model="partnerWithUsForm.directorSignature"
+                placeholder="Select an upload method from the dropdown"
+                color="#002b65"
+                base-color="black"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+                variant="outlined"
+                label="Upload Signature"
+                type="file"
+              />
+
+              <v-text-field
+                density="compact"
+                v-model="partnerWithUsForm.dateToday"
+                placeholder="Insert today’s date here"
+                color="#002b65"
+                base-color="black"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+                variant="outlined"
+                label="Today's Date"
+                type="date"
+              />
+
+              <div class="p-0 flex items-center justify-center gap-8">
+                <v-btn
+                  color="#002B65"
+                  text="Previous"
+                  max-width="40%"
+                  prepend-icon="mdi-chevron-left"
+                  rounded
+                  @click="formStage -= 1"
+                />
+                <v-btn
+                  color="#43AB43"
+                  text="Submit"
+                  max-width="30%"
+                  rounded
+                  :loading="loading"
+                  @click="sendEmail()"
+                />
+              </div>
             </div>
-          </div>
+          </Transition>
         </v-form>
       </div>
     </div>
@@ -561,5 +563,15 @@ async function sendEmail() {
   position: absolute;
   left: 52%;
   transform: translate(-50%, -50%);
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.8s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

@@ -409,7 +409,8 @@ function showResults(){
         :ui="{ rounded: 'rounded-full' }"
       />
     </div>
-    <div class="bg-panels"></div>
+
+    <!-- <div class="bg-panels"></div> -->
   </section>
 </template>
 
@@ -472,7 +473,7 @@ p {
 
 #panel {
   background-color: #43ab43;
-  background-image: url("/panels.png");
+  background-image: url("/solarbulb2.png");
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: contain;

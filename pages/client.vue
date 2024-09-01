@@ -273,106 +273,108 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
               />
             </div>
           </div>
-          <div v-if="formStage">
-            <p>2. Identity Confirmation & Credit Information</p>
-            <p class="mb-10">
-              Your identity information is required to verify your identity
-            </p>
+          <Transition>
+            <div v-if="formStage">
+              <p>2. Identity Confirmation & Credit Information</p>
+              <p class="mb-10">
+                Your identity information is required to verify your identity
+              </p>
 
-            <v-text-field
-              density="compact"
-              v-model="customerKYCForm.customerImage"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              class="mb-3"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-              type="file"
-              label="Add Photo (We will use your image to carry our a liveness check and also verify your identity)"
-            />
-            <v-select
-              density="compact"
-              v-model="customerKYCForm.customerIDCard"
-              :items="meansOfIdentification"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              class="mb-3"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-              label="Add your ID card (To verify your identity, please add your ID card number)"
-            />
-            <v-text-field
-              density="compact"
-              v-model="customerKYCForm.customerIdCardNumber"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              label="ID Card Number"
-              type="date"
-              class="mb-3"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-            />
-
-            <v-text-field
-              density="compact"
-              v-model="customerKYCForm.customerBVN"
-              placeholder="Insert BVN here"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              label="BVN"
-              type="tel"
-              class="mb-4"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-            />
-
-            <v-text-field
-              density="compact"
-              v-model="customerKYCForm.customerBankName"
-              placeholder="Union Bank"
-              color="#002b65"
-              base-color="black"
-              class="mb-3"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-              variant="outlined"
-              label="Bank Name (Name of Bank the statement is submitted in)"
-            />
-
-            <v-text-field
-              density="compact"
-              v-model="customerKYCForm.customerBankStatement"
-              color="#002b65"
-              base-color="black"
-              class="mb-3"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-              variant="outlined"
-              label="6 months Bank Statements"
-              type="file"
-            />
-
-            <div class="p-0 flex items-center justify-center gap-8">
-              <v-btn
-                color="#002B65"
-                text="Previous"
-                max-width="40%"
-                prepend-icon="mdi-chevron-left"
-                rounded="lg"
-                @click="formStage -= 1"
+              <v-text-field
+                density="compact"
+                v-model="customerKYCForm.customerImage"
+                color="#002b65"
+                base-color="black"
+                variant="outlined"
+                class="mb-3"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+                type="file"
+                label="Add Photo (We will use your image to carry our a liveness check and also verify your identity)"
               />
-              <v-btn
-                color="#43AB43"
-                text="Submit"
-                max-width="30%"
-                rounded="lg"
+              <v-select
+                density="compact"
+                v-model="customerKYCForm.customerIDCard"
+                :items="meansOfIdentification"
+                color="#002b65"
+                base-color="black"
+                variant="outlined"
+                class="mb-3"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+                label="Add your ID card (To verify your identity, please add your ID card number)"
               />
+              <v-text-field
+                density="compact"
+                v-model="customerKYCForm.customerIdCardNumber"
+                color="#002b65"
+                base-color="black"
+                variant="outlined"
+                label="ID Card Number"
+                type="date"
+                class="mb-3"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+              />
+
+              <v-text-field
+                density="compact"
+                v-model="customerKYCForm.customerBVN"
+                placeholder="Insert BVN here"
+                color="#002b65"
+                base-color="black"
+                variant="outlined"
+                label="BVN"
+                type="tel"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+              />
+
+              <v-text-field
+                density="compact"
+                v-model="customerKYCForm.customerBankName"
+                placeholder="Union Bank"
+                color="#002b65"
+                base-color="black"
+                class="mb-3"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+                variant="outlined"
+                label="Bank Name (Name of Bank the statement is submitted in)"
+              />
+
+              <v-text-field
+                density="compact"
+                v-model="customerKYCForm.customerBankStatement"
+                color="#002b65"
+                base-color="black"
+                class="mb-3"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+                variant="outlined"
+                label="6 months Bank Statements"
+                type="file"
+              />
+
+              <div class="p-0 flex items-center justify-center gap-8">
+                <v-btn
+                  color="#002B65"
+                  text="Previous"
+                  max-width="40%"
+                  prepend-icon="mdi-chevron-left"
+                  rounded="lg"
+                  @click="formStage -= 1"
+                />
+                <v-btn
+                  color="#43AB43"
+                  text="Submit"
+                  max-width="30%"
+                  rounded="lg"
+                />
+              </div>
             </div>
-          </div>
+          </Transition>
         </v-form>
       </div>
     </div>
@@ -407,5 +409,15 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
   position: absolute;
   left: 52%;
   transform: translate(-50%, -50%);
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.8s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
