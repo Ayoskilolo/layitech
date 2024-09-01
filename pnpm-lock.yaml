@@ -42,6 +42,9 @@ importers:
       path:
         specifier: ^0.12.7
         version: 0.12.7
+      primevue:
+        specifier: ^4.0.5
+        version: 4.0.5(vue@3.4.33)
       radash:
         specifier: ^12.1.0
         version: 12.1.0
