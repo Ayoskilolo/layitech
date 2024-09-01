@@ -23,9 +23,6 @@ importers:
       '@primevue/themes':
         specifier: ^4.0.5
         version: 4.0.5
-      '@vuepic/vue-datepicker':
-        specifier: ^9.0.2
-        version: 9.0.2(vue@3.4.33)
       animate.css:
         specifier: ^4.1.1
         version: 4.1.1
@@ -1299,12 +1296,6 @@ packages:
   '@vue/shared@3.4.33':
     resolution: {integrity: sha512-aoRY0jQk3A/cuvdkodTrM4NMfxco8n55eG4H7ML/CRy7OryHfiqvug4xrCBBMbbN+dvXAetDDwZW9DXWWjBntA==}
 
-  '@vuepic/vue-datepicker@9.0.2':
-    resolution: {integrity: sha512-VDAexzBJSvpErld1cZdGsBc+W/iU+Z+I98YNtEEboSSHUKHRi1s/h8s5D+wciZHLxgQ6P/tj6loNi4W7DgkYSQ==}
-    engines: {node: '>=18.12.0'}
-    peerDependencies:
-      vue: '>=3.2.0'
-
   '@vuetify/loader-shared@2.0.3':
     resolution: {integrity: sha512-Ss3GC7eJYkp2SF6xVzsT7FAruEmdihmn4OCk2+UocREerlXKWgOKKzTN5PN3ZVN5q05jHHrsNhTuWbhN61Bpdg==}
     peerDependencies:
@@ -1840,9 +1831,6 @@ packages:
 
   csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
-
-  date-fns@3.6.0:
-    resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
 
   db0@0.1.4:
     resolution: {integrity: sha512-Ft6eCwONYxlwLjBXSJxw0t0RYtA5gW9mq8JfBXn9TtC0nDPlqePAhpv9v4g9aONBi6JI1OXHTKKkUYGd+BOrCA==}
@@ -5482,11 +5470,6 @@ snapshots:
 
   '@vue/shared@3.4.33': {}
 
-  '@vuepic/vue-datepicker@9.0.2(vue@3.4.33)':
-    dependencies:
-      date-fns: 3.6.0
-      vue: 3.4.33
-
   '@vuetify/loader-shared@2.0.3(vue@3.4.33)(vuetify@3.6.14(vite-plugin-vuetify@2.0.3)(vue@3.4.33))':
     dependencies:
       upath: 2.0.1
@@ -6020,8 +6003,6 @@ snapshots:
       css-tree: 2.2.1
 
   csstype@3.1.3: {}
-
-  date-fns@3.6.0: {}
 
   db0@0.1.4: {}
 
