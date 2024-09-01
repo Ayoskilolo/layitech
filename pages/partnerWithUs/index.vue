@@ -3,7 +3,7 @@
     class="bg-[#002b65] sm:bg-bluewave bg-cover bg-no-repeat h-dvh p-[5%]"
   >
     <div
-      class="h-[95%] sm:bg-white sm:text-[#004AAD] main flex flex-col-reverse sm:flex-row justify-between sm:border-3 sm:border-[#002b65]"
+      class="h-[95%] sm:bg-white sm:text-[#004AAD] main flex flex-col-reverse sm:flex-row justify-between sm:border-3 sm:border-[#002b65] rounded-lg"
     >
       <div
         class="sm:w-1/2 flex flex-col items-center justify-center sm:items-start px-5"
@@ -16,18 +16,31 @@
         <p class="text-base font-normal">
           We've built a platform to help solar business owners grow energy sales
           & get financing by offering your customers an initial deposit of only
-          25%. Build your clean energy business with LayiTech.
+          30%. Build your clean energy business with LayiTech.
         </p>
-        <div>
-          <VBtn
-            flat
-            variant="outlined"
-            rounded="pill"
-            color="#002B65"
-            text="Partner With Us"
-            class="mt-5 text-none"
-            to="/partnerWithUs/form"
-          />
+        <div class="flex justify-center items-center sm:hidden">
+          <NuxtLink to="/partnerWithUs/form">
+            <VBtn
+              flat
+              variant="outlined"
+              rounded="pill"
+              color="#002B65"
+              text="Partner With Us"
+              class="mt-5 text-none text-white sm:hidden"
+            />
+          </NuxtLink>
+        </div>
+        <div class="flex justify-center hidden items-center sm:block">
+          <NuxtLink to="/partnerWithUs/form">
+            <VBtn
+              flat
+              variant="outlined"
+              rounded="pill"
+              color="#002B65"
+              text="Partner With Us"
+              class="mt-5 text-none text-[#002B65]"
+            />
+          </NuxtLink>
         </div>
       </div>
       <div

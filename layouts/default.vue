@@ -6,7 +6,7 @@ const list = [
   // { to: "/blog", label: "Blog", icon: "mdi-email-newsletter" },
   {
     to: "/partnerWithUs",
-    label: "Partner With Us",
+    label: "Partner",
     icon: "mdi-handshake-outline",
   },
 ];
@@ -37,20 +37,18 @@ const year = d.getFullYear();
       </div>
 
       <div class="hidden sm:block">
-        <v-btn to="/" ripple text="Home" class="text-none" flat />
+        <NuxtLink to="/">
+          <v-btn ripple text="Home" class="text-none" flat />
+        </NuxtLink>
 
-        <v-btn to="/services" ripple text="Services" class="text-none" flat />
+        <NuxtLink to="/services">
+          <v-btn ripple text="Services" class="text-none" flat />
+        </NuxtLink>
 
         <!-- <v-btn to="/blog" ripple text="Blog" /> -->
-
-        <v-btn
-          variant="text"
-          text="Partner With Us"
-          to="/partnerWithUs"
-          flat
-          ripple
-          class="text-none"
-        />
+        <NuxtLink to="/partnerWithUs">
+          <v-btn variant="text" text="Partner" flat ripple class="text-none" />
+        </NuxtLink>
       </div>
     </div>
   </header>
@@ -99,11 +97,19 @@ const year = d.getFullYear();
             <p class="py-1">
               <NuxtLink to="/partnerWithUs"> Partners</NuxtLink>
             </p>
-            <p class="py-1">Blog</p>
+            <p class="py-1">
+              <NuxtLink :to="{ path: '/', hash: '#calculator' }">
+                Blog
+              </NuxtLink>
+            </p>
           </div>
           <div>
             <p class="text-sm uppercase font-bold">Resources</p>
-            <p class="py-1">Energy Calculator</p>
+            <p class="py-1">
+              <NuxtLink :to="{ path: '/', hash: '#calculator' }">
+                Energy Calculator
+              </NuxtLink>
+            </p>
             <p class="py-1">
               <a
                 href="https://drive.google.com/file/d/14ElYuRp7OQdkXVW7sJnu3-f7DZyCloO1/view?usp=sharing"
@@ -129,6 +135,16 @@ const year = d.getFullYear();
             <p class="py-1">
               <a href="mailto:contact@layitech.africa">
                 contact@layitech.africa
+              </a>
+            </p>
+            <p class="py-1">
+              <a href="mailto:partners@layitech.africa">
+                partners@layitech.africa
+              </a>
+            </p>
+            <p class="py-1">
+              <a href="mailto:careers@layitech.africa">
+                careers@layitech.africa
               </a>
             </p>
             <p class="py-1">

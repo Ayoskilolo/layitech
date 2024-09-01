@@ -1,6 +1,6 @@
 <template>
   <section
-    class="h-[30em] py-6 bg-[#002b65] bg-no-repeat bg-cover flex items-center justify-center"
+    class="h-[15em] py-6 bg-[#002b65] bg-no-repeat bg-cover flex items-center justify-center"
   >
     <p class="text-white text-2xl sm:text-6xl font-bold">Our Services</p>
   </section>
@@ -9,9 +9,11 @@
     class="sm:h-[28rem] py-10 px-10 flex flex-col-reverse justify-between bg-[#004aad] sm:bg-minibluewave bg-no-repeat bg-cover sm:flex-row sm:text-[#004aad] sm:items-center"
   >
     <div
-      class="h-3/4 flex flex-col p-2 lg:w-[50%] sm:bg-white sm:p-4 text-center sm:text-left"
+      class="h-3/4 flex flex-col p-2 lg:w-[50%] sm:bg-white sm:p-4 text-center sm:text-left rounded-lg"
     >
-      <p class="text-3xl font-semibold mb-2">Financing a Sustainable Future</p>
+      <p class="text-3xl font-semibold mb-2 mt-5">
+        Financing a Sustainable Future
+      </p>
       <p
         class="text-lg sm:text-xl flex text-justify items-center leading-relaxed grow"
       >
@@ -32,9 +34,9 @@
       class="h-52 w-full sm:w-[40%] bg-handshake bg-no-repeat bg-contain bg-center scale-125 mb-10 sm:mb-0"
     ></div>
     <div
-      class="h-3/4 flex flex-col sm:w-[60%] sm:text-white text-center sm:text-right p-3 text-[#002b65] sm:bg-[#002b65] sm:border-2 sm:border-[#002b65]"
+      class="h-3/4 flex flex-col sm:w-[60%] sm:text-white text-center sm:text-right p-3 text-[#002b65] sm:bg-[#002b65] sm:border-2 sm:border-[#002b65] rounded-lg"
     >
-      <p class="text-3xl font-semibold mb-2">
+      <p class="text-3xl font-semibold mb-2 mt-5">
         Sustainable Partnerships with Solar Vendors & Installers
       </p>
       <p
@@ -54,10 +56,10 @@
     style="background-color: #004aad"
   >
     <div
-      class="h-3/4 flex flex-col justify-around sm:w-[50%] sm:bg-white sm:p-4 text-center sm:text-left"
+      class="h-3/4 flex flex-col justify-around sm:w-[50%] sm:bg-white sm:p-4 text-center sm:text-left rounded-lg"
       style="border: 2px solid #004aad"
     >
-      <p class="text-3xl font-semibold mb-2 py-2 flex-none">
+      <p class="text-3xl font-semibold mb-2 py-2 flex-none mt-5">
         Our Promise of a Sustainable Future
       </p>
       <p

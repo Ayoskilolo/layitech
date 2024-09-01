@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import gsap from 'gsap';
-
 const landingForm = ref({
   name: "",
   email: "",
   phoneNumber: "",
   reason: "",
 });
+
+const dateBooked = ref()
 const commisionPercentage = useRuntimeConfig().public.commsionPercentage;
 const interestRate = useRuntimeConfig().public.interestRate;
 
 const projectCost = ref();
+const clientName = ref();
 
 const monthlyAmount = computed( () => [
   calculatePaymentBreakDown(3),
@@ -88,7 +89,7 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number) {
 }
 
 function showResults(){
-    if(!projectCost.value  || !initialDepositPercentage.value || initialDepositPercentage.value>100)  {
+    if(!projectCost.value  || !initialDepositPercentage.value || initialDepositPercentage.value > 100 || initialDepositPercentage.value < 30)  {
     return 
   }
   results.value = !results.value
@@ -150,40 +151,34 @@ function showResults(){
               Please provide us with the following details to finance your
               sustainable future
             </p>
-            <v-text-field
+            <InputText
               v-model="landingForm.name"
               density="compact"
               placeholder="Enter your name."
               color="#002b65"
               base-color="black"
               variant="outlined"
+              class=mb-2
             />
-            <v-text-field
+            <InputText
               density="compact"
               v-model="landingForm.email"
               placeholder="Enter your email."
               color="#002b65"
               base-color="black"
               variant="outlined"
+              class=mb-2
             />
-            <v-text-field
+            <InputText
               density="compact"
               v-model="landingForm.phoneNumber"
               placeholder="Enter your phone number"
               color="#002b65"
               base-color="black"
               variant="outlined"
+              class=mb-2
             />
-            <v-select
-              density="compact"
-              placeholder="Purpose of solar installation"
-              v-model="landingForm.reason"
-              value="Purpose of solar installation"
-              :items="options"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-            />
+            <DatePicker id="datepicker-24h" v-model="dateBooked" showTime hourFormat="24" fluid showButtonBar placeholder="Book Consultation" class=mb-4 />
             <div class="p-0 flex items-center justify-center">
               <v-btn color="#002B65" text="Submit" max-width="30%" />
             </div>
@@ -316,6 +311,16 @@ function showResults(){
         @submit.prevent="showResults"
       >
         <div class="flex gap-5 w-full mb-5 flex-col p-1">
+            <v-text-field
+            v-model="clientName"
+            placeholder="Your Name"
+            color="#002b65"
+            base-color="white"
+            variant="outlined"
+            class="w-full"
+            :rules="[(value) => !!value || 'Please type your name.']"
+            required
+          />
           <v-text-field
             v-model="projectCost"
             placeholder="Project Amount(₦):"
@@ -415,7 +420,10 @@ function showResults(){
 p {
   font-family: "Outfit", sans-serif;
 }
-
+.p-inputtext {
+  background-color:white !important;
+  color: black !important;
+}
 #hero {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("/checkingvitals.jpeg");

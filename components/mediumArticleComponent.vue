@@ -1,6 +1,6 @@
 <template>
   <section class="text-black p-[5%]">
-    <p class="text-3xl font-bold mb-2 sm:text-5xl mb-5">Articles</p>
+    <p class="text-3xl font-bold mb-2 sm:text-5xl mb-5">Blog Articles</p>
     <div class="articles-section flex">
       <a
         :href="article.link"

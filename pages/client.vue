@@ -1,45 +1,75 @@
 <script setup lang="ts">
 import { Document, Packer, Paragraph, TextRun, HeadingLevel } from "docx";
 import { title } from "radash";
-import { SendMailClient } from "zeptomail";
 
 //Display Helper for changing page
 const formStage = ref(0);
 
 //Options for Select Button On Form
-const categoryofBusiness = ["Limited Liability Company", "Partnership", "Sole"];
-const meansOfIdentification = ["NIN", "Voter's Card", "Driver's License"];
+const nigerianStates = [
+  { name: "Abia", inactive: true },
+  { name: "Adamawa", inactive: true },
+  { name: "Akwa Ibom", inactive: true },
+  { name: "Anambra", inactive: true },
+  { name: "Bauchi", inactive: true },
+  { name: "Bayelsa", inactive: true },
+  { name: "Benue", inactive: true },
+  { name: "Borno", inactive: true },
+  { name: "Cross River", inactive: true },
+  { name: "Delta", inactive: true },
+  { name: "Ebonyi", inactive: true },
+  { name: "Edo", inactive: true },
+  { name: "Ekiti", inactive: true },
+  { name: "Enugu", inactive: true },
+  { name: "FCT - Abuja", inactive: true },
+  { name: "Gombe", inactive: true },
+  { name: "Imo", inactive: true },
+  { name: "Jigawa", inactive: true },
+  { name: "Kaduna", inactive: true },
+  { name: "Kano", inactive: true },
+  { name: "Katsina", inactive: true },
+  { name: "Kebbi", inactive: true },
+  { name: "Kogi", inactive: true },
+  { name: "Kwara", inactive: true },
+  { name: "Lagos" },
+  { name: "Nasarawa", inactive: true },
+  { name: "Niger", inactive: true },
+  { name: "Ogun", inactive: true },
+  { name: "Ondo", inactive: true },
+  { name: "Osun", inactive: true },
+  { name: "Oyo", inactive: true },
+  { name: "Plateau", inactive: true },
+  { name: "Rivers", inactive: true },
+  { name: "Sokoto", inactive: true },
+  { name: "Taraba", inactive: true },
+  { name: "Yobe", inactive: true },
+  { name: "Zamfara", inactive: true },
+];
+const meansOfIdentification = [
+  "National Identication Number",
+  "Voter's Card",
+  "Driver's License",
+  "International Passport",
+];
 
 //Reactive Object that holds the form information.
-const partnerWithUsForm = ref({
-  businessName: "",
-  businessRegistrationNumber: "",
-  dateOfIncorporation: "",
-  categoryofBusiness: "",
-  operatingBusinessAddress: "",
-  corporateBusinessAddress: "",
-  businessEmail: "",
-  businessWebsite: "",
-  businessPhoneNumber1: "",
-  businessPhoneNumber2: "",
-  businessTaxIdentificationNumber: "",
-  directorSurname: "",
-  directorFirstName: "",
-  directorOtherName: "",
-  directorDateOfBirth: "",
-  directorGender: "",
-  directorMeansOfIdentification: "",
-  directorIdentificationNumber: "",
-  directorBVN: "",
-  directorJobRole: "",
-  directorResidentialAddress: "",
-  directorState: "",
-  directorCountry: "",
-  directorPhoneNumber1: "",
-  directorPhoneNumber2: "",
-  directorEmail: "",
-  directorSignature: "",
-  dateToday: "",
+const customerKYCForm = ref({
+  customerFirstName: "",
+  customerLastName: "",
+  customerPhoneNumber: "",
+  customerEmail: "",
+  customerAddress: "",
+  customerCountryOfResidence: "",
+  customerStateOfResidence: "",
+  customerLGAOfResidence: "",
+  isContactAddressPointOfInstallation: "",
+  customerTypeOfEmployment: "",
+  customerImage: "",
+  customerIDCard: "",
+  customerIdCardNumber: "",
+  customerBVN: "",
+  customerBankName: "",
+  customerBankStatement: "",
 });
 
 const generatedDocument = ref();
@@ -51,7 +81,7 @@ async function buildDocument() {
         properties: {},
         children: [
           createHeading("Solar Provider On-boarding Information"),
-          ...writeJSONIntoParagraph(partnerWithUsForm.value),
+          ...writeJSONIntoParagraph(customerKYCForm.value),
         ],
       },
     ],
@@ -85,64 +115,6 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
 
   return children;
 }
-
-function testEmail() {
-  const url = "api.zeptomail.com/";
-  const token =
-    "Zoho-enczapikey wSsVR60i8xb3DKl9mjf4cr8xmF5XUgn0HE982Vqo7nGtT63F8cc8l0zNVwOmGKdKFGNqFDoW9bx8nRwHgTdc3t58wwwJXSiF9mqRe1U4J3x17qnvhDzIXGRYlBqBL4gPzghpnWdlG88g+g==";
-
-  let client = new SendMailClient({ url, token });
-  client
-    .sendMail({
-      from: {
-        address: "undefined",
-        name: "noreply",
-      },
-      to: [
-        {
-          email_address: {
-            address: "admin@layitech.africa",
-            name: "LayiTech",
-          },
-        },
-      ],
-      subject: "Test Email",
-      htmlbody: "<div><b> Test email sent successfully.</b></div>",
-    })
-    .then((resp) => console.log("success"))
-    .catch((error) => {
-      console.log("error");
-      console.log(error);
-    });
-}
-
-async function sendEmail() {
-  const url = "api.zeptomail.com";
-  const token =
-    "Zoho-enczapikey wSsVR60i8xb3DKl9mjf4cr8xmF5XUgn0HE982Vqo7nGtT63F8cc8l0zNVwOmGKdKFGNqFDoW9bx8nRwHgTdc3t58wwwJXSiF9mqRe1U4J3x17qnvhDzIXGRYlBqBL4gPzghpnWdlG88g+g==";
-
-  let client = new SendMailClient({ url, token });
-
-  client
-    .sendMail({
-      from: {
-        address: "<DOMAIN>",
-        name: "noreply",
-      },
-      to: [
-        {
-          email_address: {
-            address: "admin@layitech.africa",
-            name: "LayiTech",
-          },
-        },
-      ],
-      subject: "Test Email",
-      htmlbody: "<div><b> Test email sent successfully.</b></div>",
-    })
-    .then((resp) => console.log("success"))
-    .catch((error) => console.log("error"));
-}
 </script>
 
 <template>
@@ -150,7 +122,7 @@ async function sendEmail() {
     <div
       class="section-top h-[45%] bg-technicians bg-no-repeat bg-cover bg-center flex items-center justify-center z-[0]"
     >
-      <p class="text-white text-2xl sm:text-6xl font-bold">Partner With Us</p>
+      <p class="text-white text-2xl sm:text-6xl font-bold">Customer KYC</p>
     </div>
     <div
       class="h-[100%] bg-[#004AAD] sm:bg-bluewave bg-no-repeat bg-cover z-[0]"
@@ -159,140 +131,136 @@ async function sendEmail() {
     <div class="test absolute w-[87%] sm:w-[60%] h-[75%] sm:h-[70%] top-[60%]">
       <div class="cards green"></div>
       <div class="cards m-3 bg-white z-[1] on-top p-4 pt-12 sm:p-9">
-        <v-form class="sm:w-[100%] flex flex-col text-center">
+        <v-form class="sm:w-[100%] flex flex-col text-left">
           <p
-            class="text-[#43ab43] text-xl sm:text-3xl font-black mb-4 sm:text-left"
+            class="text-[#43ab43] text-xl sm:text-3xl font-black mb-3 sm:text-left"
           >
-            Solar Provider’s On-boarding Form
+            Client Information
           </p>
           <p
-            class="text-[#002b65] text-base sm:text-xl font-light mb-4 sm:text-left"
+            class="text-[#002b65] text-base sm:text-xl font-light mb-3 sm:text-left"
           >
-            (Incorporated & Non-Incorporated)
+            To create your account, we need you to provide your personal and
+            employment information
           </p>
-          <!-- :rules="[(value) => !!value || ' field']" -->
 
           <div v-if="!formStage">
-            <p>1. Company Details</p>
+            <p>1. Personal & Employment Details</p>
             <v-text-field
-              v-model="partnerWithUsForm.businessName"
+              v-model="customerKYCForm.customerFirstName"
+              density="compact"
+              placeholder="e.g John "
+              color="#002b65"
+              base-color="black"
+              variant="outlined"
+              label="First Name"
+              class="mb-3"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
+            />
+            <v-text-field
+              v-model="customerKYCForm.customerLastName"
+              density="compact"
+              placeholder="e.g Bosco"
+              color="#002b65"
+              base-color="black"
+              variant="outlined"
+              label="Last Name"
+              class="mb-3"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
+            />
+            <v-text-field
+              v-model="customerKYCForm.customerPhoneNumber"
+              density="compact"
+              placeholder="0901 234 5678"
+              color="#002b65"
+              base-color="black"
+              variant="outlined"
+              label="Phone Number"
+              type="tel"
+              class="mb-3"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
+            />
+            <v-text-field
+              v-model="customerKYCForm.customerEmail"
+              density="compact"
+              placeholder="john.bosco@email.com"
+              color="#002b65"
+              base-color="black"
+              variant="outlined"
+              label="Email"
+              class="mb-3"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
+            />
+            <v-text-field
+              v-model="customerKYCForm.customerAddress"
+              density="compact"
+              color="#002b65"
+              base-color="black"
+              variant="outlined"
+              label="Address"
+              class="mb-3"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
+            />
+            <v-select
+              v-model="customerKYCForm.customerCountryOfResidence"
+              density="compact"
+              :items="['Nigeria']"
+              color="#002b65"
+              base-color="black"
+              variant="outlined"
+              label="Country"
+              class="mb-3"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
+            />
+            <v-select
+              v-model="customerKYCForm.customerStateOfResidence"
+              density="compact"
+              :items="nigerianStates"
+              item-title="name"
+              item-value="name"
+              color="#002b65"
+              base-color="black"
+              variant="outlined"
+              label="State"
+              class="mb-3"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
+            />
+            <v-text-field
+              v-model="customerKYCForm.customerLGAOfResidence"
               density="compact"
               placeholder="e.g John Bosco Ventures"
               color="#002b65"
               base-color="black"
               variant="outlined"
-              label="Company/Business Name"
-              class="mb-2"
+              label="LGA (Local Government Area)"
+              class="mb-3"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
             />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.businessRegistrationNumber"
-              placeholder="e.g Rc 123456"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              class="mb-2"
-              label="Certification of Incorporation/Registration
-Number"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.dateOfIncorporation"
-              placeholder="DD/MM/YYYY"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              type="date"
-              class="mb-2"
-              label="Date of Incorporation/Registration"
-            />
-            <v-select
-              density="compact"
-              v-model="partnerWithUsForm.categoryofBusiness"
-              placeholder="Select a category from the dropdown"
-              color="#002b65"
-              :items="categoryofBusiness"
-              base-color="black"
-              variant="outlined"
-              class="mb-2"
-              label="Category of business"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.operatingBusinessAddress"
-              placeholder="e.g 23 Orange Lane, Surulere, Lagos"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              label="Operating Business Address"
-              type="tel"
-              class="mb-2"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.corporateBusinessAddress"
-              placeholder="e.g 47 Adewale Avenue, Lekki, Lagos"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              class="mb-2"
-              label="Corporate business Address/Registered Office
-(if different from above)"
-              type="tel"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.businessEmail"
-              placeholder="e.g johnbventures@gmail.com"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              ype="email"
-              label="Email Address"
-              class="mb-2"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.businessWebsite"
-              placeholder="e.g johnboscoventures.com"
-              color="#002b65"
-              base-color="black"
-              class="mb-2"
-              variant="outlined"
-              label="Website Address (if any)"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.businessPhoneNumber1"
-              placeholder="e.g +234 801 234 5679"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              label="Phone Number (1)"
-              type="tel"
-              class="mb-2"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.businessPhoneNumber2"
-              placeholder="e.g +234 801 234 5679"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              class="mb-2"
-              label="Phone Number (2)"
-              type="tel"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.businessTaxIdentificationNumber"
-              placeholder="Insert TIN here"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              class="mb-2"
-              label="Tax Identification Number (TIN)"
-            />
+            <v-radio-group
+              v-model="customerKYCForm.isContactAddressPointOfInstallation"
+              label="Is your contact address the same as where you want to install the system?"
+            >
+              <v-radio label="Yes, it is." value="Yes"></v-radio>
+              <v-radio label="No, it isn't" value="No"></v-radio>
+            </v-radio-group>
+
+            <v-radio-group
+              v-model="customerKYCForm.customerTypeOfEmployment"
+              label="What type of employment are you currently on?"
+            >
+              <v-radio label="Self Employed" value="Self Employed"></v-radio>
+              <v-radio label="Part Time" value="Part Time"></v-radio>
+              <v-radio label="Full Time" value="Full Time"></v-radio>
+              <v-radio label="Retired" value="Retired"></v-radio>
+            </v-radio-group>
 
             <div class="p-0 flex items-center justify-center">
               <v-btn
@@ -306,185 +274,86 @@ Number"
             </div>
           </div>
           <div v-if="formStage">
-            <p>2. Director’s Details</p>
+            <p>2. Identity Confirmation & Credit Information</p>
+            <p class="mb-10">
+              Your identity information is required to verify your identity
+            </p>
+
             <v-text-field
-              v-model="partnerWithUsForm.directorSurname"
               density="compact"
-              placeholder="Insert surname here"
+              v-model="customerKYCForm.customerImage"
               color="#002b65"
               base-color="black"
               variant="outlined"
-              label="Surname"
-              class="mb-2"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorFirstName"
-              placeholder="Insert first name here"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              class="mb-2"
-              label="First Name"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorOtherName"
-              placeholder="Insert other name here"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              class="mb-2"
-              label="Other Name"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorDateOfBirth"
-              placeholder="DD/MM/YYYY"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              label="Date of Birth"
-              type="date"
-              class="mb-2"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorGender"
-              placeholder="Select gender from the dropdown"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              label="Gender"
-              class="mb-2"
+              class="mb-3"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
+              type="file"
+              label="Add Photo (We will use your image to carry our a liveness check and also verify your identity)"
             />
             <v-select
               density="compact"
-              v-model="partnerWithUsForm.directorMeansOfIdentification"
-              placeholder="Select a means of identification"
-              color="#002b65"
-              base-color="black"
+              v-model="customerKYCForm.customerIDCard"
               :items="meansOfIdentification"
-              variant="outlined"
-              class="mb-2"
-              label="Means of Identification"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorIdentificationNumber"
-              placeholder="Insert ID number here"
               color="#002b65"
               base-color="black"
               variant="outlined"
-              label="ID Number"
-              class="mb-2"
+              class="mb-3"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
+              label="Add your ID card (To verify your identity, please add your ID card number)"
             />
             <v-text-field
               density="compact"
-              v-model="partnerWithUsForm.directorBVN"
+              v-model="customerKYCForm.customerIdCardNumber"
+              color="#002b65"
+              base-color="black"
+              variant="outlined"
+              label="ID Card Number"
+              type="date"
+              class="mb-3"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
+            />
+
+            <v-text-field
+              density="compact"
+              v-model="customerKYCForm.customerBVN"
               placeholder="Insert BVN here"
               color="#002b65"
               base-color="black"
               variant="outlined"
               label="BVN"
               type="tel"
-              class="mb-2"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorJobRole"
-              placeholder="Insert job role here"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              class="mb-2"
-              label="Job Role"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorResidentialAddress"
-              placeholder="Insert residential address here"
-              color="#002b65"
-              base-color="black"
-              class="mb-2"
-              variant="outlined"
-              label="Residential Address"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorState"
-              placeholder="Insert state here"
-              color="#002b65"
-              base-color="black"
-              class="mb-2"
-              variant="outlined"
-              label="State"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorCountry"
-              placeholder="Insert country here"
-              color="#002b65"
-              class="mb-2"
-              base-color="black"
-              variant="outlined"
-              label="Country"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorPhoneNumber1"
-              placeholder="Insert phone number here"
-              color="#002b65"
-              base-color="black"
-              class="mb-2"
-              variant="outlined"
-              label="Phone Number (1)"
-              type="tel"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorPhoneNumber2"
-              placeholder="Insert phone number here"
-              color="#002b65"
-              base-color="black"
-              class="mb-2"
-              variant="outlined"
-              label="Phone Number (2)"
-              type="tel"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorEmail"
-              placeholder="Insert email address here"
-              color="#002b65"
-              base-color="black"
-              class="mb-2"
-              variant="outlined"
-              ype="email"
-              label="Email Address"
-            />
-            <v-text-field
-              density="compact"
-              v-model="partnerWithUsForm.directorSignature"
-              placeholder="Select an upload method from the dropdown"
-              color="#002b65"
-              base-color="black"
-              class="mb-2"
-              variant="outlined"
-              label="Upload Signature"
-              type="file"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
             />
 
             <v-text-field
               density="compact"
-              v-model="partnerWithUsForm.dateToday"
-              placeholder="Insert today’s date here"
+              v-model="customerKYCForm.customerBankName"
+              placeholder="Union Bank"
               color="#002b65"
               base-color="black"
-              class="mb-2"
+              class="mb-3"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
               variant="outlined"
-              label="Today's Date"
-              type="date"
+              label="Bank Name (Name of Bank the statement is submitted in)"
+            />
+
+            <v-text-field
+              density="compact"
+              v-model="customerKYCForm.customerBankStatement"
+              color="#002b65"
+              base-color="black"
+              class="mb-3"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
+              variant="outlined"
+              label="6 months Bank Statements"
+              type="file"
             />
 
             <div class="p-0 flex items-center justify-center gap-8">
@@ -501,7 +370,6 @@ Number"
                 text="Submit"
                 max-width="30%"
                 rounded="lg"
-                @click="testEmail()"
               />
             </div>
           </div>

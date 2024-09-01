@@ -4,6 +4,7 @@ import { title } from "radash";
 
 //Display Helper for changing page
 const formStage = ref(0);
+const loading = ref(false);
 
 //Options for Select Button On Form
 const categoryofBusiness = ["Limited Liability Company", "Partnership", "Sole"];
@@ -82,6 +83,30 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
 
   return children;
 }
+
+async function sendEmail() {
+  try {
+    loading.value = true;
+    const docBuffer = await buildDocument();
+
+    const response = await $fetch("api/generate-doc", {
+      method: "POST",
+      body: docBuffer,
+    });
+
+    if (response) {
+      loading.value = false;
+      alert("Email sent successfully!");
+    } else {
+      loading.value = false;
+      alert("Email sent unsuccessfully!");
+    }
+  } catch (error) {
+    loading.value = false;
+    alert("Error sending Emai!");
+    console.error(error);
+  }
+}
 </script>
 
 <template>
@@ -98,7 +123,7 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
     <div class="test absolute w-[87%] sm:w-[60%] h-[75%] sm:h-[70%] top-[60%]">
       <div class="cards green"></div>
       <div class="cards m-3 bg-white z-[1] on-top p-4 pt-12 sm:p-9">
-        <v-form class="sm:w-[100%] flex flex-col text-center">
+        <v-form class="sm:w-[100%] flex flex-col text-left">
           <p
             class="text-[#43ab43] text-xl sm:text-3xl font-black mb-4 sm:text-left"
           >
@@ -112,7 +137,7 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
           <!-- :rules="[(value) => !!value || ' field']" -->
 
           <div v-if="!formStage">
-            <p>1. Company Details</p>
+            <p classs="text-left">1. Company Details</p>
             <v-text-field
               v-model="partnerWithUsForm.businessName"
               density="compact"
@@ -121,7 +146,9 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
               base-color="black"
               variant="outlined"
               label="Company/Business Name"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
             />
             <v-text-field
               density="compact"
@@ -130,9 +157,10 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
               color="#002b65"
               base-color="black"
               variant="outlined"
-              class="mb-2"
-              label="Certification of Incorporation/Registration
-Number"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
+              label="Certification of Incorporation/Registration Number eg. RC-1234567"
             />
             <v-text-field
               density="compact"
@@ -142,7 +170,9 @@ Number"
               base-color="black"
               variant="outlined"
               type="date"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
               label="Date of Incorporation/Registration"
             />
             <v-select
@@ -153,7 +183,9 @@ Number"
               :items="categoryofBusiness"
               base-color="black"
               variant="outlined"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
               label="Category of business"
             />
             <v-text-field
@@ -165,7 +197,9 @@ Number"
               variant="outlined"
               label="Operating Business Address"
               type="tel"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
             />
             <v-text-field
               density="compact"
@@ -174,7 +208,8 @@ Number"
               color="#002b65"
               base-color="black"
               variant="outlined"
-              class="mb-2"
+              class="mb-4"
+              rounded
               label="Corporate business Address/Registered Office
 (if different from above)"
               type="tel"
@@ -188,7 +223,9 @@ Number"
               variant="outlined"
               ype="email"
               label="Email Address"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
             />
             <v-text-field
               density="compact"
@@ -196,7 +233,8 @@ Number"
               placeholder="e.g johnboscoventures.com"
               color="#002b65"
               base-color="black"
-              class="mb-2"
+              class="mb-4"
+              rounded
               variant="outlined"
               label="Website Address (if any)"
             />
@@ -209,7 +247,9 @@ Number"
               variant="outlined"
               label="Phone Number (1)"
               type="tel"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
             />
             <v-text-field
               density="compact"
@@ -218,7 +258,8 @@ Number"
               color="#002b65"
               base-color="black"
               variant="outlined"
-              class="mb-2"
+              class="mb-4"
+              rounded
               label="Phone Number (2)"
               type="tel"
             />
@@ -229,7 +270,9 @@ Number"
               color="#002b65"
               base-color="black"
               variant="outlined"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
               label="Tax Identification Number (TIN)"
             />
 
@@ -238,7 +281,7 @@ Number"
                 color="#002B65"
                 text="Next"
                 max-width="30%"
-                rounded="lg"
+                rounded
                 append-icon="mdi-chevron-right"
                 @click="formStage += 1"
               />
@@ -254,7 +297,9 @@ Number"
               base-color="black"
               variant="outlined"
               label="Surname"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
             />
             <v-text-field
               density="compact"
@@ -263,7 +308,9 @@ Number"
               color="#002b65"
               base-color="black"
               variant="outlined"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
               label="First Name"
             />
             <v-text-field
@@ -273,7 +320,9 @@ Number"
               color="#002b65"
               base-color="black"
               variant="outlined"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
               label="Other Name"
             />
             <v-text-field
@@ -285,7 +334,9 @@ Number"
               variant="outlined"
               label="Date of Birth"
               type="date"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
             />
             <v-text-field
               density="compact"
@@ -295,7 +346,9 @@ Number"
               base-color="black"
               variant="outlined"
               label="Gender"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
             />
             <v-select
               density="compact"
@@ -305,7 +358,9 @@ Number"
               base-color="black"
               :items="meansOfIdentification"
               variant="outlined"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
               label="Means of Identification"
             />
             <v-text-field
@@ -316,7 +371,9 @@ Number"
               base-color="black"
               variant="outlined"
               label="ID Number"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
             />
             <v-text-field
               density="compact"
@@ -327,7 +384,9 @@ Number"
               variant="outlined"
               label="BVN"
               type="tel"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
             />
             <v-text-field
               density="compact"
@@ -336,7 +395,9 @@ Number"
               color="#002b65"
               base-color="black"
               variant="outlined"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
               label="Job Role"
             />
             <v-text-field
@@ -345,7 +406,9 @@ Number"
               placeholder="Insert residential address here"
               color="#002b65"
               base-color="black"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
               variant="outlined"
               label="Residential Address"
             />
@@ -355,7 +418,9 @@ Number"
               placeholder="Insert state here"
               color="#002b65"
               base-color="black"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
               variant="outlined"
               label="State"
             />
@@ -364,7 +429,9 @@ Number"
               v-model="partnerWithUsForm.directorCountry"
               placeholder="Insert country here"
               color="#002b65"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
               base-color="black"
               variant="outlined"
               label="Country"
@@ -375,7 +442,9 @@ Number"
               placeholder="Insert phone number here"
               color="#002b65"
               base-color="black"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
               variant="outlined"
               label="Phone Number (1)"
               type="tel"
@@ -386,7 +455,8 @@ Number"
               placeholder="Insert phone number here"
               color="#002b65"
               base-color="black"
-              class="mb-2"
+              class="mb-4"
+              rounded
               variant="outlined"
               label="Phone Number (2)"
               type="tel"
@@ -397,7 +467,9 @@ Number"
               placeholder="Insert email address here"
               color="#002b65"
               base-color="black"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
               variant="outlined"
               ype="email"
               label="Email Address"
@@ -408,7 +480,9 @@ Number"
               placeholder="Select an upload method from the dropdown"
               color="#002b65"
               base-color="black"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
               variant="outlined"
               label="Upload Signature"
               type="file"
@@ -420,7 +494,9 @@ Number"
               placeholder="Insert today’s date here"
               color="#002b65"
               base-color="black"
-              class="mb-2"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
               variant="outlined"
               label="Today's Date"
               type="date"
@@ -432,14 +508,16 @@ Number"
                 text="Previous"
                 max-width="40%"
                 prepend-icon="mdi-chevron-left"
-                rounded="lg"
+                rounded
                 @click="formStage -= 1"
               />
               <v-btn
                 color="#43AB43"
                 text="Submit"
                 max-width="30%"
-                rounded="lg"
+                rounded
+                :loading="loading"
+                @click="sendEmail()"
               />
             </div>
           </div>
