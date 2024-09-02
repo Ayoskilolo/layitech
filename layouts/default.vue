@@ -9,6 +9,11 @@ const list = [
     label: "Partner",
     icon: "mdi-handshake-outline",
   },
+  {
+    to: "/installers",
+    label: "Installers",
+    icon: "mdi-handshake-outline",
+  },
 ];
 
 const d = new Date();
@@ -49,6 +54,16 @@ const year = d.getFullYear();
         <NuxtLink to="/partnerWithUs">
           <v-btn variant="text" text="Partner" flat ripple class="text-none" />
         </NuxtLink>
+
+        <NuxtLink to="/installers">
+          <v-btn
+            variant="text"
+            text="Installers"
+            flat
+            ripple
+            class="text-none"
+          />
+        </NuxtLink>
       </div>
     </div>
   </header>
@@ -75,7 +90,7 @@ const year = d.getFullYear();
     <slot />
   </div>
 
-  <footer class="flex flex-col h-[35em] sm:h-[20em]">
+  <footer class="flex flex-col h-[37em] sm:h-[25em]">
     <div class="w-full grow flex flex-col justify-between px-[5%]">
       <div
         class="w-full flex flex-col sm:flex-row justify-between pt-10 sm:px-3"
@@ -177,6 +192,7 @@ const year = d.getFullYear();
         ></v-btn>
       </div>
     </div>
+
     <div
       class="w-full flex flex-col sm:flex-row justify-between items-center px-[5%] py-5"
     >

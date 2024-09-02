@@ -1,5 +1,7 @@
 <template>
-  <section class="bg-[#002b65] sm:bg-white bg-cover bg-no-repeat h-dvh p-[5%]">
+  <section
+    class="bg-[#002b65] sm:bg-bluewave bg-cover bg-no-repeat h-dvh p-[5%]"
+  >
     <div
       class="h-[95%] sm:bg-[#002b65] sm:text-white main flex flex-col-reverse sm:flex-row justify-between sm:border-3 sm:border-[#002b65] rounded-2xl"
     >
@@ -9,15 +11,16 @@
         <img src="/lightbulb.png" alt="lightbulb" width="50" height="50" />
 
         <p class="text-2xl sm:text-5xl font-bold mb-5">
-          Build your clean energy business on LayiTech for Solar-Installation
+          Solar installers can reply on LayiTech for trusted financing solutions
         </p>
         <p class="text-base font-normal">
-          We've built a platform to help solar business owners grow energy sales
-          & get financing by offering your customers an initial deposit of only
-          30%. Build your clean energy business with LayiTech.
+          Partner with us to expand solar energy to more homes and businesses.
+          Send LayiTech your client’s quotation and invoice and we’ll fund it!
+          We disburse within 8 hours with a seamless application process. Join
+          us as a solar installer today
         </p>
         <div class="flex justify-center items-center sm:hidden">
-          <NuxtLink to="/partnerWithUs/form">
+          <NuxtLink to="/installers/form">
             <VBtn
               flat
               variant="outlined"
@@ -29,7 +32,7 @@
           </NuxtLink>
         </div>
         <div class="flex justify-center hidden items-center sm:block">
-          <NuxtLink to="/partnerWithUs/form">
+          <NuxtLink to="/installers/form">
             <VBtn
               flat
               variant="outlined"

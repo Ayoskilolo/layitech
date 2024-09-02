@@ -23,6 +23,7 @@ const partnerWithUsForm = ref({
   businessPhoneNumber1: "",
   businessPhoneNumber2: "",
   businessTaxIdentificationNumber: "",
+  numberOfDirectors: "",
   directorSurname: "",
   directorFirstName: "",
   directorOtherName: "",
@@ -30,7 +31,7 @@ const partnerWithUsForm = ref({
   directorGender: "",
   directorMeansOfIdentification: "",
   directorIdentificationNumber: "",
-  directorBVN: "",
+  directorPhotograph: [],
   directorJobRole: "",
   directorResidentialAddress: "",
   directorState: "",
@@ -38,7 +39,7 @@ const partnerWithUsForm = ref({
   directorPhoneNumber1: "",
   directorPhoneNumber2: "",
   directorEmail: "",
-  directorSignature: "",
+  directorSignature: [],
   dateToday: "",
 });
 
@@ -59,7 +60,6 @@ async function buildDocument() {
 
   return buffer;
 }
-
 function createHeading(text: string): Paragraph {
   return new Paragraph({
     text: text,
@@ -83,7 +83,6 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
 
   return children;
 }
-
 async function sendEmail() {
   try {
     loading.value = true;
@@ -105,6 +104,22 @@ async function sendEmail() {
     loading.value = false;
     alert("Error sending Emai!");
     console.error(error);
+  }
+}
+
+function noOfDirectorsToFillFor() {
+  if (partnerWithUsForm.value.numberOfDirectors === "3+") {
+    return 1;
+  } else {
+    return Number(partnerWithUsForm.value.numberOfDirectors);
+  }
+}
+
+function moveOn() {
+  if (!partnerWithUsForm.value.numberOfDirectors) {
+    return;
+  } else {
+    formStage.value += 1;
   }
 }
 </script>
@@ -276,6 +291,20 @@ async function sendEmail() {
               label="Tax Identification Number (TIN)"
             />
 
+            <v-select
+              density="compact"
+              v-model="partnerWithUsForm.numberOfDirectors"
+              placeholder="1"
+              color="#002b65"
+              base-color="black"
+              :items="[1, 2, '3+']"
+              variant="outlined"
+              class="mb-4"
+              rounded
+              :rules="[(value) => !!value || 'This field is required.']"
+              label="No of Director(s)"
+            />
+
             <div class="p-0 flex items-center justify-center">
               <v-btn
                 color="#002B65"
@@ -283,12 +312,12 @@ async function sendEmail() {
                 max-width="30%"
                 rounded
                 append-icon="mdi-chevron-right"
-                @click="formStage += 1"
+                @click="moveOn()"
               />
             </div>
           </div>
-          <Transition>
-            <div v-if="formStage">
+          <TransitionGroup>
+            <div v-if="formStage" v-for="n in noOfDirectorsToFillFor()">
               <p>2. Director’s Details</p>
               <v-text-field
                 v-model="partnerWithUsForm.directorSurname"
@@ -376,18 +405,17 @@ async function sendEmail() {
                 rounded
                 :rules="[(value) => !!value || 'This field is required.']"
               />
-              <v-text-field
+              <v-file-input
                 density="compact"
-                v-model="partnerWithUsForm.directorBVN"
-                placeholder="Insert BVN here"
+                v-model="partnerWithUsForm.directorPhotograph"
                 color="#002b65"
                 base-color="black"
                 variant="outlined"
-                label="BVN"
-                type="tel"
-                class="mb-4"
+                class="mb-3"
                 rounded
                 :rules="[(value) => !!value || 'This field is required.']"
+                accept=".png,.jpeg"
+                label="Add Photo"
               />
               <v-text-field
                 density="compact"
@@ -475,7 +503,7 @@ async function sendEmail() {
                 ype="email"
                 label="Email Address"
               />
-              <v-text-field
+              <v-file-input
                 density="compact"
                 v-model="partnerWithUsForm.directorSignature"
                 placeholder="Select an upload method from the dropdown"
@@ -486,9 +514,7 @@ async function sendEmail() {
                 :rules="[(value) => !!value || 'This field is required.']"
                 variant="outlined"
                 label="Upload Signature"
-                type="file"
               />
-
               <v-text-field
                 density="compact"
                 v-model="partnerWithUsForm.dateToday"
@@ -513,16 +539,26 @@ async function sendEmail() {
                   @click="formStage -= 1"
                 />
                 <v-btn
+                  color="#002B65"
+                  text="Next"
+                  max-width="40%"
+                  append-icon="mdi-chevron-right"
+                  rounded
+                  v-if="formStage > 0"
+                  @click="formStage += 1"
+                />
+                <v-btn
                   color="#43AB43"
                   text="Submit"
                   max-width="30%"
                   rounded
                   :loading="loading"
+                  v-if="formStage === partnerWithUsForm.noOfDirectorsToFillFor"
                   @click="sendEmail()"
                 />
               </div>
             </div>
-          </Transition>
+          </TransitionGroup>
         </v-form>
       </div>
     </div>

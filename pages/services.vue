@@ -9,13 +9,13 @@
     class="sm:h-[28rem] py-10 px-10 flex flex-col-reverse justify-between bg-[#004aad] sm:bg-minibluewave bg-no-repeat bg-cover sm:flex-row sm:text-[#004aad] sm:items-center"
   >
     <div
-      class="h-3/4 flex flex-col p-2 lg:w-[50%] sm:bg-white sm:p-4 text-center sm:text-left rounded-lg"
+      class="h-3/4 flex flex-col p-2 lg:w-[50%] sm:bg-white sm:p-4 text-center sm:text-left rounded-2xl"
     >
       <p class="text-3xl font-semibold mb-2 mt-5">
         Financing a Sustainable Future
       </p>
       <p
-        class="text-lg sm:text-xl flex text-justify items-center leading-relaxed grow"
+        class="text-lg sm:text-xl flex text-center items-center leading-relaxed grow"
       >
         Discover tailor-made renewable energy solutions with LayiTech, perfect
         for individuals & homes aiming to cut energy bills and increase power
@@ -34,13 +34,13 @@
       class="h-52 w-full sm:w-[40%] bg-handshake bg-no-repeat bg-contain bg-center scale-125 mb-10 sm:mb-0"
     ></div>
     <div
-      class="h-3/4 flex flex-col sm:w-[60%] sm:text-white text-center sm:text-right p-3 text-[#002b65] sm:bg-[#002b65] sm:border-2 sm:border-[#002b65] rounded-lg"
+      class="h-3/4 flex flex-col sm:w-[60%] sm:text-white text-center sm:text-right p-3 text-[#002b65] sm:bg-[#002b65] sm:border-2 sm:border-[#002b65] rounded-2xl"
     >
-      <p class="text-3xl font-semibold mb-2 mt-5">
+      <p class="text-3xl font-semibold mb-2 mt-4">
         Sustainable Partnerships with Solar Vendors & Installers
       </p>
       <p
-        class="text-lg sm:text-xl flex text-justify items-center leading-relaxed grow"
+        class="text-lg sm:text-xl flex text-center items-center leading-relaxed grow"
       >
         LayiTech is partnering with leading solar vendors and installers to
         grant access to clean and affordable energy through solar installations.
@@ -56,14 +56,14 @@
     style="background-color: #004aad"
   >
     <div
-      class="h-3/4 flex flex-col justify-around sm:w-[50%] sm:bg-white sm:p-4 text-center sm:text-left rounded-lg"
+      class="h-3/4 flex flex-col justify-around sm:w-[50%] sm:bg-white sm:p-4 text-center sm:text-left rounded-2xl"
       style="border: 2px solid #004aad"
     >
-      <p class="text-3xl font-semibold mb-2 py-2 flex-none mt-5">
+      <p class="text-3xl font-semibold mb-2 py-2 flex-none mt-4">
         Our Promise of a Sustainable Future
       </p>
       <p
-        class="text-lg sm:text-xl flex text-justify items-center leading-relaxed grow"
+        class="text-lg sm:text-xl flex text-center items-center leading-relaxed grow"
       >
         Upgrade from hazardous and costly fuel generators and lanterns to modern
         solar electricity, capable of powering lights, televisions, mobile
