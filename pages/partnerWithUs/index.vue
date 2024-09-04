@@ -1,7 +1,9 @@
 <template>
-  <section class="bg-[#002b65] sm:bg-white bg-cover bg-no-repeat h-dvh p-[5%]">
+  <section
+    class="bg-[#002b65] sm:bg-bluewave bg-cover bg-no-repeat h-dvh p-[5%]"
+  >
     <div
-      class="h-[95%] sm:bg-[#002b65] sm:text-white main flex flex-col-reverse sm:flex-row justify-between sm:border-3 sm:border-[#002b65] rounded-2xl"
+      class="h-[95%] sm:bg-white sm:text-[#002b65] main flex flex-col-reverse sm:flex-row justify-around sm:justify-between sm:border-3 sm:border-[#002b65] rounded-2xl"
     >
       <div
         class="sm:w-1/2 flex flex-col items-center justify-center sm:items-start px-5"
@@ -34,9 +36,9 @@
               flat
               variant="outlined"
               rounded="pill"
-              color="white"
+              color="#002b65"
               text="Partner With Us"
-              class="mt-5 text-none text-white"
+              class="mt-5 text-none"
             />
           </NuxtLink>
         </div>

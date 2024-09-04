@@ -55,6 +55,7 @@ export default defineNuxtConfig({
             smarthome: "url('/smarthome.png')",
             greenwave2: "url('/greenwave2.png')",
             technicians: "url('/technicians.jpeg')",
+            youngGuy: "url('/young-guy.png')",
           },
           backgroundSize: { "90%": "90%" },
         },

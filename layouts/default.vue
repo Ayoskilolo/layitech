@@ -26,7 +26,13 @@ const year = d.getFullYear();
   >
     <div class="flex items-center justify-between h-[100%] w-full">
       <NuxtLink to="/">
-        <img src="/logo.png" width="200" height="200" class="ml-5" />
+        <img src="/logo.png" width="200" height="200" class="ml-5 sm:hidden" />
+        <img
+          src="/logo.png"
+          width="150"
+          height="150"
+          class="ml-5 hidden sm:block"
+        />
       </NuxtLink>
 
       <v-spacer></v-spacer>

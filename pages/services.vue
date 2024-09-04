@@ -23,7 +23,7 @@
       </p>
     </div>
     <div
-      class="h-52 w-full lg:w-[50%] bg-piggy bg-contain bg-no-repeat bg-center scale-150 mb-10 sm:mb-0"
+      class="h-52 w-full lg:w-[50%] bg-piggy bg-contain bg-no-repeat bg-center sm:scale-150 mb-10 sm:mb-0"
     ></div>
   </section>
 
@@ -31,7 +31,7 @@
     class="sm:h-[28rem] py-10 px-10 bg-white gap-4 flex flex-col justify-between sm:bg-miniwhitewave sm:flex-row sm:items-center bg-no-repeat bg-cover"
   >
     <div
-      class="h-52 w-full sm:w-[40%] bg-handshake bg-no-repeat bg-contain bg-center scale-125 mb-10 sm:mb-0"
+      class="h-52 w-full sm:w-[40%] bg-handshake bg-no-repeat bg-contain bg-center sm:scale-125 mb-10 sm:mb-0"
     ></div>
     <div
       class="h-3/4 flex flex-col sm:w-[60%] sm:text-white text-center sm:text-right p-3 text-[#002b65] sm:bg-[#002b65] sm:border-2 sm:border-[#002b65] rounded-2xl"
@@ -73,7 +73,7 @@
       </p>
     </div>
     <div
-      class="h-52 w-full sm:w-[50%] bg-energy bg-contain bg-no-repeat bg-center scale-150"
+      class="h-52 w-full sm:w-[50%] bg-energy bg-contain bg-no-repeat bg-center sm:scale-150"
     ></div>
   </section>
 </template>

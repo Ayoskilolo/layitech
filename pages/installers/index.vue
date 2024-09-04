@@ -3,7 +3,7 @@
     class="bg-[#002b65] sm:bg-bluewave bg-cover bg-no-repeat h-dvh p-[5%]"
   >
     <div
-      class="h-[95%] sm:bg-[#002b65] sm:text-white main flex flex-col-reverse sm:flex-row justify-between sm:border-3 sm:border-[#002b65] rounded-2xl"
+      class="h-[95%] sm:bg-[#002b65] sm:text-white main flex flex-col-reverse sm:flex-row justify-around sm:justify-between sm:border-3 sm:border-[#002b65] rounded-2xl"
     >
       <div
         class="sm:w-1/2 flex flex-col items-center justify-center sm:items-start px-5"
@@ -11,7 +11,7 @@
         <img src="/lightbulb.png" alt="lightbulb" width="50" height="50" />
 
         <p class="text-2xl sm:text-5xl font-bold mb-5">
-          Solar installers can reply on LayiTech for trusted financing solutions
+          Solar installers can rely on LayiTech for trusted financing solutions
         </p>
         <p class="text-base font-normal">
           Partner with us to expand solar energy to more homes and businesses.
@@ -45,7 +45,7 @@
         </div>
       </div>
       <div
-        class="h-80 w-full sm:h-full bg-smarthome bg-contain bg-center bg-no-repeat sm:w-1/2"
+        class="h-80 w-full sm:h-full bg-youngGuy bg-contain bg-center bg-no-repeat sm:w-1/2"
       ></div>
     </div>
   </section>

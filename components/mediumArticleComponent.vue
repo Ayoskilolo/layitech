@@ -9,31 +9,29 @@
         v-for="article in mediumArticles.items"
         :key="article.link"
       >
-        <v-card flat hover variant="outlined">
-          <div class="article-title p-1[rem]">
+        <div
+          class="w-96 p-3 rounded-lg bg-[#002b65] text-white"
+          style="border: 1px solid black"
+        >
+          <div class="article-title p-1 font-black text-lg">
             <label>{{ article.title }}</label>
           </div>
 
-          <!-- <div
-          class="ellipsis overflow-hidden"
-          v-html="article.description"
-        ></div> -->
+          <div
+            class="ellipsis overflow-hidden h-40 p-2"
+            v-html="article.description"
+          ></div>
 
-          <div class="article-date">
+          <div class="article-date mt-2">
             <p>{{ new Date(article.pubDate).toLocaleDateString() }}</p>
           </div>
-        </v-card>
+        </div>
       </a>
     </div>
   </section>
 </template>
 
 <script setup>
-// const props = defineProps({
-//   mediumArticles: Object,
-// });
-
-// console.log(props.mediumArticles);
 const loading = ref(true);
 
 const { data: mediumArticles } = useFetch(
@@ -49,6 +47,10 @@ const { data: mediumArticles } = useFetch(
   font-family: "Outfit", sans-serif;
   gap: 1rem;
   cursor: pointer;
+  display: flex;
   overflow-y: scroll;
+}
+.article-title {
+  cursor: pointer;
 }
 </style>
