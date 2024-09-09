@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
   try {
-    console.log(body);
+    console.log("iran");
 
     const url = "api.zeptomail.com";
     const token =
@@ -29,6 +29,8 @@ export default defineEventHandler(async (event) => {
         subject: "Test Email",
         htmlbody: "<div><b> Test email sent successfully.</b></div>",
       });
+
+      return true;
     } catch (e) {
       return false;
     } finally {

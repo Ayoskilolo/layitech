@@ -45,7 +45,7 @@
         </div>
       </div>
       <div
-        class="h-80 w-full sm:h-full bg-youngGuy bg-contain bg-center bg-no-repeat sm:w-1/2"
+        class="h-80 w-full sm:h-full bg-youngGuy bg-cover bg-center bg-no-repeat sm:w-1/2"
       ></div>
     </div>
   </section>

@@ -1,5 +1,5 @@
 <template>
-  <section class="text-black p-[5%]">
+  <section class="text-black p-[5%] text-center">
     <p class="text-3xl font-bold mb-2 sm:text-5xl mb-5">Blog Articles</p>
     <div class="articles-section flex">
       <a
@@ -10,7 +10,7 @@
         :key="article.link"
       >
         <div
-          class="w-96 p-3 rounded-lg bg-[#002b65] text-white"
+          class="w-96 p-3 rounded-lg bg-[#002b65] text-white text-left"
           style="border: 1px solid black"
         >
           <div class="article-title p-1 font-black text-lg">

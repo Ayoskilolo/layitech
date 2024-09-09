@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { Document, Packer, Paragraph, TextRun, HeadingLevel } from "docx";
+import { title } from "radash";
+
 const landingForm = ref({
   name: "",
   email: "",
@@ -66,6 +69,7 @@ function calculatePaymentBreakDown(repaymentPeriodInMonths: number, interestRate
   const projectCostDone = Number(projectCost.value.replace(/,/g, ''));
   paymentDetails.commision = projectCostDone * (+commisionPercentage / 100);
 
+
   paymentDetails.projectCostPlusCommision =
     projectCostDone + paymentDetails.commision;
 
@@ -99,6 +103,73 @@ function showResults() {
   if (plans)
     plans.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
 }
+
+async function buildDocument() {
+  const doc = new Document({
+    sections: [
+      {
+        properties: {},
+        children: [
+          createHeading("Solar Provider On-boarding Information"),
+          ...writeJSONIntoParagraph(landingForm.value),
+        ],
+      },
+    ],
+  });
+
+  const blob = await Packer.toBlob(doc);
+
+  return blob;
+}
+function createHeading(text: string): Paragraph {
+  return new Paragraph({
+    text: text,
+    heading: "Heading1",
+    thematicBreak: true,
+  });
+}
+function writeJSONIntoParagraph(formData: Object): Paragraph[] {
+  const eachEntry = Object.entries(formData);
+
+  let children = [];
+
+  for (const [key, value] of eachEntry) {
+    const newLine = new Paragraph({
+      children: [new TextRun(`${title(key)}: ${title(String(value))}`)],
+      heading: HeadingLevel.HEADING_1,
+    });
+
+    children.push(newLine);
+  }
+
+  return children;
+}
+async function sendEmail() {
+  try {
+    loading.value = true;
+    const docBlob = await buildDocument();
+
+    const response = await $fetch("api/generate-doc", {
+      method: "POST",
+      body: docBlob,
+    });
+    
+
+    if (response) {
+      loading.value = false;
+      alert("Email sent successfully!");
+    } else {
+      loading.value = false;
+      alert("Email sent unsuccessfully!");
+    }
+  } catch (error) {
+    loading.value = false;
+    alert("Error sending Emai!");
+    console.error(error);
+  }
+}
+
+
 </script>
 
 <template>
@@ -139,7 +210,7 @@ function showResults() {
             <DatePicker id="datepicker-24h" v-model="dateBooked" showTime hourFormat="24" fluid showButtonBar
               placeholder="Book Consultation" class=mb-4 />
             <div class="p-0 flex items-center justify-center">
-              <v-btn color="#002B65" text="Submit" max-width="30%" />
+              <v-btn color="#002B65" text="Submit" max-width="30%" @click="sendEmail()"/>
             </div>
           </div>
         </form>
@@ -154,7 +225,7 @@ function showResults() {
         About LayiTech
       </p>
       <p class="text-xl md:text-2xl text-left">
-        LayiTech (subsidiary of LAYI Energy) is a cleantech company specializing
+        LayiTech is a cleantech company specializing
         in providing installment payment solutions through strategic
         partnerships with solar vendors.
       </p>
@@ -380,10 +451,10 @@ p {
 
 #panel {
   background-color: #002b65;
-  background-image: url("/solarbulb2.png");
+  background-image: url("/panels.png");
   background-position: bottom;
   background-repeat: no-repeat;
-  background-size: 70%;
+  background-size: contain;
 }
 
 .v-enter-active,
