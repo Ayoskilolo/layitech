@@ -18,12 +18,12 @@ const projectCost = ref();
 const clientName = ref();
 
 const monthlyAmount = computed(() => [
-  calculatePaymentBreakDown(3, interestRates[0]),
-  calculatePaymentBreakDown(6, interestRates[1]),
-  calculatePaymentBreakDown(9, interestRates[2]),
-  calculatePaymentBreakDown(12, interestRates[3]),
-  calculatePaymentBreakDown(15, interestRates[4]),
-  calculatePaymentBreakDown(18, interestRates[5]),
+  calculatePaymentBreakDown(1, interestRates[0]),
+  calculatePaymentBreakDown(2, interestRates[1]),
+  calculatePaymentBreakDown(3, interestRates[2]),
+  calculatePaymentBreakDown(4, interestRates[3]),
+  calculatePaymentBreakDown(5, interestRates[4]),
+  calculatePaymentBreakDown(6, interestRates[5]),
 ]);
 
 const results = ref(false)
@@ -168,8 +168,6 @@ async function sendEmail() {
     console.error(error);
   }
 }
-
-
 </script>
 
 <template>

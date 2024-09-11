@@ -76,27 +76,6 @@ const specialization = [
   "Other",
 ];
 
-//  1.⁠ ⁠Surname, ✅
-//  2.⁠ ⁠first name,✅
-//  3.⁠ ⁠date of birth,✅
-//  4.⁠ ⁠gender,✅
-//  5.⁠ ⁠means of ID,✅
-//  6.⁠ ⁠ID number with example,✅
-//  7.⁠ ⁠BVN,✅
-//  8.⁠ ⁠residential address,✅
-//  9.⁠ ⁠Upload utility Bill,✅
-// 10.⁠ ⁠state,✅
-// 11.⁠ ⁠country,✅
-// 12.⁠ ⁠phone number 1,✅
-// 13.⁠ ⁠email,✅
-
-// 14.⁠ ⁠Highest education level (objective; High school, OND, HND, Training certificate, Bachelors)
-// 15.⁠ ⁠Numbers of years of experience (less than 2 years of experience, over 2 years of existence)
-// 16.⁠ ⁠Specialization (please select as many skills as possible) design, installation, QHSE, project management, Site assessment, customer service, other.
-// 17.⁠ ⁠todays date
-// 18.⁠ ⁠Upload installation pictures minimum of 5
-// 19.⁠ ⁠upload Signature
-
 //Reactive Object that holds the form information.
 const installerKYCForm = ref({
   installerFirstName: "",
@@ -320,19 +299,6 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
             />
 
             <v-select
-              v-model="installerKYCForm.installerCountryOfResidence"
-              density="compact"
-              :items="['Nigeria']"
-              color="#002b65"
-              base-color="black"
-              variant="outlined"
-              label="Country"
-              class="mb-3"
-              rounded
-              :rules="[(value) => !!value || 'This field is required.']"
-            />
-
-            <v-select
               v-model="installerKYCForm.installerStateOfResidence"
               density="compact"
               :items="nigerianStates"
@@ -347,19 +313,19 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
               :rules="[(value) => !!value || 'This field is required.']"
             />
 
-            <v-text-field
+            <v-select
+              v-model="installerKYCForm.installerCountryOfResidence"
               density="compact"
-              v-model="installerKYCForm.installerBVN"
-              placeholder="Insert BVN here"
+              :items="['Nigeria']"
               color="#002b65"
               base-color="black"
               variant="outlined"
-              label="BVN"
-              type="tel"
-              class="mb-4"
+              label="Country"
+              class="mb-3"
               rounded
               :rules="[(value) => !!value || 'This field is required.']"
             />
+
             <div class="p-0 flex items-center justify-center">
               <v-btn
                 color="#002B65"
@@ -421,20 +387,6 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
                 persistent-hint
               />
 
-              <v-text-field
-                density="compact"
-                v-model="installerKYCForm.dateToday"
-                placeholder="Insert today’s date here"
-                color="#002b65"
-                base-color="black"
-                class="mb-4"
-                rounded
-                :rules="[(value) => !!value || 'This field is required.']"
-                variant="outlined"
-                label="Today's Date"
-                type="date"
-              />
-
               <v-file-input
                 density="compact"
                 v-model="installerKYCForm.installationPictures"
@@ -445,7 +397,8 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
                 rounded
                 :rules="[(value) => !!value || 'This field is required.']"
                 variant="outlined"
-                label="6 months Bank Statements"
+                label="Installation Pictues"
+                hint="A minimum number of 5 picuturess"
                 accept=".png,.jpeg,.pdf"
               />
 
@@ -460,6 +413,20 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
                 :rules="[(value) => !!value || 'This field is required.']"
                 variant="outlined"
                 label="Upload Signature"
+              />
+
+              <v-text-field
+                density="compact"
+                v-model="installerKYCForm.dateToday"
+                placeholder="Insert today’s date here"
+                color="#002b65"
+                base-color="black"
+                class="mb-4"
+                rounded
+                :rules="[(value) => !!value || 'This field is required.']"
+                variant="outlined"
+                label="Today's Date"
+                type="date"
               />
 
               <div class="p-0 flex items-center justify-center gap-8">

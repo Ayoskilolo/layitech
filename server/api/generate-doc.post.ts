@@ -7,28 +7,29 @@ export default defineEventHandler(async (event) => {
     console.log("iran");
 
     const url = "api.zeptomail.com";
-    const token =
-      "Zoho-enczapikey wSsVR60i8xb3DKl9mjf4cr8xmF5XUgn0HE982Vqo7nGtT63F8cc8l0zNVwOmGKdKFGNqFDoW9bx8nRwHgTdc3t58wwwJXSiF9mqRe1U4J3x17qnvhDzIXGRYlBqBL4gPzghpnWdlG88g+g==";
-
+    const token = useRuntimeConfig().SENDGRID_TOKEN;
     const client = new SendMailClient({ url, token });
 
     try {
-      client.sendMail({
-        from: {
-          address: "admin@layitech.africa",
-          name: "LayiTech",
-        },
-        to: [
-          {
-            email_address: {
-              address: "ayoafo82@gmail.com",
-              name: "Ayomide",
-            },
+      client
+        .sendMail({
+          from: {
+            address: "admin@layitech.africa",
+            name: "LayiTech",
           },
-        ],
-        subject: "Test Email",
-        htmlbody: "<div><b> Test email sent successfully.</b></div>",
-      });
+          to: [
+            {
+              email_address: {
+                address: "ayoafo82@gmail.com",
+                name: "Ayomide",
+              },
+            },
+          ],
+          subject: "Test Email",
+          htmlbody: "<div><b> Test email sent successfully.</b></div>",
+        })
+        .then((resp) => console.log("success"))
+        .catch((error) => console.log("error"));
 
       return true;
     } catch (e) {
@@ -40,4 +41,31 @@ export default defineEventHandler(async (event) => {
   } catch (e) {
     console.log(e);
   }
+
+  // https://www.npmjs.com/package/zeptomail
+
+  const url = "api.zeptomail.com/";
+  const token = "<SEND_MAIL_TOKEN>";
+
+  let client = new SendMailClient({ url, token });
+
+  client
+    .sendMail({
+      from: {
+        address: "<DOMAIN>",
+        name: "noreply",
+      },
+      to: [
+        {
+          email_address: {
+            address: "admin@layitech.africa",
+            name: "LayiTech",
+          },
+        },
+      ],
+      subject: "Test Email",
+      htmlbody: "<div><b> Test email sent successfully.</b></div>",
+    })
+    .then((resp) => console.log("success"))
+    .catch((error) => console.log("error"));
 });
