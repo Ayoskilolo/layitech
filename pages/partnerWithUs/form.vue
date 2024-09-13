@@ -509,6 +509,8 @@ function moveOn() {
                 v-model="partnerWithUsForm.directorState"
                 placeholder="Insert state here"
                 :items="nigerianStates"
+                item-title="name"
+                item-value="name"
                 color="#002b65"
                 base-color="black"
                 class="mb-4"

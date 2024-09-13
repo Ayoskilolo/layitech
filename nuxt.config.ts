@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     "vuetify-nuxt-module",
     "nuxt-marquee",
     "@primevue/nuxt-module",
+    "@nuxtjs/sitemap",
   ],
   runtimeConfig: {
     sendGridToken: process.env.NUXT_SENDGRID_TOKEN,
@@ -62,5 +63,11 @@ export default defineNuxtConfig({
         },
       },
     },
+  },
+  site: {
+    url: "www.layitech.africa",
+    name: "LayiTech",
+    description: "Financing Renewable Energy",
+    defaultLocale: "en", // not needed if you have @nuxtjs/i18n installed
   },
 });
