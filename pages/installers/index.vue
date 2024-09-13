@@ -6,10 +6,8 @@
       class="h-[95%] sm:bg-[#002b65] sm:text-white main flex flex-col-reverse sm:flex-row justify-around sm:justify-between sm:border-3 sm:border-[#002b65] rounded-2xl"
     >
       <div
-        class="sm:w-1/2 flex flex-col items-center justify-center sm:items-start px-5"
+        class="sm:w-1/2 flex flex-col items-center justify-center px-5 text-center"
       >
-        <img src="/lightbulb.png" alt="lightbulb" width="50" height="50" />
-
         <p class="text-2xl sm:text-5xl font-bold mb-5">
           Solar installers can rely on LayiTech for trusted financing solutions
         </p>

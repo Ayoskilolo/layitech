@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { Document, Packer, Paragraph, TextRun, HeadingLevel } from "docx";
-import { title } from "radash";
-
 const landingForm = ref({
   name: "",
   email: "",
@@ -12,7 +9,6 @@ const landingForm = ref({
 const dateBooked = ref()
 const commisionPercentage = useRuntimeConfig().public.commsionPercentage;
 const interestRates = useRuntimeConfig().public.interestRate.split(",");
-const rates = useRuntimeConfig().public.interestRate
 
 const projectCost = ref();
 const clientName = ref();
@@ -37,18 +33,11 @@ const paymentDetails = {
   totalOutstandingBalancePayment: 0,
   amountExpectedInMonths: 0,
 };
+const loading = ref(false);
+const dialog = ref(false);
 
-const articles = ref()
-const loading = ref(true);
+const formSubmissionStatus = ref("PENDING");
 
-
-const options = [
-  "Not Sure - Exploring Options",
-  "At some point this year",
-  "Within the next month or so",
-  "Within the next 2 weeks",
-  "ASAP, within the next few days",
-];
 
 const images = [
   "/africell.png",
@@ -104,68 +93,33 @@ function showResults() {
     plans.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
 }
 
-async function buildDocument() {
-  const doc = new Document({
-    sections: [
-      {
-        properties: {},
-        children: [
-          createHeading("Solar Provider On-boarding Information"),
-          ...writeJSONIntoParagraph(landingForm.value),
-        ],
-      },
-    ],
-  });
-
-  const blob = await Packer.toBlob(doc);
-
-  return blob;
-}
-function createHeading(text: string): Paragraph {
-  return new Paragraph({
-    text: text,
-    heading: "Heading1",
-    thematicBreak: true,
-  });
-}
-function writeJSONIntoParagraph(formData: Object): Paragraph[] {
-  const eachEntry = Object.entries(formData);
-
-  let children = [];
-
-  for (const [key, value] of eachEntry) {
-    const newLine = new Paragraph({
-      children: [new TextRun(`${title(key)}: ${title(String(value))}`)],
-      heading: HeadingLevel.HEADING_1,
-    });
-
-    children.push(newLine);
-  }
-
-  return children;
-}
 async function sendEmail() {
   try {
     loading.value = true;
-    const docBlob = await buildDocument();
+    dialog.value = true;
 
-    const response = await $fetch("api/generate-doc", {
+    const response = await $fetch("api/contactUs", {
       method: "POST",
-      body: docBlob,
+      body: {...landingForm.value, dateBooked: dateBooked.value},
     });
     
 
     if (response) {
       loading.value = false;
-      alert("Email sent successfully!");
+      formSubmissionStatus.value = "SUCCESS";
     } else {
       loading.value = false;
-      alert("Email sent unsuccessfully!");
+      formSubmissionStatus.value = "FAILURE";
     }
   } catch (error) {
     loading.value = false;
-    alert("Error sending Emai!");
-    console.error(error);
+    formSubmissionStatus.value = "FAILURE";
+  } finally {
+    landingForm.value.name = "";
+    landingForm.value.email = "";
+    landingForm.value.phoneNumber = "";
+    dateBooked.value="";
+    setTimeout(() =>  dialog.value = false, 1000); 
   }
 }
 </script>
@@ -208,7 +162,7 @@ async function sendEmail() {
             <DatePicker id="datepicker-24h" v-model="dateBooked" showTime hourFormat="24" fluid showButtonBar
               placeholder="Book Consultation" class=mb-4 />
             <div class="p-0 flex items-center justify-center">
-              <v-btn color="#002B65" text="Submit" max-width="30%" @click="sendEmail()"/>
+              <v-btn color="#002B65" text="Submit" max-width="30%" @click="sendEmail()" :loading="loading"/>
             </div>
           </div>
         </form>
@@ -372,7 +326,7 @@ async function sendEmail() {
     </Transition>
   </section>
 
-  <MediumArticleComponent />
+  <MediumArticleComponent id="articles"/>
 
   <section id="panel" class="flex flex-col items-center h-[35rem] sm:h-[60rem]">
     <div class="flex flex-col items-center justify-around py-8 text-center">
@@ -386,6 +340,53 @@ async function sendEmail() {
 
     <!-- <div class="bg-panels"></div> -->
   </section>
+
+  <v-dialog max-width="320" persistent v-model="dialog">
+    <v-list class="py-2" color="primary" elevation="12" rounded="lg">
+      <v-list-item
+        prepend-icon="mdi-check"
+        title="Successfully sent your form!"
+        v-if="formSubmissionStatus === 'SUCCESS'"
+      >
+        <template v-slot:prepend>
+          <div class="pe-4">
+            <v-icon color="primary" size="x-large"></v-icon>
+          </div>
+        </template>
+      </v-list-item>
+      <v-list-item
+        v-if="formSubmissionStatus === 'PENDING'"
+        prepend-icon="$vuetify-outline"
+        title="Sending your form..."
+      >
+        <template v-slot:prepend>
+          <div class="pe-4">
+            <v-icon color="primary" size="x-large"></v-icon>
+          </div>
+        </template>
+
+        <template v-slot:append>
+          <v-progress-circular
+            color="primary"
+            indeterminate="disable-shrink"
+            size="16"
+            width="2"
+          ></v-progress-circular>
+        </template>
+      </v-list-item>
+      <v-list-item
+        v-if="formSubmissionStatus === 'FAILURE'"
+        prepend-icon="mdi-message-alert"
+        title="OOPS! Something went wrong. Please try again."
+      >
+        <template v-slot:prepend>
+          <div class="pe-4">
+            <v-icon color="primary" size="x-large"></v-icon>
+          </div>
+        </template>
+      </v-list-item>
+    </v-list>
+  </v-dialog>
 </template>
 
 <style>

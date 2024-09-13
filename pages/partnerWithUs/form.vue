@@ -5,10 +5,51 @@ import { title } from "radash";
 //Display Helper for changing page
 const formStage = ref(0);
 const loading = ref(false);
+const dialog = ref(false);
+const formSubmissionStatus = ref("PENDING");
 
 //Options for Select Button On Form
 const categoryofBusiness = ["Limited Liability Company", "Partnership", "Sole"];
 const meansOfIdentification = ["NIN", "Voter's Card", "Driver's License"];
+const nigerianStates = [
+  { name: "Abia", inactive: true },
+  { name: "Adamawa", inactive: true },
+  { name: "Akwa Ibom", inactive: true },
+  { name: "Anambra", inactive: true },
+  { name: "Bauchi", inactive: true },
+  { name: "Bayelsa", inactive: true },
+  { name: "Benue", inactive: true },
+  { name: "Borno", inactive: true },
+  { name: "Cross River", inactive: true },
+  { name: "Delta", inactive: true },
+  { name: "Ebonyi", inactive: true },
+  { name: "Edo", inactive: true },
+  { name: "Ekiti", inactive: true },
+  { name: "Enugu", inactive: true },
+  { name: "FCT - Abuja", inactive: true },
+  { name: "Gombe", inactive: true },
+  { name: "Imo", inactive: true },
+  { name: "Jigawa", inactive: true },
+  { name: "Kaduna", inactive: true },
+  { name: "Kano", inactive: true },
+  { name: "Katsina", inactive: true },
+  { name: "Kebbi", inactive: true },
+  { name: "Kogi", inactive: true },
+  { name: "Kwara", inactive: true },
+  { name: "Lagos" },
+  { name: "Nasarawa", inactive: true },
+  { name: "Niger", inactive: true },
+  { name: "Ogun", inactive: true },
+  { name: "Ondo", inactive: true },
+  { name: "Osun", inactive: true },
+  { name: "Oyo", inactive: true },
+  { name: "Plateau", inactive: true },
+  { name: "Rivers", inactive: true },
+  { name: "Sokoto", inactive: true },
+  { name: "Taraba", inactive: true },
+  { name: "Yobe", inactive: true },
+  { name: "Zamfara", inactive: true },
+];
 
 //Reactive Object that holds the form information.
 const partnerWithUsForm = ref({
@@ -56,7 +97,7 @@ async function buildDocument() {
     ],
   });
 
-  const buffer = await Packer.toBuffer(doc);
+  const buffer = await Packer.toBase64String(doc);
 
   return buffer;
 }
@@ -86,24 +127,31 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
 async function sendEmail() {
   try {
     loading.value = true;
+    dialog.value = true;
     const docBuffer = await buildDocument();
 
-    const response = await $fetch("api/generate-doc", {
+    let files: File[] = [];
+
+    files.push(partnerWithUsForm.value.directorPhotograph[0]);
+    files.push(partnerWithUsForm.value.directorSignature[0]);
+
+    const response = await $fetch("/api/generate-doc", {
       method: "POST",
-      body: docBuffer,
+      body: { doc: docBuffer, typeOfForm: "PARTNER", files },
     });
 
     if (response) {
       loading.value = false;
-      alert("Email sent successfully!");
+      formSubmissionStatus.value = "SUCCESS";
     } else {
       loading.value = false;
-      alert("Email sent unsuccessfully!");
+      formSubmissionStatus.value = "FAILURE";
     }
   } catch (error) {
     loading.value = false;
-    alert("Error sending Emai!");
-    console.error(error);
+    formSubmissionStatus.value = "FAILURE";
+  } finally {
+    setTimeout(() => (dialog.value = false), 1000);
   }
 }
 
@@ -149,7 +197,6 @@ function moveOn() {
           >
             (Incorporated & Non-Incorporated)
           </p>
-          <!-- :rules="[(value) => !!value || ' field']" -->
 
           <div v-if="!formStage">
             <p classs="text-left">1. Company Details</p>
@@ -161,6 +208,7 @@ function moveOn() {
               base-color="black"
               variant="outlined"
               label="Company/Business Name"
+              name="Company/Business Name"
               class="mb-4"
               rounded
               :rules="[(value) => !!value || 'This field is required.']"
@@ -176,6 +224,7 @@ function moveOn() {
               rounded
               :rules="[(value) => !!value || 'This field is required.']"
               label="Certification of Incorporation/Registration Number eg. RC-1234567"
+              name="Certification of Incorporation/Registration Number eg. RC-1234567"
             />
             <v-text-field
               density="compact"
@@ -189,6 +238,7 @@ function moveOn() {
               rounded
               :rules="[(value) => !!value || 'This field is required.']"
               label="Date of Incorporation/Registration"
+              name="Date of Incorporation/Registration"
             />
             <v-select
               density="compact"
@@ -202,6 +252,7 @@ function moveOn() {
               rounded
               :rules="[(value) => !!value || 'This field is required.']"
               label="Category of business"
+              name="Category of business"
             />
             <v-text-field
               density="compact"
@@ -211,6 +262,7 @@ function moveOn() {
               base-color="black"
               variant="outlined"
               label="Operating Business Address"
+              name="Operating Business Address"
               type="tel"
               class="mb-4"
               rounded
@@ -227,6 +279,8 @@ function moveOn() {
               rounded
               label="Corporate business Address/Registered Office
 (if different from above)"
+              name="Corporate business Address/Registered Office
+(if different from above)"
               type="tel"
             />
             <v-text-field
@@ -236,8 +290,9 @@ function moveOn() {
               color="#002b65"
               base-color="black"
               variant="outlined"
-              ype="email"
+              type="email"
               label="Email Address"
+              name="Email Address"
               class="mb-4"
               rounded
               :rules="[(value) => !!value || 'This field is required.']"
@@ -252,6 +307,7 @@ function moveOn() {
               rounded
               variant="outlined"
               label="Website Address (if any)"
+              name="Website Address (if any)"
             />
             <v-text-field
               density="compact"
@@ -261,6 +317,7 @@ function moveOn() {
               base-color="black"
               variant="outlined"
               label="Phone Number (1)"
+              name="Phone Number (1)"
               type="tel"
               class="mb-4"
               rounded
@@ -276,6 +333,7 @@ function moveOn() {
               class="mb-4"
               rounded
               label="Phone Number (2)"
+              name="Phone Number (2)"
               type="tel"
             />
             <v-text-field
@@ -289,6 +347,7 @@ function moveOn() {
               rounded
               :rules="[(value) => !!value || 'This field is required.']"
               label="Tax Identification Number (TIN)"
+              name="Tax Identification Number (TIN)"
             />
 
             <v-select
@@ -303,6 +362,7 @@ function moveOn() {
               rounded
               :rules="[(value) => !!value || 'This field is required.']"
               label="No of Director(s)"
+              name="No of Director(s)"
             />
 
             <div class="p-0 flex items-center justify-center">
@@ -327,6 +387,7 @@ function moveOn() {
                 base-color="black"
                 variant="outlined"
                 label="Surname"
+                name="Surname"
                 class="mb-4"
                 rounded
                 :rules="[(value) => !!value || 'This field is required.']"
@@ -342,6 +403,7 @@ function moveOn() {
                 rounded
                 :rules="[(value) => !!value || 'This field is required.']"
                 label="First Name"
+                name="First Name"
               />
               <v-text-field
                 density="compact"
@@ -368,9 +430,10 @@ function moveOn() {
                 rounded
                 :rules="[(value) => !!value || 'This field is required.']"
               />
-              <v-text-field
+              <v-select
                 density="compact"
                 v-model="partnerWithUsForm.directorGender"
+                :items="['Male', 'Female']"
                 placeholder="Select gender from the dropdown"
                 color="#002b65"
                 base-color="black"
@@ -441,10 +504,11 @@ function moveOn() {
                 variant="outlined"
                 label="Residential Address"
               />
-              <v-text-field
+              <v-select
                 density="compact"
                 v-model="partnerWithUsForm.directorState"
                 placeholder="Insert state here"
+                :items="nigerianStates"
                 color="#002b65"
                 base-color="black"
                 class="mb-4"
@@ -544,7 +608,7 @@ function moveOn() {
                   max-width="40%"
                   append-icon="mdi-chevron-right"
                   rounded
-                  v-if="formStage > 0"
+                  v-if="formStage != +partnerWithUsForm.numberOfDirectors"
                   @click="formStage += 1"
                 />
                 <v-btn
@@ -553,7 +617,7 @@ function moveOn() {
                   max-width="30%"
                   rounded
                   :loading="loading"
-                  v-if="formStage === partnerWithUsForm.noOfDirectorsToFillFor"
+                  v-else
                   @click="sendEmail()"
                 />
               </div>
@@ -562,6 +626,53 @@ function moveOn() {
         </v-form>
       </div>
     </div>
+
+    <v-dialog v-model="dialog" max-width="320" persistent>
+      <v-list class="py-2" color="primary" elevation="12" rounded="lg">
+        <v-list-item
+          prepend-icon="mdi-check"
+          title="Successfully sent your form!"
+          v-if="formSubmissionStatus === 'SUCCESS'"
+        >
+          <template v-slot:prepend>
+            <div class="pe-4">
+              <v-icon color="primary" size="x-large"></v-icon>
+            </div>
+          </template>
+        </v-list-item>
+        <v-list-item
+          v-if="formSubmissionStatus === 'PENDING'"
+          prepend-icon="$vuetify-outline"
+          title="Sending your form..."
+        >
+          <template v-slot:prepend>
+            <div class="pe-4">
+              <v-icon color="primary" size="x-large"></v-icon>
+            </div>
+          </template>
+
+          <template v-slot:append>
+            <v-progress-circular
+              color="primary"
+              indeterminate="disable-shrink"
+              size="16"
+              width="2"
+            ></v-progress-circular>
+          </template>
+        </v-list-item>
+        <v-list-item
+          v-if="formSubmissionStatus === 'FAILURE'"
+          prepend-icon="mdi-message-alert"
+          title="OOPS! Something went wrong. Please try again."
+        >
+          <template v-slot:prepend>
+            <div class="pe-4">
+              <v-icon color="primary" size="x-large"></v-icon>
+            </div>
+          </template>
+        </v-list-item>
+      </v-list>
+    </v-dialog>
   </section>
 </template>
 

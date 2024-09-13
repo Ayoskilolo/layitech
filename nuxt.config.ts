@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     "@primevue/nuxt-module",
   ],
   runtimeConfig: {
+    sendGridToken: process.env.NUXT_SENDGRID_TOKEN,
     public: {
       commsionPercentage: process.env.COMMISION_PERCENTAGE,
       interestRate: process.env.INTEREST_RATE,

@@ -1,71 +1,81 @@
-import { SendMailClient } from "zeptomail";
+import sgMail from "@sendgrid/mail";
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler<{
+  body: { doc: string; typeOfForm: string; files: File[]; photo: string };
+}>(async (event) => {
   const body = await readBody(event);
+  console.log(body.photo);
 
   try {
-    console.log("iran");
+    const token = useRuntimeConfig().sendGridToken;
+    sgMail.setApiKey(token);
 
-    const url = "api.zeptomail.com";
-    const token = useRuntimeConfig().SENDGRID_TOKEN;
-    const client = new SendMailClient({ url, token });
+    let emailBody = ``;
+    switch (body.typeOfForm) {
+      case "PARTNER":
+        emailBody = `<h3>New Partner!</h3>`;
+        break;
+      case "INSTALLER":
+        emailBody = `<h3>New Installer!</h3>`;
+        break;
+      case "CLIENT":
+        emailBody = `<h3>New Client!</h3>`;
+        break;
+      default:
+    }
 
     try {
-      client
-        .sendMail({
-          from: {
-            address: "admin@layitech.africa",
-            name: "LayiTech",
+      const msg = {
+        to: "layitechltd@gmail.com", // Change to your recipient
+        from: "admin@layitech.africa ", // Change to your verified sender
+        subject: "Sending with SendGrid is Fun",
+        html: emailBody,
+        attachments: [
+          {
+            content: body.doc,
+            filename: "FilledForm.docx",
+            type: "application/docx",
+            disposition: "attachment",
           },
-          to: [
-            {
-              email_address: {
-                address: "ayoafo82@gmail.com",
-                name: "Ayomide",
-              },
-            },
-          ],
-          subject: "Test Email",
-          htmlbody: "<div><b> Test email sent successfully.</b></div>",
-        })
-        .then((resp) => console.log("success"))
-        .catch((error) => console.log("error"));
+        ],
+      };
 
+      if (body.files) {
+        for (const file of body.files) {
+          console.log(typeof file);
+          const newAttachment = {
+            content: file.toString(),
+            type: file.type,
+            filename: file.name,
+            disposition: "attachment",
+          };
+          msg.attachments.push(newAttachment);
+        }
+      }
+
+      await sgMail
+        .send(msg)
+        .then(() => {
+          console.log("Email sent");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
       return true;
     } catch (e) {
+      console.log(e);
       return false;
-    } finally {
-      console.log(true);
-      console.log("success");
     }
+    return true;
   } catch (e) {
     console.log(e);
   }
-
-  // https://www.npmjs.com/package/zeptomail
-
-  const url = "api.zeptomail.com/";
-  const token = "<SEND_MAIL_TOKEN>";
-
-  let client = new SendMailClient({ url, token });
-
-  client
-    .sendMail({
-      from: {
-        address: "<DOMAIN>",
-        name: "noreply",
-      },
-      to: [
-        {
-          email_address: {
-            address: "admin@layitech.africa",
-            name: "LayiTech",
-          },
-        },
-      ],
-      subject: "Test Email",
-      htmlbody: "<div><b> Test email sent successfully.</b></div>",
-    })
-    .then((resp) => console.log("success"))
-    .catch((error) => console.log("error"));
 });
+
+const toBase64 = (file: File) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+  });

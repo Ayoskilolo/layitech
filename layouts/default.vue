@@ -119,9 +119,7 @@ const year = d.getFullYear();
               <NuxtLink to="/partnerWithUs"> Partners</NuxtLink>
             </p>
             <p class="py-1">
-              <NuxtLink :to="{ path: '/', hash: '#calculator' }">
-                Blog
-              </NuxtLink>
+              <NuxtLink :to="{ path: '/', hash: '#articles' }"> Blog </NuxtLink>
             </p>
           </div>
           <div>
@@ -143,7 +141,18 @@ const year = d.getFullYear();
           </div>
           <div>
             <p class="text-sm uppercase font-bold">Legal</p>
-            <p class="py-1">Service Level Agreement</p>
+            <p class="py-1">
+              <a
+                href="https://drive.google.com/file/d/1Saue4QTjYjespANmaiHM--gtKLgy84kN/view?usp=drive_link"
+                >Solar Provider's SLA</a
+              >
+            </p>
+            <p class="py-1">
+              <a
+                href="https://drive.google.com/file/d/19_35_70SJBuPkdJj_9VgAlmupxIG0mfD/view?usp=drive_link"
+                >Solar Installer's SLA</a
+              >
+            </p>
             <p class="py-1">
               <a
                 href="https://drive.google.com/file/d/17qPxzpC61bywmfghsGBPLx3KRZUZmRfF/view?usp=sharing"

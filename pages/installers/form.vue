@@ -4,6 +4,9 @@ import { title } from "radash";
 
 //Display Helper for changing page
 const formStage = ref(0);
+const loading = ref(false);
+const dialog = ref(false);
+const formSubmissionStatus = ref("PENDING");
 
 //Options for Select Button On Form
 const nigerianStates = [
@@ -114,7 +117,7 @@ async function buildDocument() {
     ],
   });
 
-  const buffer = await Packer.toBuffer(doc);
+  const buffer = await Packer.toBase64String(doc);
 
   return buffer;
 }
@@ -142,6 +145,32 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
 
   return children;
 }
+
+async function sendEmail() {
+  try {
+    loading.value = true;
+    dialog.value = true;
+    const docBuffer = await buildDocument();
+
+    const response = await $fetch("api/generate-doc", {
+      method: "POST",
+      body: { doc: docBuffer, typeOfForm: "INSTALLER" },
+    });
+
+    if (response) {
+      loading.value = false;
+      formSubmissionStatus.value = "SUCCESS";
+    } else {
+      loading.value = false;
+      formSubmissionStatus.value = "FAILURE";
+    }
+  } catch (error) {
+    loading.value = false;
+    formSubmissionStatus.value = "FAILURE";
+  } finally {
+    setTimeout(() => (dialog.value = false), 1000);
+  }
+}
 </script>
 
 <template>
@@ -162,17 +191,17 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
           <p
             class="text-[#43ab43] text-xl sm:text-3xl font-black mb-3 sm:text-left"
           >
-            Client Information
+            Installer's Information
           </p>
           <p
             class="text-[#002b65] text-base sm:text-xl font-light mb-3 sm:text-left"
           >
-            To finance your solar installation, we need you to provide your
-            personal and financial information.
+            Fill the form accurately below to gain access to solar financing for
+            your customers.
           </p>
 
           <div v-if="!formStage">
-            <p>1. Personal & Employment Details</p>
+            <p>1. Personal & Residential Information</p>
             <v-text-field
               v-model="installerKYCForm.installerFirstName"
               density="compact"
@@ -280,6 +309,7 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
               color="#002b65"
               base-color="black"
               variant="outlined"
+              placeholder="22, Sule Avenue, Badore-Ajah, Lagos."
               label="Address"
               class="mb-3"
               rounded
@@ -443,6 +473,7 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
                   text="Submit"
                   max-width="30%"
                   rounded="lg"
+                  @click="sendEmail()"
                 />
               </div>
             </div>
@@ -451,6 +482,53 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
       </div>
     </div>
   </section>
+
+  <v-dialog v-model="dialog" max-width="320" persistent>
+    <v-list class="py-2" color="primary" elevation="12" rounded="lg">
+      <v-list-item
+        prepend-icon="mdi-check"
+        title="Successfully sent your form!"
+        v-if="formSubmissionStatus === 'SUCCESS'"
+      >
+        <template v-slot:prepend>
+          <div class="pe-4">
+            <v-icon color="primary" size="x-large"></v-icon>
+          </div>
+        </template>
+      </v-list-item>
+      <v-list-item
+        v-if="formSubmissionStatus === 'PENDING'"
+        prepend-icon="$vuetify-outline"
+        title="Sending your form..."
+      >
+        <template v-slot:prepend>
+          <div class="pe-4">
+            <v-icon color="primary" size="x-large"></v-icon>
+          </div>
+        </template>
+
+        <template v-slot:append>
+          <v-progress-circular
+            color="primary"
+            indeterminate="disable-shrink"
+            size="16"
+            width="2"
+          ></v-progress-circular>
+        </template>
+      </v-list-item>
+      <v-list-item
+        v-if="formSubmissionStatus === 'FAILURE'"
+        prepend-icon="mdi-message-alert"
+        title="OOPS! Something went wrong. Please try again."
+      >
+        <template v-slot:prepend>
+          <div class="pe-4">
+            <v-icon color="primary" size="x-large"></v-icon>
+          </div>
+        </template>
+      </v-list-item>
+    </v-list>
+  </v-dialog>
 </template>
 
 <style scoped>
