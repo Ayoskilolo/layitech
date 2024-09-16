@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@types/validator": "^13.12.1",
+    "nuxt-file-storage": "^0.2.7",
     "zeptomail": "^6.0.0"
   }
 }

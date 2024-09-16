@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { defineNuxtConfig, type NuxtConfig } from "nuxt/config";
 import Aura from "@primevue/themes/aura";
 
 export default defineNuxtConfig({
@@ -12,11 +13,12 @@ export default defineNuxtConfig({
     "nuxt-marquee",
     "@primevue/nuxt-module",
     "@nuxtjs/sitemap",
+    "nuxt-file-storage",
   ],
   runtimeConfig: {
     sendGridToken: process.env.NUXT_SENDGRID_TOKEN,
     public: {
-      commsionPercentage: process.env.COMMISION_PERCENTAGE,
+      commissionPercentage: process.env.COMMISSION_PERCENTAGE,
       interestRate: process.env.INTEREST_RATE,
     },
   },
@@ -65,7 +67,7 @@ export default defineNuxtConfig({
     },
   },
   site: {
-    url: "www.layitech.africa",
+    url: "https://www.layitech.africa",
     name: "LayiTech",
     description: "Financing Renewable Energy",
     defaultLocale: "en", // not needed if you have @nuxtjs/i18n installed

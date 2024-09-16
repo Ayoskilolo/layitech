@@ -84,6 +84,8 @@ const partnerWithUsForm = ref({
   dateToday: "",
 });
 
+const { handleFileInput, files } = useFileStorage();
+
 async function buildDocument() {
   const doc = new Document({
     sections: [
@@ -114,6 +116,9 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
   let children = [];
 
   for (const [key, value] of eachEntry) {
+    if (key === "directorPhotograph" || key === "directorSignature") {
+      continue;
+    }
     const newLine = new Paragraph({
       children: [new TextRun(`${title(key)}: ${title(String(value))}`)],
       heading: HeadingLevel.HEADING_1,
@@ -130,14 +135,9 @@ async function sendEmail() {
     dialog.value = true;
     const docBuffer = await buildDocument();
 
-    let files: File[] = [];
-
-    files.push(partnerWithUsForm.value.directorPhotograph[0]);
-    files.push(partnerWithUsForm.value.directorSignature[0]);
-
     const response = await $fetch("/api/generate-doc", {
       method: "POST",
-      body: { doc: docBuffer, typeOfForm: "PARTNER", files },
+      body: { doc: docBuffer, typeOfForm: "PARTNER", files: files.value },
     });
 
     if (response) {
@@ -154,7 +154,6 @@ async function sendEmail() {
     setTimeout(() => (dialog.value = false), 1000);
   }
 }
-
 function noOfDirectorsToFillFor() {
   if (partnerWithUsForm.value.numberOfDirectors === "3+") {
     return 1;
@@ -162,7 +161,6 @@ function noOfDirectorsToFillFor() {
     return Number(partnerWithUsForm.value.numberOfDirectors);
   }
 }
-
 function moveOn() {
   if (!partnerWithUsForm.value.numberOfDirectors) {
     return;
@@ -479,6 +477,7 @@ function moveOn() {
                 :rules="[(value) => !!value || 'This field is required.']"
                 accept=".png,.jpeg"
                 label="Add Photo"
+                @input="handleFileInput"
               />
               <v-text-field
                 density="compact"
@@ -580,6 +579,7 @@ function moveOn() {
                 :rules="[(value) => !!value || 'This field is required.']"
                 variant="outlined"
                 label="Upload Signature"
+                @input="handleFileInput"
               />
               <v-text-field
                 density="compact"
