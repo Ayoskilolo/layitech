@@ -41,17 +41,14 @@ export default defineEventHandler<{
     for (const file of body.files) {
       const { binaryString, ext } = parseDataUrl(file.content);
 
-      if (body.files) {
-        for (const file of body.files) {
-          const newAttachment = {
-            content: binaryString.toString("base64"),
-            type: ext,
-            filename: file.name,
-            disposition: "attachment",
-          };
-          msg.attachments.push(newAttachment);
-        }
-      }
+      const newAttachment = {
+        content: binaryString.toString("base64"),
+        type: ext,
+        filename: file.name,
+        disposition: "attachment",
+      };
+
+      msg.attachments.push(newAttachment);
     }
 
     await sgMail
