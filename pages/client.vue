@@ -9,7 +9,45 @@ const dialog = ref(false);
 const formSubmissionStatus = ref("PENDING");
 
 //Options for Select Button On Form
-const nigerianStates = [{ name: "Lagos" }];
+const nigerianStates = [
+  { name: "Abia", inactive: true },
+  { name: "Adamawa", inactive: true },
+  { name: "Akwa Ibom", inactive: true },
+  { name: "Anambra", inactive: true },
+  { name: "Bauchi", inactive: true },
+  { name: "Bayelsa", inactive: true },
+  { name: "Benue", inactive: true },
+  { name: "Borno", inactive: true },
+  { name: "Cross River", inactive: true },
+  { name: "Delta", inactive: true },
+  { name: "Ebonyi", inactive: true },
+  { name: "Edo", inactive: true },
+  { name: "Ekiti", inactive: true },
+  { name: "Enugu", inactive: true },
+  { name: "FCT - Abuja", inactive: true },
+  { name: "Gombe", inactive: true },
+  { name: "Imo", inactive: true },
+  { name: "Jigawa", inactive: true },
+  { name: "Kaduna", inactive: true },
+  { name: "Kano", inactive: true },
+  { name: "Katsina", inactive: true },
+  { name: "Kebbi", inactive: true },
+  { name: "Kogi", inactive: true },
+  { name: "Kwara", inactive: true },
+  { name: "Lagos" },
+  { name: "Nasarawa", inactive: true },
+  { name: "Niger", inactive: true },
+  { name: "Ogun", inactive: true },
+  { name: "Ondo", inactive: true },
+  { name: "Osun", inactive: true },
+  { name: "Oyo", inactive: true },
+  { name: "Plateau", inactive: true },
+  { name: "Rivers", inactive: true },
+  { name: "Sokoto", inactive: true },
+  { name: "Taraba", inactive: true },
+  { name: "Yobe", inactive: true },
+  { name: "Zamfara", inactive: true },
+];
 
 const nigerianBanks = [
   {
