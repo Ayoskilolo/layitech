@@ -1123,7 +1123,14 @@ const customerKYCForm = ref({
   utilityBill: [],
 });
 
-const { handleFileInput, files } = useFileStorage();
+const { handleFileInput: handleCustomerImage, files: customerImageFiles } =
+  useFileStorage();
+const {
+  handleFileInput: handleCustomerBankStatement,
+  files: customerBankStatementFiles,
+} = useFileStorage();
+const { handleFileInput: handleUtilityBill, files: utilityBillFiles } =
+  useFileStorage();
 
 async function buildDocument() {
   const doc = new Document({
@@ -1182,7 +1189,15 @@ async function sendEmail() {
 
     const response = await $fetch("api/generate-doc", {
       method: "POST",
-      body: { doc: docBuffer, typeOfForm: "CLIENT", files: files.value },
+      body: {
+        doc: docBuffer,
+        typeOfForm: "CLIENT",
+        files: [
+          customerBankStatementFiles.value,
+          utilityBillFiles.value,
+          customerImageFiles.value,
+        ],
+      },
     });
 
     if (response) {
@@ -1313,7 +1328,7 @@ async function sendEmail() {
               variant="outlined"
               label="Upload Utility Bill "
               type="file"
-              @input="handleFileInput"
+              @input="handleUtilityBill"
             />
             <v-select
               v-model="customerKYCForm.customerCountryOfResidence"
@@ -1472,7 +1487,7 @@ async function sendEmail() {
                 :rules="[(value) => !!value || 'This field is required.']"
                 accept=".png,.jpeg"
                 label="Add Photo (We will use your image to carry out a liveness check and also verify your identity)"
-                @input="handleFileInput"
+                @input="handleCustomerImage"
               />
               <v-select
                 density="compact"
@@ -1540,7 +1555,7 @@ async function sendEmail() {
                 variant="outlined"
                 label="6 months Bank Statements"
                 accept=".png,.jpeg,.pdf"
-                @input="handleFileInput"
+                @input="handleCustomerBankStatement"
               />
 
               <div class="p-0 flex items-center justify-center gap-8">

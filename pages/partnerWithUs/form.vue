@@ -84,7 +84,14 @@ const partnerWithUsForm = ref({
   dateToday: "",
 });
 
-const { handleFileInput, files } = useFileStorage();
+const {
+  handleFileInput: handleDirectorPhotograph,
+  files: directorPhotographFiles,
+} = useFileStorage();
+const {
+  handleFileInput: handleDirectorSignature,
+  files: directorSignatureFiles,
+} = useFileStorage();
 
 async function buildDocument() {
   const doc = new Document({
@@ -137,7 +144,11 @@ async function sendEmail() {
 
     const response = await $fetch("/api/generate-doc", {
       method: "POST",
-      body: { doc: docBuffer, typeOfForm: "PARTNER", files: files.value },
+      body: {
+        doc: docBuffer,
+        typeOfForm: "PARTNER",
+        files: [directorPhotographFiles.value, directorSignatureFiles.value],
+      },
     });
 
     if (response) {
@@ -477,7 +488,7 @@ function moveOn() {
                 :rules="[(value) => !!value || 'This field is required.']"
                 accept=".png,.jpeg"
                 label="Add Photo"
-                @input="handleFileInput"
+                @input="handleDirectorPhotograph"
               />
               <v-text-field
                 density="compact"
@@ -579,7 +590,7 @@ function moveOn() {
                 :rules="[(value) => !!value || 'This field is required.']"
                 variant="outlined"
                 label="Upload Signature"
-                @input="handleFileInput"
+                @input="handleDirectorSignature"
               />
               <v-text-field
                 density="compact"

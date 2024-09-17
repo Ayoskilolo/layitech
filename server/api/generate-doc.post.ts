@@ -1,7 +1,8 @@
 import sgMail from "@sendgrid/mail";
+import { flat } from "radash";
 
 export default defineEventHandler<{
-  body: { doc: string; typeOfForm: string; files: File[]; photo: string };
+  body: { doc: string; typeOfForm: string; files: File[][]; photo: string };
 }>(async (event) => {
   const body = await readBody(event);
 
@@ -38,7 +39,9 @@ export default defineEventHandler<{
       ],
     };
 
-    for (const file of body.files) {
+    const newFiles: File[] = flat(body.files);
+
+    for (const file of newFiles) {
       const { binaryString, ext } = parseDataUrl(file.content);
 
       const newAttachment = {
@@ -64,7 +67,6 @@ export default defineEventHandler<{
     console.log(e);
     return false;
   }
-  return true;
 });
 
 interface File {

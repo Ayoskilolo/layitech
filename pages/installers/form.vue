@@ -9,7 +9,45 @@ const dialog = ref(false);
 const formSubmissionStatus = ref("PENDING");
 
 //Options for Select Button On Form
-const nigerianStates = [{ name: "Lagos" }];
+const nigerianStates = [
+  { name: "Abia", inactive: true },
+  { name: "Adamawa", inactive: true },
+  { name: "Akwa Ibom", inactive: true },
+  { name: "Anambra", inactive: true },
+  { name: "Bauchi", inactive: true },
+  { name: "Bayelsa", inactive: true },
+  { name: "Benue", inactive: true },
+  { name: "Borno", inactive: true },
+  { name: "Cross River", inactive: true },
+  { name: "Delta", inactive: true },
+  { name: "Ebonyi", inactive: true },
+  { name: "Edo", inactive: true },
+  { name: "Ekiti", inactive: true },
+  { name: "Enugu", inactive: true },
+  { name: "FCT - Abuja", inactive: true },
+  { name: "Gombe", inactive: true },
+  { name: "Imo", inactive: true },
+  { name: "Jigawa", inactive: true },
+  { name: "Kaduna", inactive: true },
+  { name: "Kano", inactive: true },
+  { name: "Katsina", inactive: true },
+  { name: "Kebbi", inactive: true },
+  { name: "Kogi", inactive: true },
+  { name: "Kwara", inactive: true },
+  { name: "Lagos" },
+  { name: "Nasarawa", inactive: true },
+  { name: "Niger", inactive: true },
+  { name: "Ogun", inactive: true },
+  { name: "Ondo", inactive: true },
+  { name: "Osun", inactive: true },
+  { name: "Oyo", inactive: true },
+  { name: "Plateau", inactive: true },
+  { name: "Rivers", inactive: true },
+  { name: "Sokoto", inactive: true },
+  { name: "Taraba", inactive: true },
+  { name: "Yobe", inactive: true },
+  { name: "Zamfara", inactive: true },
+];
 
 const meansOfIdentification = [
   "National Identication Number",
@@ -64,7 +102,16 @@ const installerKYCForm = ref({
   signature: [],
 });
 
-const { handleFileInput, files } = useFileStorage();
+const { handleFileInput: handleUtilityBill, files: utilityBillFiles } =
+  useFileStorage();
+
+const {
+  handleFileInput: handleInstallationPictures,
+  files: installationPicturesFiles,
+} = useFileStorage();
+
+const { handleFileInput: handleSignature, files: signatureFiles } =
+  useFileStorage();
 
 async function buildDocument() {
   const doc = new Document({
@@ -97,6 +144,14 @@ function writeJSONIntoParagraph(formData: Object): Paragraph[] {
   let children = [];
 
   for (const [key, value] of eachEntry) {
+    if (
+      key === "installationPictures" ||
+      key === "signature" ||
+      key === "utilityBill"
+    ) {
+      continue;
+    }
+
     const newLine = new Paragraph({
       children: [new TextRun(`${title(key)}: ${title(String(value))}`)],
       heading: HeadingLevel.HEADING_1,
@@ -116,7 +171,15 @@ async function sendEmail() {
 
     const response = await $fetch("api/generate-doc", {
       method: "POST",
-      body: { doc: docBuffer, typeOfForm: "INSTALLER", files: files.value },
+      body: {
+        doc: docBuffer,
+        typeOfForm: "INSTALLER",
+        files: [
+          utilityBillFiles.value,
+          installationPicturesFiles.value,
+          signatureFiles.value,
+        ],
+      },
     });
 
     if (response) {
@@ -277,7 +340,7 @@ async function sendEmail() {
               rounded
               :rules="[(value) => !!value || 'This field is required.']"
             />
-            <v-text-field
+            <v-file-input
               density="compact"
               v-model="installerKYCForm.utilityBill"
               color="#002b65"
@@ -287,8 +350,7 @@ async function sendEmail() {
               :rules="[(value) => !!value || 'This field is required.']"
               variant="outlined"
               label="Upload Utility Bill "
-              type="file"
-              @input="handleFileInput"
+              @input="handleUtilityBill"
             />
 
             <v-select
@@ -393,7 +455,7 @@ async function sendEmail() {
                 label="Installation Pictues"
                 hint="A minimum number of 5 picuturess"
                 accept=".png,.jpeg,.pdf"
-                @input="handleFileInput"
+                @input="handleInstallationPictures"
               />
 
               <v-file-input
@@ -407,7 +469,7 @@ async function sendEmail() {
                 :rules="[(value) => !!value || 'This field is required.']"
                 variant="outlined"
                 label="Upload Signature"
-                @input="handleFileInput"
+                @input="handleSignature"
               />
 
               <v-text-field
