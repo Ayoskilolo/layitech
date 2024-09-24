@@ -1,13 +1,8 @@
 <template>
-  <section
-    class="bg-[#002b65] sm:bg-bluewave bg-cover bg-no-repeat h-dvh p-[5%]"
-  >
+  <section class="bg-[#002b65] sm:bg-bluewave bg-cover bg-no-repeat h-dvh p-[5%]">
     <div
-      class="h-[95%] sm:bg-[#002b65] sm:text-white main flex flex-col-reverse sm:flex-row justify-around sm:justify-between sm:border-3 sm:border-[#002b65] rounded-2xl"
-    >
-      <div
-        class="sm:w-1/2 flex flex-col items-center justify-center px-5 text-center"
-      >
+      class="h-[95%] sm:bg-[#002b65] sm:text-white main flex flex-col-reverse sm:flex-row justify-around sm:justify-between sm:border-3 sm:border-[#002b65] rounded-2xl">
+      <div class="sm:w-1/2 flex flex-col items-lef justify-center px-5 text-left">
         <p class="text-2xl sm:text-5xl font-bold mb-5">
           Solar installers can rely on LayiTech for trusted financing solutions
         </p>
@@ -19,32 +14,18 @@
         </p>
         <div class="flex justify-center items-center sm:hidden">
           <NuxtLink to="/installers/form">
-            <VBtn
-              flat
-              variant="outlined"
-              rounded="pill"
-              color="white"
-              text="Partner With Us"
-              class="mt-5 text-none text-white sm:hidden"
-            />
+            <VBtn flat variant="outlined" rounded="pill" color="white" text="Partner With Us"
+              class="mt-5 text-none text-white sm:hidden" />
           </NuxtLink>
         </div>
         <div class="flex justify-center hidden items-center sm:block">
           <NuxtLink to="/installers/form">
-            <VBtn
-              flat
-              variant="outlined"
-              rounded="pill"
-              color="white"
-              text="Partner With Us"
-              class="mt-5 text-none text-white"
-            />
+            <VBtn flat variant="outlined" rounded="pill" color="white" text="Partner With Us"
+              class="mt-5 text-none text-white" />
           </NuxtLink>
         </div>
       </div>
-      <div
-        class="h-80 w-full sm:h-full bg-youngGuy bg-cover bg-center bg-no-repeat sm:w-1/2"
-      ></div>
+      <div class="h-80 w-full sm:h-full bg-youngGuy bg-cover bg-center bg-no-repeat sm:w-1/2"></div>
     </div>
   </section>
 </template>
@@ -71,6 +52,7 @@
   border: 2px solid #002b65;
   overflow: scroll;
 }
+
 .test {
   overflow-y: visible;
   overflow-x: visible;

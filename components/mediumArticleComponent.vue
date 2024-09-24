@@ -2,25 +2,15 @@
   <section class="text-black p-[5%] text-center">
     <p class="text-3xl font-bold mb-2 sm:text-5xl mb-5">Blog Articles</p>
     <div class="articles-section flex">
-      <a
-        :href="article.link"
-        target="_blank"
-        v-if="mediumArticles.items"
-        v-for="article in mediumArticles.items"
-        :key="article.link"
-      >
-        <div
-          class="w-96 p-3 rounded-lg bg-[#002b65] text-white text-left"
-          style="border: 1px solid black"
-        >
+      <a :href="article.link" target="_blank" v-if="mediumArticles.items" v-for="article in mediumArticles.items"
+        :key="article.link">
+        <div class="w-96 p-3 rounded-lg bg-[#002b65] text-white text-left"
+          style="border: 1px solid black; height: 320px; overflow-y: hidden">
           <div class="article-title p-1 font-black text-lg">
             <label>{{ article.title }}</label>
           </div>
 
-          <div
-            class="ellipsis overflow-hidden h-40 p-2"
-            v-html="article.description"
-          ></div>
+          <div class="ellipsis overflow-hidden h-40 p-2" v-html="article.description"></div>
 
           <div class="article-date mt-2">
             <p>{{ new Date(article.pubDate).toLocaleDateString() }}</p>
@@ -34,12 +24,21 @@
 <script setup>
 const loading = ref(true);
 
-const { data: mediumArticles } = useFetch(
-  "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@layi.energy",
-  {
-    lazy: true,
+try {
+  const { data: mediumArticles } = useFetch(
+    "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@layi.energy",
+    {
+      lazy: true,
+    }
+  );
+} catch (error) {
+  console.log(error);
+} finally {
+  const mediumArticles = {
+    items: []
   }
-);
+}
+
 </script>
 
 <style scoped>
@@ -50,6 +49,7 @@ const { data: mediumArticles } = useFetch(
   display: flex;
   overflow-y: scroll;
 }
+
 .article-title {
   cursor: pointer;
 }

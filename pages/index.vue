@@ -7,7 +7,7 @@ const landingForm = ref({
 });
 
 const dateBooked = ref()
-const commisionPercentage = useRuntimeConfig().public.commsionPercentage;
+const commisionPercentage = useRuntimeConfig().public.commissionPercentage;
 const interestRates = useRuntimeConfig().public.interestRate.split(",");
 
 const projectCost = ref();
@@ -100,9 +100,9 @@ async function sendEmail() {
 
     const response = await $fetch("api/contactUs", {
       method: "POST",
-      body: {...landingForm.value, dateBooked: dateBooked.value},
+      body: { ...landingForm.value, dateBooked: dateBooked.value },
     });
-    
+
 
     if (response) {
       loading.value = false;
@@ -118,8 +118,8 @@ async function sendEmail() {
     landingForm.value.name = "";
     landingForm.value.email = "";
     landingForm.value.phoneNumber = "";
-    dateBooked.value="";
-    setTimeout(() =>  dialog.value = false, 1000); 
+    dateBooked.value = "";
+    setTimeout(() => dialog.value = false, 1000);
   }
 }
 </script>
@@ -162,7 +162,7 @@ async function sendEmail() {
             <DatePicker id="datepicker-24h" v-model="dateBooked" showTime hourFormat="24" fluid showButtonBar
               placeholder="Book Consultation" class=mb-4 />
             <div class="p-0 flex items-center justify-center">
-              <v-btn color="#002B65" text="Submit" max-width="30%" @click="sendEmail()" :loading="loading"/>
+              <v-btn color="#002B65" text="Submit" max-width="30%" @click="sendEmail()" :loading="loading" />
             </div>
           </div>
         </form>
@@ -256,7 +256,7 @@ async function sendEmail() {
     </NuxtMarquee>
   </section>
 
-  <section id="calculator" class="flex flex-col  p-[5%] text-black bg-[#002b65] text-white gap-5">
+  <section id="calculator" class="flex flex-col p-[5%] text-black bg-[#002b65] text-white gap-5">
     <div class="flex flex-col sm:flex-row gap-5 mb-10">
       <div class="w-full sm:w-1/2">
         <p class="text-3xl font-bold mb-2 sm:text-6xl text-white mb-5">
@@ -299,7 +299,7 @@ async function sendEmail() {
     <Transition>
       <div v-if="results">
         <p class="text-3xl font-bold mb-2 sm:text-5xl text-white mb-5">Hey, {{ clientName }} </p>
-        <div class="grid grid-row-4 grid-cols-1 gap-4 sm:grid-cols-2 sm:grid-row-2 mt-5" >
+        <div class="grid grid-row-4 grid-cols-1 gap-4 sm:grid-cols-2 sm:grid-row-2 mt-5">
           <v-card v-for="n in 6" class="p-5 " variant="outlined" style="padding: 1.5em">
             <p class="text-[1.4em] mb-12">
             <p>Plan {{ n }}:</p>
@@ -326,39 +326,66 @@ async function sendEmail() {
     </Transition>
   </section>
 
-  <MediumArticleComponent id="articles"/>
+  <MediumArticleComponent id="articles" />
 
-  <section id="panel" class="flex flex-col items-center h-[35rem] sm:h-[60rem]">
-    <div class="flex flex-col items-center justify-around py-8 text-center">
-      <img src="/lightbulb.png" alt="lightbulb" width="50" height="50" class="pt-5" />
-      <p class="text-xl sm:text-6xl font-bold mb-4 tracking-wider">
-        Finance your sustainable future, <br />
-        today.
-      </p>
-      <UButton label="Learn More" color="white" variant="outline" :ui="{ rounded: 'rounded-full' }" />
-    </div>
+  <v-carousel height="45rem" show-arrows="hover" hide-delimiter-background>
+    <v-carousel-item id="panel" class="flex flex-col items-center ">
+      <div class="flex flex-col items-center justify-around py-8 text-center p-[5%]">
+        <img src="/lightbulb.png" alt="lightbulb" width="50" height="50" class="pt-5" />
+        <p class="text-xl sm:text-4xl md:text-6xl font-bold mb-4 tracking-wider">
+          Finance your sustainable future, <br />
+          today.
+        </p>
 
-    <!-- <div class="bg-panels"></div> -->
-  </section>
+      </div>
+    </v-carousel-item>
+
+    <v-carousel-item id="empowerHerBG" class="items-center">
+      <div class="flex flex-col justify-around p-[5%] text-left w-3/5 h-full">
+        <p class="text-xl sm:text-4xl md:text-6xl font-bold mb-1 tracking-wider">
+          Low Interest Solar Financing for Women-Owned Businesses
+        </p>
+        <div>
+          <p class="text-xl sm:text-2xl  mb-4 text-left">
+            LayiTech offers reduced interest rates on solar financing for registered women-owned businesses. We're
+            committed to helping women entrepreneurs lower energy costs and powe their growth sustainably.
+          </p>
+          <VBtn flat variant="flat" rounded="pill" color="#FF00BA" text="Partner With Us" class="mt-5 text-none" />
+        </div>
+      </div>
+
+      <div id="empowerHer"></div>
+    </v-carousel-item>
+
+    <v-carousel-item id="salaryEarners" class="">
+      <div class="flex flex-col items-left justify-around p-[5%] w-full md:w-1/2 h-full">
+        <p class="text-3xl sm:text-4xl md:text-6xl font-bold tracking-wider text-left">
+          Affordable Solar Financing for Salary Earners
+        </p>
+        <div>
+          <p class="text-xl sm:text-2xl mb-4 text-left">
+            LayiTech provides flexible solar financing with low interest rates tailored for salary earners. Enjoy clean
+            energy solutions that fit your budget and help reduce energy costs over time.
+          </p>
+          <VBtn flat variant="flat" rounded="pill" color="white" text="Partner With Us" class="mt-5 text-none" />
+        </div>
+
+      </div>
+    </v-carousel-item>
+  </v-carousel>
 
   <v-dialog max-width="320" persistent v-model="dialog">
     <v-list class="py-2" color="primary" elevation="12" rounded="lg">
-      <v-list-item
-        prepend-icon="mdi-check"
-        title="Successfully sent your form!"
-        v-if="formSubmissionStatus === 'SUCCESS'"
-      >
+      <v-list-item prepend-icon="mdi-check" title="Successfully sent your form!"
+        v-if="formSubmissionStatus === 'SUCCESS'">
         <template v-slot:prepend>
           <div class="pe-4">
             <v-icon color="primary" size="x-large"></v-icon>
           </div>
         </template>
       </v-list-item>
-      <v-list-item
-        v-if="formSubmissionStatus === 'PENDING'"
-        prepend-icon="$vuetify-outline"
-        title="Sending your form..."
-      >
+      <v-list-item v-if="formSubmissionStatus === 'PENDING'" prepend-icon="$vuetify-outline"
+        title="Sending your form...">
         <template v-slot:prepend>
           <div class="pe-4">
             <v-icon color="primary" size="x-large"></v-icon>
@@ -366,19 +393,11 @@ async function sendEmail() {
         </template>
 
         <template v-slot:append>
-          <v-progress-circular
-            color="primary"
-            indeterminate="disable-shrink"
-            size="16"
-            width="2"
-          ></v-progress-circular>
+          <v-progress-circular color="primary" indeterminate="disable-shrink" size="16" width="2"></v-progress-circular>
         </template>
       </v-list-item>
-      <v-list-item
-        v-if="formSubmissionStatus === 'FAILURE'"
-        prepend-icon="mdi-message-alert"
-        title="OOPS! Something went wrong. Please try again."
-      >
+      <v-list-item v-if="formSubmissionStatus === 'FAILURE'" prepend-icon="mdi-message-alert"
+        title="OOPS! Something went wrong. Please try again.">
         <template v-slot:prepend>
           <div class="pe-4">
             <v-icon color="primary" size="x-large"></v-icon>
@@ -416,6 +435,14 @@ p {
       url("/checkingvitals.jpeg");
     background-size: contain;
     background-position: bottom, top;
+  }
+
+  #empowerHerBG {
+    background-image: none
+  }
+
+  #salaryEarners {
+    background-image: linear-gradient(#002b65, transparent)
   }
 }
 
@@ -455,6 +482,21 @@ p {
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+#empowerHerBG {
+  background-image: url("/empowerHer.png"), linear-gradient(135deg, #002b65 50%, #FF00BA);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#salaryEarners {
+  background-image: linear-gradient(to right, #002b65 10%, transparent), url("/salary.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 
 .v-enter-active,
 .v-leave-active {
