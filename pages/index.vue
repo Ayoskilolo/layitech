@@ -326,7 +326,7 @@ async function sendEmail() {
     </Transition>
   </section>
 
-  <MediumArticleComponent id="articles" />
+  <!-- <MediumArticleComponent id="articles" /> -->
 
   <v-carousel height="45rem" show-arrows="hover" hide-delimiter-background>
     <v-carousel-item id="panel" class="flex flex-col items-center ">
